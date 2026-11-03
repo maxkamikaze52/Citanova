@@ -11,7 +11,7 @@ type FieldSpec = {
 };
 
 export type Connection = {
-  provider: "whatsapp" | "google_calendar" | "email";
+  provider: "whatsapp" | "google_calendar" | "email" | "crm" | "ics_calendar";
   label: string;
   capability: "active" | "saved_only";
   help: string;
@@ -74,7 +74,14 @@ function ConnectionCard({
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         provider: connection.provider,
-        accountLabel: values[connection.fields[0]?.key ?? ""] ?? null,
+        // A secret field (the ICS feed URL, an API key) must never become the
+        // label: labels are shown back to the owner and returned as JSON.
+        accountLabel: (() => {
+          const first = connection.fields[0];
+          if (!first || first.secret) return null;
+          const value = (values[first.key] ?? "").trim();
+          return value || null;
+        })(),
         credentials: values,
       }),
     });
@@ -162,7 +169,7 @@ function ConnectionCard({
             <label key={field.key} style={{ display: "grid", gap: 6, fontSize: 13.5, color: "#0f2b2a" }}>
               <span style={{ fontWeight: 600 }}>{field.label}</span>
               <input
-                type={field.secret ? "password" : "text"}
+                type={field.secret && connection.provider !== "ics_calendar" ? "password" : "text"}
                 required={field.required}
                 autoComplete="off"
                 spellCheck={false}
