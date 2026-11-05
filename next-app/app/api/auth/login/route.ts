@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { createSupabaseServer } from "../../../../lib/supabase-server";
-import { parseSignupBody } from "../../../../lib/account";
+import { createSupabaseServer } from "../../../../lib/db";
+import { parseSignupBody } from "../../../../lib/db";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

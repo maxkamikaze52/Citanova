@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import AutoRefresh from "../components/AutoRefresh";
-import CopyField from "../components/CopyField";
-import { widgetTag } from "../../lib/widget-tag";
-import { createSupabaseServer, getMyBusiness } from "../../lib/supabase-server";
+import { AutoRefresh } from "../components/ui";
+import { CopyField } from "../components/ui";
+import { widgetTag } from "../../lib/operator";
+import { createSupabaseServer, getMyBusiness } from "../../lib/db";
 
 export const dynamic = "force-dynamic";
 

@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
 import Connections, { type Connection } from "../../components/Connections";
-import CopyField from "../../components/CopyField";
-import PracticeDetails from "../../components/PracticeDetails";
-import WebsiteOrigin from "../../components/WebsiteOrigin";
+import { CopyField } from "../../components/ui";
+import { PracticeDetails } from "../../components/practice";
+import { WebsiteOrigin } from "../../components/practice";
 import { callBackend, ownerContext } from "../../../lib/admin-proxy";
-import { widgetTag } from "../../../lib/widget-tag";
-import { createSupabaseServer, getMyBusiness } from "../../../lib/supabase-server";
+import { widgetTag } from "../../../lib/operator";
+import { createSupabaseServer, getMyBusiness } from "../../../lib/db";
 
 export const dynamic = "force-dynamic";
 

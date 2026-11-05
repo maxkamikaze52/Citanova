@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { createSupabaseServer } from "../../../../lib/supabase-server";
-import { clearInviteCookie } from "../../../../lib/account";
+import { createSupabaseServer } from "../../../../lib/db";
+import { clearInviteCookie } from "../../../../lib/db";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

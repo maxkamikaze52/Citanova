@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { useRouter } from "next/navigation";
 
 /** A read-only value with a Copy button that tells you it worked. */
-export default function CopyField({
+export function CopyField({
   label,
   value,
 }: {
@@ -70,4 +72,14 @@ export default function CopyField({
       </div>
     </div>
   );
+}
+
+/** Re-runs the dashboard's server queries so new bookings appear without a manual reload. */
+export function AutoRefresh({ seconds = 10 }: { seconds?: number }) {
+  const router = useRouter();
+  useEffect(() => {
+    const timer = setInterval(() => router.refresh(), seconds * 1000);
+    return () => clearInterval(timer);
+  }, [router, seconds]);
+  return null;
 }

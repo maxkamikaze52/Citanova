@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createSupabaseServer, getMyBusiness } from "./supabase-server";
+import { createSupabaseServer, getMyBusiness } from "./db";
 
 /**
  * Proxies the console to the assistant backend's owner-authenticated admin API.

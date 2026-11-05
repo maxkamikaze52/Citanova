@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import PhoneField from "../components/PhoneField";
+import { PhoneField } from "../components/practice";
 
 /** Spain first (home market), then the rest in a predictable order. */
 const TIMEZONES = [

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { parseSignupBody, signUpOrIn, setInviteCookie, validateSignup } from "../../../lib/account";
-import { provisionBusiness, normalizePracticeName, isValidTimeZone } from "../../../lib/provisioning";
-import { admin } from "../../../lib/supabase-admin";
+import { parseSignupBody, signUpOrIn, setInviteCookie, validateSignup } from "../../../lib/db";
+import { provisionBusiness, normalizePracticeName, isValidTimeZone } from "../../../lib/operator";
+import { admin } from "../../../lib/db";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

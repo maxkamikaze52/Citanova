@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import CopyField from "../components/CopyField";
-import { readInviteCookie } from "../../lib/account";
-import { widgetTag } from "../../lib/widget-tag";
-import { getMyBusiness } from "../../lib/supabase-server";
+import { CopyField } from "../components/ui";
+import { readInviteCookie } from "../../lib/db";
+import { widgetTag } from "../../lib/operator";
+import { getMyBusiness } from "../../lib/db";
 
 export const dynamic = "force-dynamic";
 
