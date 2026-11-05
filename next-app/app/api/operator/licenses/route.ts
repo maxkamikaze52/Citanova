@@ -1,6 +1,12 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { adminApiUrl, isValidOperatorCookie, OPERATOR_COOKIE } from "../../../../lib/operator";
+import {
+  adminApiUrl,
+  forbiddenOrigin,
+  isSameOrigin,
+  isValidOperatorCookie,
+  OPERATOR_COOKIE,
+} from "../../../../lib/operator";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -42,11 +48,15 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  // Minting a licence has a side effect, so cross-site requests are refused.
+  if (!isSameOrigin(request)) return forbiddenOrigin();
   const body = await request.json().catch(() => null);
   return forward("POST", "/api/operator/licenses", body ?? {});
 }
 
 export async function PATCH(request: Request) {
+  // Suspend / revoke: a side effect, so the same-origin rule applies.
+  if (!isSameOrigin(request)) return forbiddenOrigin();
   const body = await request.json().catch(() => null);
   return forward("PATCH", "/api/operator/licenses", body ?? {});
 }

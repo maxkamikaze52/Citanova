@@ -2,24 +2,48 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import PhoneField from "../components/PhoneField";
 
+/** Spain first (home market), then the rest in a predictable order. */
 const TIMEZONES = [
-  "Europe/London",
-  "Europe/Dublin",
   "Europe/Madrid",
+  "Europe/London",
+  "Europe/Lisbon",
   "Europe/Paris",
   "Europe/Rome",
   "Europe/Berlin",
+  "Europe/Dublin",
+  "Europe/Amsterdam",
+  "Europe/Brussels",
+  "Europe/Zurich",
   "America/New_York",
   "America/Chicago",
+  "America/Denver",
   "America/Los_Angeles",
+  "America/Toronto",
+  "America/Mexico_City",
+  "America/Bogota",
+  "America/Santiago",
+  "America/Argentina/Buenos_Aires",
+  "America/Sao_Paulo",
+  "Asia/Dubai",
+  "Asia/Kolkata",
+  "Asia/Singapore",
+  "Asia/Tokyo",
+  "Australia/Sydney",
+  "Australia/Melbourne",
+  "Pacific/Auckland",
+  "Africa/Johannesburg",
+  "Africa/Cairo",
+  "Africa/Lagos",
+  "Africa/Nairobi",
 ];
 
 export default function SignupPage() {
   const router = useRouter();
   const [form, setForm] = useState({
     practiceName: "",
-    timezone: "Europe/London",
+    timezone: "Europe/Madrid",
     phone: "",
     address: "",
     website: "",
@@ -94,8 +118,12 @@ export default function SignupPage() {
               ))}
             </select>
           </Field>
-          <Field label="Phone" hint="Optional">
-            <input value={form.phone} onChange={set("phone")} placeholder="+44 20 …" style={input} />
+          <Field label="Phone" hint="Optional — any country.">
+            <PhoneField
+              value={form.phone}
+              onChange={(next) => setForm((current) => ({ ...current, phone: next }))}
+              timeZone={form.timezone}
+            />
           </Field>
         </div>
 

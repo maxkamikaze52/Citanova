@@ -435,18 +435,3 @@ export async function provisionBusiness(
   };
 }
 
-/**
- * Adds an existing practice to another person's account (a second dentist, a
- * receptionist). Idempotent: re-running does not duplicate the membership.
- */
-export async function addMember(
-  admin: AdminLike,
-  businessId: string,
-  userId: string,
-  role: "owner" | "staff" = "staff",
-): Promise<void> {
-  const { error } = await admin
-    .from("business_members")
-    .upsert({ business_id: businessId, user_id: userId, role }, { onConflict: "business_id,user_id" });
-  if (error) throw new Error(`business_members: ${error.message}`);
-}

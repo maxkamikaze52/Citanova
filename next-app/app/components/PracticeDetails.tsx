@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import PhoneField from "./PhoneField";
 
 type Details = {
   name: string;
@@ -19,7 +20,13 @@ type Details = {
  * Uses the backend's own settings schema (PATCH /api/settings), so validation
  * messages come from one place rather than a second copy here.
  */
-export default function PracticeDetails({ initial }: { initial: Details }) {
+export default function PracticeDetails({
+  initial,
+  timeZone,
+}: {
+  initial: Details;
+  timeZone?: string | null;
+}) {
   const [form, setForm] = useState(initial);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<{ kind: "ok" | "error"; text: string } | null>(null);
@@ -73,7 +80,11 @@ export default function PracticeDetails({ initial }: { initial: Details }) {
           <input value={form.name} onChange={field("name")} style={input} required />
         </Field>
         <Field label="Phone patients should call">
-          <input value={form.phone} onChange={field("phone")} style={input} placeholder="+44 20 …" />
+          <PhoneField
+            value={form.phone}
+            onChange={(next) => setForm((current) => ({ ...current, phone: next }))}
+            timeZone={timeZone}
+          />
         </Field>
       </div>
 

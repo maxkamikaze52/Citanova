@@ -108,7 +108,7 @@ export default async function SettingsPage() {
       ) : null}
 
       <Section title="Practice details" note="Shown to patients and used by the assistant.">
-        <PracticeDetails initial={details} />
+        <PracticeDetails initial={details} timeZone={business.timezone} />
       </Section>
 
       <Section
