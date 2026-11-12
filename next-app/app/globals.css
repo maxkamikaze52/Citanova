@@ -615,6 +615,227 @@ body:has(main.ap) .mobile-cta { background: rgba(7, 11, 20, 0.92); border-top-co
 }
 
 /* ==========================================================================
+   El chat: WhatsApp, que es donde de verdad se habla en España.
+   Cabecera verde oscura, fondo con la textura de siempre, burbujas con colita,
+   hora dentro de la burbuja y doble check azul al entregarse.
+   ========================================================================== */
+
+.ap-chat {
+  position: relative; border-radius: 16px; overflow: hidden;
+  background: #0b141a;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 60px 120px -50px rgba(0, 0, 0, 0.95);
+  text-align: left;
+  animation: ap-float 11s ease-in-out infinite;
+}
+.ap-chat-head {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px 10px 8px;
+  background: #1f2c34;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+}
+.ap-back { color: #aebac1; font-size: 22px; line-height: 1; padding: 0 2px 2px 6px; }
+.ap-avatar {
+  width: 34px; height: 34px; border-radius: 50%; flex: none;
+  display: grid; place-items: center; font-size: 12px; font-weight: 600; color: #e9edef;
+  background: #3b4a54;
+}
+.ap-chat-who { display: grid; line-height: 1.22; flex: 1; }
+.ap-chat-who strong { font-family: var(--font-ui); font-size: 14.5px; font-weight: 600; color: #e9edef; }
+.ap-online { font-size: 12px; color: #aebac1; }
+.ap-chat-actions { display: inline-flex; align-items: center; gap: 16px; padding-right: 4px; }
+.ap-ico { width: 17px; height: 17px; border: 1.6px solid #aebac1; opacity: 0.9; }
+.ap-ico-video { border-radius: 4px; position: relative; }
+.ap-ico-video::after {
+  content: ""; position: absolute; right: -6px; top: 4px;
+  border-left: 5px solid #aebac1; border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+}
+.ap-ico-call { border-radius: 50% 50% 50% 0; transform: rotate(-45deg); }
+
+/* fondo con la textura tenue de WhatsApp (dos capas de puntos, sin imagen) */
+.ap-chat-body {
+  position: relative; display: grid; gap: 8px;
+  padding: 14px 12px 16px;
+  background-color: #0b141a;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 22px 22px, 14px 14px;
+  background-position: 0 0, 7px 7px;
+  min-height: 300px;
+  align-content: start;
+}
+.ap-day {
+  justify-self: center; margin: 2px 0 6px; padding: 4px 11px;
+  border-radius: 6px; background: #182229;
+  font-size: 10.5px; font-weight: 500; letter-spacing: 0.06em; color: #8696a0;
+}
+
+.ap-row { display: flex; }
+.ap-row.in { justify-content: flex-start; }
+.ap-row.out { justify-content: flex-end; }
+.ap-msg {
+  position: relative; margin: 0; width: fit-content; max-width: 84%;
+  padding: 6px 9px 8px; border-radius: 8px;
+  font-size: 14px; line-height: 1.38; overflow-wrap: break-word;
+  color: #e9edef;
+}
+.ap-msg.in { background: #202c33; border-top-left-radius: 2px; }
+.ap-msg.out { background: #005c4b; border-top-right-radius: 2px; }
+/* la colita de la burbuja */
+.ap-msg.in::before {
+  content: ""; position: absolute; left: -6px; top: 0;
+  border-right: 6px solid #202c33; border-bottom: 6px solid transparent;
+}
+.ap-msg.out::before {
+  content: ""; position: absolute; right: -6px; top: 0;
+  border-left: 6px solid #005c4b; border-bottom: 6px solid transparent;
+}
+.ap-time {
+  float: right; margin: 4px 0 -2px 8px;
+  font-size: 10.5px; color: rgba(233, 237, 239, 0.6); letter-spacing: 0;
+  white-space: nowrap;
+}
+.ap-ticks { color: #53bdeb; font-size: 10.5px; letter-spacing: -2px; }
+
+.ap-card {
+  justify-self: start; display: grid; gap: 2px; margin-top: 2px;
+  padding: 10px 12px; border-radius: 8px; max-width: 84%;
+  background: #202c33; border-left: 3px solid var(--sold);
+  font-size: 12px; line-height: 1.4; color: #8696a0;
+}
+.ap-card strong { font-size: 13.5px; color: #e9edef; font-weight: 600; }
+.ap-card-tag {
+  justify-self: start; margin-bottom: 2px; padding: 2px 7px; border-radius: 4px;
+  background: var(--sold); color: #1a0a02;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+}
+
+.ap-chat-foot {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 8px 8px;
+  background: #0b141a;
+}
+.ap-input {
+  flex: 1; padding: 10px 14px; border-radius: 980px;
+  background: #202c33; color: #8696a0; font-size: 13.5px;
+}
+.ap-attach {
+  width: 22px; height: 22px; flex: none; opacity: 0.75;
+  border: 1.6px solid #8696a0; border-radius: 4px; position: relative;
+  transform: rotate(-40deg);
+}
+.ap-send {
+  width: 38px; height: 38px; border-radius: 50%; flex: none;
+  display: grid; place-items: center;
+  background: #00a884; color: #0b141a; font-size: 15px; padding-left: 2px;
+}
+
+/* ==========================================================================
+   La agenda: vista de semana de Google Calendar.
+   Horas a la izquierda, siete/ cinco columnas, eventos con barra de color,
+   el día de hoy marcado y línea de la hora actual.
+   ========================================================================== */
+
+.gcal {
+  max-width: 900px; margin: 76px auto 0;
+  border-radius: 12px; overflow: hidden;
+  background: #131314;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 60px 120px -60px rgba(0, 0, 0, 1);
+  font-family: var(--font-ui);
+}
+.gcal-bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #131314;
+}
+.gcal-menu { width: 16px; height: 12px; border-top: 2px solid #c4c7c5; border-bottom: 2px solid #c4c7c5; position: relative; flex: none; }
+.gcal-menu::after { content: ""; position: absolute; left: 0; right: 0; top: 3px; height: 2px; background: #c4c7c5; }
+.gcal-logo { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; width: 20px; height: 20px; gap: 1px; }
+.gcal-logo i { display: block; border-radius: 1px; }
+.gcal-logo-blue { background: #4285f4; } .gcal-logo-green { background: #0f9d58; }
+.gcal-logo-yellow { background: #f4b400; } .gcal-logo-red { background: #db4437; }
+.gcal-title { font-size: 15px; color: #e3e3e3; letter-spacing: -0.01em; }
+.gcal-today {
+  padding: 5px 12px; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.24);
+  font-size: 12.5px; color: #e3e3e3;
+}
+.gcal-range { font-size: 12.5px; color: #9aa0a6; }
+.gcal-spacer { flex: 1; }
+.gcal-view {
+  padding: 5px 10px; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 12px; color: #c4c7c5;
+}
+.gcal-avatar {
+  width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+  background: #7b1fa2; color: #fff; font-size: 11.5px; font-weight: 600;
+}
+
+.gcal-grid { display: grid; grid-template-columns: 52px repeat(5, minmax(0, 1fr)); }
+.gcal-gutter { display: grid; grid-auto-rows: 60px; border-right: 1px solid rgba(255, 255, 255, 0.07); }
+.gcal-hour {
+  font-size: 10px; color: #9aa0a6; text-align: right; padding: 2px 6px 0 0;
+  transform: translateY(-6px);
+}
+.gcal-col { position: relative; border-left: 1px solid rgba(255, 255, 255, 0.05); }
+.gcal-col.is-today { background: rgba(66, 133, 244, 0.05); }
+.gcal-head {
+  display: grid; justify-items: center; gap: 1px; padding: 6px 0 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+.gcal-head span { font-size: 9.5px; letter-spacing: 0.08em; color: #9aa0a6; }
+.gcal-head strong { font-size: 15px; font-weight: 500; color: #e3e3e3; }
+.gcal-col.is-today .gcal-head strong {
+  width: 25px; height: 25px; border-radius: 50%; display: grid; place-items: center;
+  background: #4285f4; color: #fff; font-size: 13px;
+}
+.gcal-slots {
+  position: relative; height: 480px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.06) 0 1px,
+    transparent 1px 60px
+  );
+}
+/* la hora actual */
+.gcal-col.is-today .gcal-slots::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 148px; height: 2px;
+  background: #ea4335;
+}
+.gcal-col.is-today .gcal-slots::before {
+  content: ""; position: absolute; left: -4px; top: 143px; z-index: 2;
+  width: 9px; height: 9px; border-radius: 50%; background: #ea4335;
+}
+.gcal-ev {
+  position: absolute; left: 3px; right: 3px;
+  display: block; overflow: hidden;
+  border-radius: 4px; padding: 3px 5px;
+  font-size: 10px; line-height: 1.25;
+  background: rgba(66, 133, 244, 0.28); border-left: 3px solid #4285f4;
+  color: #d2e3fc;
+}
+.gcal-ev b { display: block; font-weight: 600; font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gcal-ev em { display: block; font-style: normal; font-size: 9.5px; opacity: 0.85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gcal-ev.green { background: rgba(15, 157, 88, 0.26); border-left-color: #0f9d58; color: #c6f0d8; }
+.gcal-ev.violet { background: rgba(123, 31, 162, 0.26); border-left-color: #9c4dcc; color: #e6d4f3; }
+.gcal-ev.orange { background: rgba(255, 122, 26, 0.24); border-left-color: var(--sold); color: #ffdcc2; }
+.gcal-badge {
+  position: absolute; top: 3px; right: 3px;
+  padding: 1px 5px; border-radius: 3px; background: var(--sold); color: #1a0a02;
+  font-size: 8px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+}
+.gcal-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  padding: 12px 14px; border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12px; color: #9aa0a6;
+}
+.gcal-foot span { display: inline-flex; align-items: center; gap: 7px; }
+.gcal-foot .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.gcal-foot .dot.blue { background: #4285f4; }
+.gcal-foot .dot.orange { background: var(--sold); }
+
+/* ==========================================================================
    Clics — los arreglos
    1. Mientras un bloque aparece, no intercepta el clic (antes el hit-box iba
       30px por delante del contenido y el clic caía en el hueco).

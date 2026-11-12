@@ -19,6 +19,9 @@ const key = [
   { n: 0, sub: "", label: "Equipos nuevos, centralitas ni teléfonos." },
 ];
 
+type CalendarEvent = { t: string; h: number; cls: string; title: string; who: string; badge?: string };
+type CalendarDay = { day: string; num: string; today?: boolean; events: CalendarEvent[] };
+
 const compare = [
   { what: "Contesta a las 22:00", vm: "No", as: "Por horas", us: "Sí" },
   { what: "Reserva la cita", vm: "No", as: "A veces", us: "Sí" },
@@ -104,33 +107,58 @@ export default function Home() {
             <p className="ap-fine">Desde 49 € al mes. Sin coste de alta.</p>
 
             <div className="ap-product">
+              {/* WhatsApp de verdad: cabecera verde oscura, fondo con textura,
+                  burbujas con colita y doble check azul. En España se habla por aquí. */}
               <div className="ap-chat">
                 <div className="ap-chat-head">
+                  <span className="ap-back" aria-hidden="true">‹</span>
                   <span className="ap-avatar" aria-hidden="true">CD</span>
                   <div className="ap-chat-who">
                     <strong>Clínica Dental Sol</strong>
-                    <span className="ap-online"><i aria-hidden="true" />En línea</span>
+                    <span className="ap-online">en línea</span>
                   </div>
+                  <span className="ap-chat-actions" aria-hidden="true">
+                    <span className="ap-ico ap-ico-video" />
+                    <span className="ap-ico ap-ico-call" />
+                  </span>
                 </div>
 
                 <div className="ap-chat-body">
-                  <p className="ap-msg in">Hola, ¿tenéis algo para una revisión esta semana?</p>
-                  <p className="ap-msg out">
-                    El jueves a las 10:40 con el doctor Ellis, o el viernes a las 15:20. ¿Qué te
-                    viene mejor?
-                  </p>
-                  <p className="ap-msg in">El jueves</p>
+                  <p className="ap-day" aria-hidden="true">HOY</p>
 
-                  <div className="ap-booked">
-                    <span className="ap-booked-tag">Reservada</span>
+                  <div className="ap-row in">
+                    <p className="ap-msg in">Hola, ¿tenéis algo para una revisión esta semana?<span className="ap-time">21:46</span></p>
+                  </div>
+
+                  <div className="ap-row out">
+                    <p className="ap-msg out">
+                      ¡Hola! Sí, tenemos el jueves a las 10:40 con el doctor Ellis o el viernes a
+                      las 15:20. ¿Qué te viene mejor?<span className="ap-time">21:46 <span className="ap-ticks">✓✓</span></span>
+                    </p>
+                  </div>
+
+                  <div className="ap-row in">
+                    <p className="ap-msg in">El jueves<span className="ap-time">21:47</span></p>
+                  </div>
+
+                  <div className="ap-row out">
+                    <p className="ap-msg out">
+                      Hecho. Revisión el jueves 19 a las 10:40 con el doctor Ellis. Te mando el
+                      recordatorio el miércoles.<span className="ap-time">21:47 <span className="ap-ticks">✓✓</span></span>
+                    </p>
+                  </div>
+
+                  <div className="ap-card">
+                    <span className="ap-card-tag">Cita reservada</span>
                     <strong>Revisión · 45 min</strong>
-                    <span>Jueves 19 · 10:40 · Dr. Ellis</span>
+                    <span>Jue 19 nov · 10:40 · Dr. Ellis</span>
                   </div>
                 </div>
 
                 <div className="ap-chat-foot" aria-hidden="true">
-                  <span>Escribe un mensaje…</span>
-                  <span className="ap-send">↑</span>
+                  <span className="ap-input">Escribe un mensaje…</span>
+                  <span className="ap-attach" />
+                  <span className="ap-send">➤</span>
                 </div>
               </div>
             </div>
@@ -166,33 +194,87 @@ export default function Home() {
               Un asistente, tres trabajos. Ninguno de ellos te quita la mañana.
             </p>
 
-            <div className="ap-board" data-reveal aria-hidden="true">
-              <div className="ap-board-head">
-                <span>Hoy</span>
-                <span className="ap-live">En directo</span>
+            {/* Vista de semana, como Google Calendar: horas a la izquierda,
+                columnas de día y eventos con barra de color. */}
+            <div className="gcal" data-reveal aria-hidden="true">
+              <div className="gcal-bar">
+                <span className="gcal-menu" />
+                <span className="gcal-logo"><i className="gcal-logo-blue" /><i className="gcal-logo-green" /><i className="gcal-logo-yellow" /><i className="gcal-logo-red" /></span>
+                <span className="gcal-title">Calendario</span>
+                <span className="gcal-today">Hoy</span>
+                <span className="gcal-range">16 – 20 de noviembre</span>
+                <span className="gcal-spacer" />
+                <span className="gcal-view">Semana</span>
+                <span className="gcal-avatar">M</span>
               </div>
-              <div className="ap-board-row is-new">
-                <span className="ap-board-time">08:20</span>
-                <span className="ap-board-what">Urgencia · Sra. Ferrer</span>
-                <span className="ap-board-tag">nueva</span>
+
+              <div className="gcal-grid">
+                <div className="gcal-gutter">
+                  <span className="gcal-hour" />
+                  <span className="gcal-hour">09:00</span>
+                  <span className="gcal-hour">10:00</span>
+                  <span className="gcal-hour">11:00</span>
+                  <span className="gcal-hour">12:00</span>
+                  <span className="gcal-hour">13:00</span>
+                  <span className="gcal-hour">14:00</span>
+                  <span className="gcal-hour">15:00</span>
+                  <span className="gcal-hour">16:00</span>
+                </div>
+
+                {([
+                  { day: "LUN", num: "16", events: [
+                    { t: "09:20", h: 1, cls: "blue", title: "Revisión", who: "A. Puig" },
+                    { t: "11:00", h: 2, cls: "green", title: "Higiene", who: "M. Costa" },
+                    { t: "15:20", h: 1, cls: "blue", title: "Revisión", who: "L. Vidal" },
+                  ]},
+                  { day: "MAR", num: "17", events: [
+                    { t: "09:40", h: 1, cls: "violet", title: "Ortodoncia", who: "J. Serra" },
+                    { t: "12:20", h: 1, cls: "blue", title: "Revisión", who: "N. Roca" },
+                    { t: "14:40", h: 1, cls: "green", title: "Higiene", who: "P. Mas" },
+                  ]},
+                  { day: "MIÉ", num: "18", today: true, events: [
+                    { t: "09:00", h: 1, cls: "blue", title: "Revisión", who: "C. Font" },
+                    { t: "10:40", h: 2, cls: "orange", title: "Urgencia", who: "Sra. Ferrer", badge: "nueva" },
+                    { t: "13:00", h: 1, cls: "green", title: "Higiene", who: "R. Pou" },
+                    { t: "15:00", h: 2, cls: "violet", title: "Ortodoncia", who: "T. Bosch" },
+                  ]},
+                  { day: "JUE", num: "19", events: [
+                    { t: "10:40", h: 1, cls: "blue", title: "Revisión", who: "Dr. Ellis" },
+                    { t: "12:00", h: 2, cls: "green", title: "Higiene", who: "E. Camps" },
+                    { t: "16:00", h: 1, cls: "blue", title: "Revisión", who: "G. Solé" },
+                  ]},
+                  { day: "VIE", num: "20", events: [
+                    { t: "09:20", h: 2, cls: "blue", title: "Revisión", who: "A. Marquès" },
+                    { t: "12:40", h: 1, cls: "orange", title: "Urgencia", who: "D. Vila" },
+                    { t: "15:20", h: 1, cls: "green", title: "Higiene", who: "S. Prat" },
+                  ]},
+                ] as CalendarDay[]).map((d) => (
+                  <div key={d.day} className={`gcal-col${d.today ? " is-today" : ""}`}>
+                    <div className="gcal-head">
+                      <span>{d.day}</span>
+                      <strong>{d.num}</strong>
+                    </div>
+                    <div className="gcal-slots">
+                      {d.events.map((ev) => (
+                        <span
+                          key={ev.t + ev.who}
+                          className={`gcal-ev ${ev.cls}`}
+                          style={{ top: `calc(${(parseInt(ev.t.slice(0, 2)) - 9) * 60 + parseInt(ev.t.slice(3))}px)` , height: `${ev.h * 60 - 6}px` }}
+                        >
+                          <b>{ev.t} {ev.title}</b>
+                          <em>{ev.who}</em>
+                          {ev.badge && <span className="gcal-badge">{ev.badge}</span>}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="ap-board-row">
-                <span className="ap-board-time">10:40</span>
-                <span className="ap-board-what">Revisión · Dr. Ellis</span>
+
+              <div className="gcal-foot">
+                <span><i className="dot blue" /> 3 reservadas por el asistente</span>
+                <span><i className="dot orange" /> 2 urgencias de esta noche</span>
               </div>
-              <div className="ap-board-row">
-                <span className="ap-board-time">12:15</span>
-                <span className="ap-board-what">Higiene · 30 min</span>
-              </div>
-              <div className="ap-board-row">
-                <span className="ap-board-time">15:20</span>
-                <span className="ap-board-what">Revisión · 45 min</span>
-              </div>
-              <div className="ap-board-row ap-board-dim">
-                <span className="ap-board-time">17:00</span>
-                <span className="ap-board-what">Cerrado</span>
-              </div>
-              <p className="ap-board-foot">3 de 4 citas reservadas por el asistente.</p>
             </div>
           </div>
         </section>
