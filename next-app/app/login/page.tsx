@@ -35,6 +35,7 @@ export default function LoginPage() {
   return (
     <main id="main" className="auth">
       <div className="auth-card">
+        <Link href="/" className="auth-back">← Volver a la web</Link>
         <p className="auth-brand">Citadent</p>
         <h1>Entra en tu clínica</h1>
         <p className="auth-sub">
@@ -75,6 +76,13 @@ export default function LoginPage() {
 
         <p className="auth-alt">
           ¿Primera vez? <Link href="/signup">Configura tu asistente</Link>
+        </p>
+        <p className="auth-exit">
+          <Link href="/pricing">Ver precios</Link>
+          <span aria-hidden="true">·</span>
+          <Link href="/contact">Hablar con nosotros</Link>
+          <span aria-hidden="true">·</span>
+          <Link href="/">Ir a la web</Link>
         </p>
       </div>
 
