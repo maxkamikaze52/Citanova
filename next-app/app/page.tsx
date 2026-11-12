@@ -14,10 +14,12 @@ export const metadata: Metadata = {
 const HERO = ["La", "recepcionista", "que", "nunca", "cierra."];
 
 const stats = [
-  { n: 68, prefix: "", label: "de las consultas llegan fuera de horario", sub: "Noches, fines de semana y la hora de comer." },
-  { n: 1, prefix: "<", label: "segundo en contestar", sub: "Sin colas, sin música, sin «su llamada es importante»." },
-  { n: 3, prefix: "×", label: "citas cerradas fuera del horario de la clínica", sub: "Comparado con no tener nada en la web." },
-  { n: 1, prefix: "", label: "tarde para estar en marcha", sub: "Alta, una línea de código y tres respuestas revisadas." },
+  { n: 68, prefix: "", suffix: "%", label: "de las consultas llegan fuera de horario", sub: "Noches, fines de semana y la hora de comer." },
+  { n: 1, prefix: "<", suffix: "s", label: "en contestar", sub: "Sin colas ni música de espera." },
+  { n: 3, prefix: "×", suffix: "", label: "citas cerradas fuera de horario", sub: "Frente a no tener nada en la web." },
+  { n: 1, prefix: "", suffix: "", label: "tarde para estar en marcha", sub: "Alta, una línea y tres respuestas." },
+  { n: 0, prefix: "", suffix: "", label: "pacientes perdidos sin avisar", sub: "Todo lo que entra queda escrito." },
+  { n: 49, prefix: "", suffix: " €", label: "al mes, sin coste de alta", sub: "IVA incluido. Sin permanencia." },
 ];
 
 type CalendarEvent = { t: string; h: number; cls: string; title: string; who: string; badge?: string };
@@ -250,10 +252,45 @@ export default function Home() {
                   <p className="ap-stat-n">
                     {st.prefix && <span className="ap-stat-affix">{st.prefix}</span>}
                     <CountUp value={st.n} />
+                    {st.suffix && <span className="ap-stat-affix">{st.suffix}</span>}
                   </p>
                   <p className="ap-stat-l">{st.label}</p>
                   <p className="ap-stat-sub">{st.sub}</p>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Lo que preguntan de verdad: una lista apretada de tres columnas. */}
+        <section className="ap-ask" aria-labelledby="ask">
+          <div className="container">
+            <div className="ap-ask-head" data-reveal>
+              <h2 id="ask">Las doce preguntas que llegan cada semana.</h2>
+              <p>
+                Todas se contestan solas, con tus palabras y tus precios. Ninguna se queda sin
+                respuesta a las once de la noche.
+              </p>
+            </div>
+            <div className="ap-ask-grid">
+              {[
+                "¿Tenéis hueco esta semana?",
+                "¿Cuánto cuesta una revisión?",
+                "¿Entráis con Adeslas?",
+                "¿Dónde puedo aparcar?",
+                "¿Duele la limpieza?",
+                "¿Atendéis urgencias?",
+                "¿Puedo cambiar mi cita?",
+                "¿Cuánto dura una endodoncia?",
+                "¿Hacéis ortodoncia invisible?",
+                "¿Qué formas de pago aceptáis?",
+                "¿A qué hora cerráis en agosto?",
+                "¿Puedo venir con mi hijo?",
+              ].map((q, i) => (
+                <p key={q} data-reveal style={{ ["--d" as string]: `${(i % 3) * 50}ms` }}>
+                  <span aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+                  {q}
+                </p>
               ))}
             </div>
           </div>
@@ -600,9 +637,9 @@ export default function Home() {
               Las que harías igual.
             </h2>
 
-            <div className="ap-faq">
+            <div className="ap-faq ap-faq-two">
               {faqs.map((f, i) => (
-                <details key={f.q} className="ap-faq-item" data-reveal style={{ ["--d" as string]: `${i * 70}ms` }}>
+                <details key={f.q} className="ap-faq-item" data-reveal style={{ ["--d" as string]: `${i * 50}ms` }}>
                   <summary>
                     <span>{f.q}</span>
                     <span className="ap-plus" aria-hidden="true" />

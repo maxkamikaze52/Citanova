@@ -1642,3 +1642,97 @@ html.reveal-js [data-reveal].is-in { opacity: 1; transform: none; pointer-events
 @media (prefers-reduced-motion: reduce) {
   .home-veil, .home-veil-inner { transition: none; animation: none; }
 }
+
+/* ==========================================================================
+   De la portada hacia abajo: menos aire, más información.
+   El hero se queda como estaba (una idea por pantalla); a partir de aquí se
+   aprieta el ritmo, se acortan las frases y se mete más dato por centímetro.
+   ========================================================================== */
+
+/* Ritmo más corto */
+.ap-section { padding: 84px 0; }
+.ap-section-tight { padding: 68px 0; }
+.ap-dense { padding: 76px 0; }
+.ap-stats { padding: 72px 0 64px; }
+.ap-close { padding: 96px 0 104px; }
+
+/* Frases de sección algo menores: siguen mandando, pero no ocupan una pantalla */
+.ap-claim { font-size: clamp(30px, 4.1vw, 54px); max-width: 24ch; }
+.ap-claim-wide { max-width: 34ch; }
+.ap-body { margin-top: 16px; font-size: 16px; max-width: 54ch; line-height: 1.55; }
+.ap-label { margin-bottom: 10px; }
+
+/* Cabeceras a dos columnas: título a la izquierda, entradilla a la derecha */
+.ap-section > .container > .ap-label,
+.ap-section .container > .ap-claim { text-align: center; }
+
+/* Cifras: seis, en dos filas de tres, muy juntas */
+.ap-stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); border-left: 1px solid var(--hair); }
+.ap-stat { padding: 14px 20px; border-bottom: 1px solid var(--hair); }
+.ap-stat:nth-last-child(-n+3) { border-bottom: 0; }
+.ap-stat-n { font-size: clamp(28px, 3vw, 38px); margin-bottom: 6px; }
+.ap-stat-l { font-size: 13px; margin-bottom: 3px; }
+.ap-stat-sub { font-size: 11.5px; line-height: 1.35; }
+.ap-stats-lead { margin-bottom: 30px; font-size: clamp(20px, 2.2vw, 26px); }
+
+/* Las doce preguntas */
+.ap-ask { padding: 76px 0; border-top: 1px solid var(--hair-soft); }
+.ap-ask-head {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: 16px 48px; align-items: end; margin-bottom: 34px;
+}
+.ap-ask-head h2 {
+  margin: 0; font-family: var(--font-display);
+  font-size: clamp(26px, 3.2vw, 40px); letter-spacing: -0.02em; line-height: 1.04; color: var(--ink);
+}
+.ap-ask-head p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted); max-width: 44ch; }
+.ap-ask-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 36px; border-top: 1px solid var(--hair);
+}
+.ap-ask-grid p {
+  display: flex; gap: 12px; align-items: baseline;
+  margin: 0; padding: 11px 0;
+  font-size: 14px; line-height: 1.4; color: var(--muted);
+  border-bottom: 1px solid var(--hair-soft);
+}
+.ap-ask-grid p span {
+  font-size: 10px; letter-spacing: 0.08em; color: var(--faint);
+  font-variant-numeric: tabular-nums; flex: none;
+}
+
+/* FAQ a dos columnas */
+.ap-faq-two {
+  max-width: none;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 44px; align-items: start;
+}
+.ap-faq-two .ap-faq-item:nth-child(1) { border-top: 1px solid var(--hair); }
+.ap-faq-two .ap-faq-item p { padding-right: 16px; }
+.ap-faq-item summary { padding: 16px 4px; font-size: 15.5px; }
+
+/* El tablero de comparación y el denso, un poco más apretados */
+.ap-versus { margin-top: 40px; }
+.ap-vs-what, .ap-vs-cell { padding: 13px 14px; font-size: 13.5px; }
+.ap-vs-col-head { padding: 14px 14px 12px; }
+.ap-dense-grid { gap: 0 40px; }
+.ap-dense-col li { padding: 8px 0 8px 20px; font-size: 14px; }
+.ap-dense-strip { margin-top: 30px; padding-top: 20px; }
+.ap-board, .ap-transcript { margin-top: 40px; }
+.ap-priv-big { margin-top: 46px; }
+.ap-plans { margin-top: 40px; }
+.ap-faq-two { margin-top: 34px; }
+
+@media (max-width: 1000px) {
+  .ap-ask-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ap-ask-head { grid-template-columns: minmax(0, 1fr); }
+  .ap-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .ap-section, .ap-dense, .ap-ask { padding: 56px 0; }
+  .ap-stats { padding: 52px 0; }
+  .ap-stats-grid { grid-template-columns: minmax(0, 1fr); }
+  .ap-stat { border-bottom: 1px solid var(--hair); }
+  .ap-stat:last-child { border-bottom: 0; }
+  .ap-ask-grid, .ap-faq-two { grid-template-columns: minmax(0, 1fr); }
+}
