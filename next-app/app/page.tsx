@@ -323,17 +323,25 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Night story */}
-        <section className="ap-section" aria-labelledby="two">
-          <div className="container">
-            <p className="ap-label" data-reveal>21:47</p>
-            <h2 id="two" className="ap-claim" data-reveal>
-              Son las once de la noche. Y sigues abierto.
-            </h2>
-            <p className="ap-body" data-reveal>
-              La mitad de las consultas llegan con la clínica cerrada. Antes se quedaban sin
-              respuesta; ahora son una cita a las 08:20.
-            </p>
+        {/* Night story — split, no centred stack: texto a la izquierda,
+            transcripción a la derecha. Rompe el ritmo de "todo centrado". */}
+        <section className="ap-section ap-split" aria-labelledby="two">
+          <div className="container ap-split-in">
+            <div className="ap-split-copy">
+              <p className="ap-label ap-label-left" data-reveal>21:47</p>
+              <h2 id="two" data-reveal>
+                Son las once de la noche. Y sigues abierto.
+              </h2>
+              <p className="ap-split-body" data-reveal>
+                La mitad de las consultas llegan con la clínica cerrada. Antes se quedaban sin
+                respuesta; ahora son una cita a las 08:20.
+              </p>
+              <ul className="ap-split-points">
+                <li data-reveal>Contesta en un segundo, también de madrugada.</li>
+                <li data-reveal>Detecta la urgencia y te la pone la primera.</li>
+                <li data-reveal>Te la encuentras en la agenda al abrir.</li>
+              </ul>
+            </div>
 
             <div className="ap-transcript" data-reveal aria-hidden="true">
               <div className="ap-tr-head">
@@ -352,33 +360,6 @@ export default function Home() {
               <div className="ap-tok">
                 <span>Reservada</span> Urgencia · 08:20 · Dr. Ellis
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Calendar */}
-        <section className="ap-section ap-black" aria-labelledby="three">
-          <div className="container">
-            <p className="ap-label" data-reveal>Tu calendario</p>
-            <h2 id="three" className="ap-claim" data-reveal>
-              Tu agenda, intacta.
-            </h2>
-            <p className="ap-body" data-reveal>
-              Se conecta en solo lectura al calendario que ya usas. Nunca mueve una cita tuya, y deja
-              de ofrecer un hueco en el momento en que lo ocupas.
-            </p>
-
-            <div className="ap-cal" data-reveal aria-hidden="true">
-              {["Lun", "Mar", "Mié", "Jue", "Vie"].map((d, i) => (
-                <div key={d} className="ap-cal-col">
-                  <p className="ap-cal-day">{d}</p>
-                  <div className="ap-cal-slot" />
-                  <div className={`ap-cal-slot${i === 1 ? " is-booked" : ""}`}>{i === 1 ? "10:40" : ""}</div>
-                  <div className="ap-cal-slot" />
-                  <div className={`ap-cal-slot${i === 3 ? " is-free" : ""}`}>{i === 3 ? "libre" : ""}</div>
-                  <div className="ap-cal-slot" />
-                </div>
-              ))}
             </div>
           </div>
         </section>
@@ -459,27 +440,44 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Privacy */}
+        {/* Privacy — dos columnas con borde, no otra pila centrada. */}
         <section className="ap-section ap-black" aria-labelledby="five">
-          <div className="container">
-            <div data-reveal><Tick /></div>
-            <p className="ap-label" data-reveal>Privacidad</p>
-            <h2 id="five" className="ap-claim" data-reveal>
-              Privacidad de serie.
-            </h2>
-            <p className="ap-body" data-reveal>
-              Las conversaciones de tus pacientes no son un activo de marketing. No entrenamos
-              modelos públicos con ellas y no las vendemos a nadie.
-            </p>
+          <div className="container ap-priv">
+            <div className="ap-priv-copy">
+              <p className="ap-label ap-label-left" data-reveal>Privacidad</p>
+              <h2 id="five" data-reveal>Privacidad de serie.</h2>
+              <p data-reveal>
+                Las conversaciones de tus pacientes no son un activo de marketing. No entrenamos
+                modelos públicos con ellas y no las vendemos a nadie.
+              </p>
+            </div>
 
-            <ul className="ap-privacy-list">
-              <li data-reveal>Datos alojados en la UE</li>
-              <li data-reveal>Cifrado en tránsito y en reposo</li>
-              <li data-reveal>Calendario en solo lectura</li>
-              <li data-reveal>Exporta o borra todo cuando quieras</li>
-              <li data-reveal>Contrato de encargo con cada clínica</li>
-              <li data-reveal>Una clínica, un espacio cerrado</li>
-            </ul>
+            <div className="ap-priv-table">
+              <div className="ap-priv-row" data-reveal>
+                <span>Dónde están los datos</span>
+                <strong>Servidores en la UE</strong>
+              </div>
+              <div className="ap-priv-row" data-reveal>
+                <span>Cómo se guardan</span>
+                <strong>Cifrado en tránsito y en reposo</strong>
+              </div>
+              <div className="ap-priv-row" data-reveal>
+                <span>Qué puedes tocar de tu agenda</span>
+                <strong>Nada: solo lectura</strong>
+              </div>
+              <div className="ap-priv-row" data-reveal>
+                <span>Si te vas</span>
+                <strong>Exportas o borras todo</strong>
+              </div>
+              <div className="ap-priv-row" data-reveal>
+                <span>Papeles</span>
+                <strong>Encargo de tratamiento firmado</strong>
+              </div>
+              <div className="ap-priv-row" data-reveal>
+                <span>Y las otras clínicas</span>
+                <strong>No ven nada tuyo</strong>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -492,12 +490,12 @@ export default function Home() {
             </h2>
 
             <div className="ap-limits">
-              <p data-reveal>No diagnostica.</p>
-              <p data-reveal>No da presupuestos cerrados.</p>
-              <p data-reveal>No pide tarjetas.</p>
-              <p data-reveal>No escribe primero al paciente.</p>
-              <p data-reveal>No actúa fuera de tu web.</p>
-              <p data-reveal>No adivina: toma nota.</p>
+              <p data-reveal data-n="01">No diagnostica.</p>
+              <p data-reveal data-n="02">No da presupuestos cerrados.</p>
+              <p data-reveal data-n="03">No pide tarjetas.</p>
+              <p data-reveal data-n="04">No escribe primero al paciente.</p>
+              <p data-reveal data-n="05">No actúa fuera de tu web.</p>
+              <p data-reveal data-n="06">No adivina: toma nota.</p>
             </div>
           </div>
         </section>
