@@ -4,6 +4,7 @@ import "./globals.css";
 import SiteFooter from "./components/SiteFooter";
 import MobileCta from "./components/MobileCta";
 import CookieConsent from "./components/CookieConsent";
+import HomeTransition from "./components/HomeTransition";
 import { SITE } from "../lib/site";
 
 /**
@@ -58,6 +59,7 @@ export default function Root({ children }: { children: React.ReactNode }) {
         <SiteFooter />
         <MobileCta />
         <CookieConsent />
+        <HomeTransition />
       </body>
     </html>
   );
