@@ -205,9 +205,9 @@ input:user-invalid, select:user-invalid, textarea:user-invalid {
 
 body:has(main.ap),
 .ap {
-  --paper: #0b0b0d;         /* casi negro, como apple.com */
-  --navy: #16161a;          /* panel de apoyo, apenas más claro */
-  --band: #000000;
+  --paper: #070b14;         /* casi negro, con un deje azul */
+  --navy: #0d1424;          /* panel de apoyo: azul muy apagado */
+  --band: #04070e;
   --ink: #f5f5f7;
   --muted: #a1a1a6;
   --faint: #6e6e73;
@@ -225,7 +225,7 @@ body:has(main.ap),
   --font-ui: var(--font-inter-tight), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 body:has(main.ap) {
-  background: #0b0b0d;
+  background: #070b14;
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
 }
@@ -247,10 +247,10 @@ body:has(main.ap) a.ap-brand,
 body:has(main.ap) a.ap-brand:hover { color: var(--ink); }
 body:has(main.ap) a.ap-textlink { color: var(--blue); }
 body:has(main.ap) :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-body:has(main.ap) .site-footer { background: #0b0b0d; border-top: 1px solid var(--hair); }
+body:has(main.ap) .site-footer { background: #05080f; border-top: 1px solid var(--hair); }
 body:has(main.ap) .site-footer h2 { color: var(--ink); }
-body:has(main.ap) .cookie-banner { background: #0b1730; border-color: var(--hair); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7); }
-body:has(main.ap) .mobile-cta { background: rgba(11, 11, 13, 0.92); border-top-color: var(--hair); backdrop-filter: blur(20px); }
+body:has(main.ap) .cookie-banner { background: #0d1424; border-color: var(--hair); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7); }
+body:has(main.ap) .mobile-cta { background: rgba(7, 11, 20, 0.92); border-top-color: var(--hair); backdrop-filter: blur(20px); }
 
 .ap { background: var(--paper); }
 .ap ::selection { background: rgba(0, 113, 227, 0.35); }
@@ -276,7 +276,7 @@ body:has(main.ap) .mobile-cta { background: rgba(11, 11, 13, 0.92); border-top-c
   transition: background 500ms cubic-bezier(0.16, 1, 0.3, 1), border-color 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .ap-nav.is-scrolled {
-  background: rgba(11, 11, 13, 0.76);
+  background: rgba(7, 11, 20, 0.78);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom-color: var(--hair);
@@ -311,7 +311,9 @@ body:has(main.ap) .mobile-cta { background: rgba(11, 11, 13, 0.92); border-top-c
 .ap-hero { position: relative; padding: 88px 0 44px; text-align: center; overflow: hidden; }
 .ap-hero::before {
   content: ""; position: absolute; inset: -18% -10% auto; height: 92%;
-  background: radial-gradient(52% 46% at 50% 12%, rgba(255, 255, 255, 0.07), transparent 76%);
+  background:
+    radial-gradient(50% 44% at 50% 12%, rgba(255, 255, 255, 0.06), transparent 76%),
+    radial-gradient(60% 50% at 50% 0%, rgba(41, 151, 255, 0.10), transparent 78%);
   pointer-events: none;
 }
 .ap-eyebrow {
@@ -376,7 +378,7 @@ body:has(main.ap) .mobile-cta { background: rgba(11, 11, 13, 0.92); border-top-c
 }
 .ap-chat {
   position: relative; border-radius: 22px; overflow: hidden;
-  background: linear-gradient(180deg, #16161a, #101013);
+  background: linear-gradient(180deg, #0d1424, #0a0f1b);
   border: 1px solid var(--hair);
   box-shadow: 0 60px 120px -50px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
   text-align: left;
@@ -402,7 +404,7 @@ body:has(main.ap) .mobile-cta { background: rgba(11, 11, 13, 0.92); border-top-c
   padding: 11px 15px; border-radius: 18px;
   font-size: 14px; line-height: 1.45; overflow-wrap: break-word;
 }
-.ap-msg.in { background: #1d1d21; color: var(--ink); justify-self: start; border-bottom-left-radius: 6px; }
+.ap-msg.in { background: #141c2e; color: var(--ink); justify-self: start; border-bottom-left-radius: 6px; }
 .ap-msg.out { background: var(--accent); color: #fff; justify-self: end; border-bottom-right-radius: 6px; }
 .ap-booked {
   display: grid; gap: 3px; margin-top: 4px; padding: 13px 15px;
