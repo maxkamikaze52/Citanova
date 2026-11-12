@@ -23,12 +23,12 @@ export async function POST(request: Request) {
 
   const name = normalizePracticeName(record.practiceName);
   if (!name) {
-    return NextResponse.json({ ok: false, error: "Enter the practice name." }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "Escribe el nombre de la clínica." }, { status: 400 });
   }
 
   const timezone = typeof record.timezone === "string" ? record.timezone : "Europe/London";
   if (!isValidTimeZone(timezone)) {
-    return NextResponse.json({ ok: false, error: "Choose a valid timezone." }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "Elige una zona horaria válida." }, { status: 400 });
   }
 
   const created = await signUpOrIn({ email: account.email!, password: account.password! });
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       ok: true,
       needsEmailConfirm: true,
-      message: "Check your inbox to confirm the account, then sign in to finish setup.",
+      message: "Mira tu correo para confirmar la cuenta y luego entra para terminar el alta.",
     });
   }
 
@@ -52,13 +52,13 @@ export async function POST(request: Request) {
       .limit(1);
     if (ownedError) {
       return NextResponse.json(
-        { ok: false, error: "Could not check your account. Please try again." },
+        { ok: false, error: "No hemos podido comprobar tu cuenta. Inténtalo otra vez." },
         { status: 500 },
       );
     }
     if (owned && owned.length > 0) {
       return NextResponse.json(
-        { ok: false, error: "That account already has a practice. Sign in instead." },
+        { ok: false, error: "Esta cuenta ya tiene una clínica. Entra en lugar de crear otra." },
         { status: 409 },
       );
     }
@@ -94,7 +94,11 @@ export async function POST(request: Request) {
   } catch (error) {
     // Roll the account back so the same email can be used again.
     if (created.isNew) await admin.auth.admin.deleteUser(created.userId).catch(() => {});
-    const message = error instanceof Error ? error.message : "Could not create the practice.";
+    // Nunca el texto crudo del SDK: puede ser en inglés y técnico.
+    const raw = error instanceof Error ? error.message : "";
+    const message = /fetch failed|network|ENOTFOUND|ECONNREFUSED|timeout/i.test(raw)
+      ? "No hemos podido conectar con el servidor. Inténtalo en un minuto."
+      : raw || "No hemos podido crear la clínica. Inténtalo otra vez.";
     return NextResponse.json({ ok: false, error: message }, { status: 500 });
   }
 }

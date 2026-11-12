@@ -468,9 +468,9 @@ export async function provisionBusiness(
   input: ProvisionInput,
 ): Promise<Provisioned> {
   const name = normalizePracticeName(input.name);
-  if (!name) throw new Error("A practice name is required.");
+  if (!name) throw new Error("Escribe el nombre de la clínica.");
   if (!isValidTimeZone(input.timezone)) throw new Error("That timezone is not recognised.");
-  if (!input.ownerUserId) throw new Error("An owner account is required.");
+  if (!input.ownerUserId) throw new Error("Falta la cuenta del propietario.");
 
   const services = normalizeServices(input.services);
   const hours = normalizeHours(input.hours);
@@ -500,7 +500,7 @@ export async function provisionBusiness(
     .single();
 
   if (businessError || !business) {
-    throw new Error(`Could not create the practice: ${businessError?.message ?? "unknown error"}`);
+    throw new Error(`No hemos podido crear la clínica: ${businessError?.message ?? "error desconocido"}`);
   }
 
   const businessId = business.id as string;

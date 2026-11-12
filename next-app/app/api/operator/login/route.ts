@@ -23,7 +23,7 @@ export async function POST(request: Request) {
   const retryAfter = loginRetryAfter(key);
   if (retryAfter > 0) {
     return NextResponse.json(
-      { ok: false, error: "Too many attempts. Try again later." },
+      { ok: false, error: "Demasiados intentos seguidos. Espera un momento e inténtalo de nuevo." },
       { status: 429, headers: { "Retry-After": String(retryAfter) } },
     );
   }
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
   if (!isOperator(new Headers({ "x-operator-token": token }))) {
     recordLoginFailure(key);
-    return NextResponse.json({ ok: false, error: "Invalid operator token." }, { status: 401 });
+    return NextResponse.json({ ok: false, error: "La clave de operador no es válida." }, { status: 401 });
   }
 
   clearLoginFailures(key);

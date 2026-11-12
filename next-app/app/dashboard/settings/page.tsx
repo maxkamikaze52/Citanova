@@ -68,9 +68,9 @@ export default async function SettingsPage() {
 
     const list = (integrations.body as any)?.connections;
     if (Array.isArray(list)) connections = list as Connection[];
-    else backendError = "The assistant service did not return connector settings.";
+    else backendError = "El servicio del asistente no ha devuelto la configuración de conexiones.";
   } catch {
-    backendError = "Could not reach the assistant service. Start it, then reload.";
+    backendError = "No hay conexión con el servicio del asistente. Compruébalo y recarga la página.";
   }
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3002";

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { userMessage } from "../../lib/errors";
 
 type Key = {
   id: string;
@@ -46,7 +47,7 @@ export default function OperatorConsole() {
       return;
     }
     if (!response.ok || !data.ok) {
-      setError(data.error ?? "Could not load keys.");
+      setError(userMessage(data.error, "No hemos podido cargar las claves."));
       return;
     }
     setError("");
@@ -77,7 +78,7 @@ export default function OperatorConsole() {
     setBusy(false);
 
     if (!response.ok || !data.ok) {
-      setError(data.error ?? "Could not create the key.");
+      setError(userMessage(data.error, "No hemos podido crear la clave."));
       return;
     }
     setMinted(data.key);

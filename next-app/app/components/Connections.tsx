@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { userMessage } from "../../lib/errors";
 
 type FieldSpec = {
   key: string;
@@ -90,7 +91,7 @@ function ConnectionCard({
 
     if (!response.ok || !data.ok) {
       const field = data.field ? ` (${data.field})` : "";
-      setError(`${data.error ?? "Could not save."}${field}`);
+      setError(`${userMessage(data.error, "No hemos podido guardar.")}${field}`);
       return;
     }
 
@@ -111,7 +112,7 @@ function ConnectionCard({
     });
     setBusy(false);
     if (!response.ok) {
-      setError("Could not disconnect.");
+      setError("No hemos podido desconectarlo.");
       return;
     }
     onUpdated({ connected: false, status: "revoked", accountLabel: null });

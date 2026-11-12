@@ -11,6 +11,7 @@ import {
 } from "../../lib/countries";
 
 import React, { useEffect, useRef, useState } from "react";
+import { userMessage } from "../../lib/errors";
 
 type Props = {
   /** Stored E.164 value ("+34612345678"), or "" when empty. */
@@ -190,7 +191,7 @@ export function PracticeDetails({
         data?.error?.issues?.map((i: { path: string[]; message: string }) => `${i.path.join(".")}: ${i.message}`).join("; ") ??
         data?.error?.message ??
         data?.error ??
-        "Could not save.";
+        "No hemos podido guardar.";
       setMessage({ kind: "error", text: String(detail) });
       return;
     }
@@ -350,7 +351,7 @@ export function WebsiteOrigin({
 
     if (!response.ok) {
       const detail =
-        data?.error?.message ?? data?.error ?? "Could not save that address.";
+        userMessage(data?.error?.message ?? data?.error, "No hemos podido guardar esa dirección.");
       setMessage({ kind: "error", text: String(detail) });
       return;
     }

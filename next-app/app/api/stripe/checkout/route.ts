@@ -12,14 +12,14 @@ export async function POST(req: NextRequest) {
   const sb = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     { cookies: { getAll: () => jar.getAll(), setAll: () => {} } });
   const { data: { user } } = await sb.auth.getUser();
-  if (!user) return NextResponse.json({ error: "login required" }, { status: 401 });
+  if (!user) return NextResponse.json({ error: "login_required" }, { status: 401 });
 
   const { business } = await getMyBusiness();
   if (!business) {
-    return NextResponse.json({ error: "Finish setting up your practice first." }, { status: 409 });
+    return NextResponse.json({ error: "Termina de configurar la clínica antes de pagar." }, { status: 409 });
   }
   if (["active", "trialing", "past_due"].includes(business.subscription_status)) {
-    return NextResponse.json({ error: "This practice already has a subscription." }, { status: 409 });
+    return NextResponse.json({ error: "Esta clínica ya tiene una suscripción activa." }, { status: 409 });
   }
 
   const price = plan === "pro" ? process.env.STRIPE_PRICE_PRO! : process.env.STRIPE_PRICE_STARTER!;

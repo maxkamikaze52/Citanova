@@ -113,9 +113,9 @@ const MIN_PASSWORD = 8;
 
 export function validateSignup(input: Partial<SignupInput>): string | null {
   const email = (input.email ?? "").trim();
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return "Enter a valid email address.";
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return "Escribe un correo electrónico válido.";
   if ((input.password ?? "").length < MIN_PASSWORD) {
-    return `Use at least ${MIN_PASSWORD} characters for the password.`;
+    return `La contraseña necesita al menos ${MIN_PASSWORD} caracteres.`;
   }
   return null;
 }
@@ -142,14 +142,14 @@ export async function signUpOrIn(input: SignupInput): Promise<SignupResult> {
         password: input.password,
       });
       if (signInError || !signed.user) {
-        return { ok: false, error: "That email already has an account. Try signing in instead." };
+        return { ok: false, error: "Ese correo ya tiene cuenta. Entra en lugar de crear otra." };
       }
       return { ok: true, userId: signed.user.id, needsEmailConfirm: false, isNew: false };
     }
     return { ok: false, error: error.message };
   }
 
-  if (!data.user) return { ok: false, error: "Could not create the account." };
+  if (!data.user) return { ok: false, error: "No hemos podido crear la cuenta. Inténtalo otra vez." };
 
   // With "Confirm email" on, Supabase hides "already registered" behind a fake
   // user that has no identities. Treat that as an existing account.
@@ -159,7 +159,7 @@ export async function signUpOrIn(input: SignupInput): Promise<SignupResult> {
       password: input.password,
     });
     if (signInError || !signed.user) {
-      return { ok: false, error: "That email already has an account. Try signing in instead." };
+      return { ok: false, error: "Ese correo ya tiene cuenta. Entra en lugar de crear otra." };
     }
     return { ok: true, userId: signed.user.id, needsEmailConfirm: false, isNew: false };
   }
