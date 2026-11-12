@@ -24,7 +24,7 @@ export default function LoginPage() {
     setBusy(false);
 
     if (!response.ok) {
-      setError(data.error ?? "Could not sign in.");
+      setError(data.error ?? "No hemos podido entrar. Revisa el correo y la contraseña.");
       return;
     }
     router.replace("/dashboard");
@@ -32,15 +32,15 @@ export default function LoginPage() {
   }
 
   return (
-    <main style={{ maxWidth: 420, margin: "0 auto", padding: "72px 24px" }}>
-      <h1 style={{ fontSize: 28, marginBottom: 6 }}>Practice sign in</h1>
-      <p style={{ color: "#5b7573", marginTop: 0, marginBottom: 28 }}>
-        See exactly what your assistant booked.
+    <main id="main" style={{ maxWidth: 420, margin: "0 auto", padding: "72px 24px" }}>
+      <h1 style={{ fontSize: 28, marginBottom: 6 }}>Entrar en mi clínica</h1>
+      <p style={{ color: "var(--muted)", marginTop: 0, marginBottom: 28 }}>
+        Mira exactamente qué ha reservado tu asistente.
       </p>
 
       <form onSubmit={submit} style={{ display: "grid", gap: 12 }}>
-        <label style={{ display: "grid", gap: 6, fontSize: 14, color: "#0f2b2a" }}>
-          <span style={{ fontWeight: 600 }}>Email</span>
+        <label style={{ display: "grid", gap: 6, fontSize: 14, color: "var(--ink)" }}>
+          <span style={{ fontWeight: 600 }}>Correo electrónico</span>
           <input
             type="email"
             value={email}
@@ -50,8 +50,8 @@ export default function LoginPage() {
             style={input}
           />
         </label>
-        <label style={{ display: "grid", gap: 6, fontSize: 14, color: "#0f2b2a" }}>
-          <span style={{ fontWeight: 600 }}>Password</span>
+        <label style={{ display: "grid", gap: 6, fontSize: 14, color: "var(--ink)" }}>
+          <span style={{ fontWeight: 600 }}>Contraseña</span>
           <input
             type="password"
             value={password}
@@ -63,17 +63,17 @@ export default function LoginPage() {
         </label>
 
         {error ? (
-          <p role="alert" style={{ color: "#b42318", fontSize: 14, margin: 0 }}>
+          <p role="alert" style={{ color: "var(--danger)", fontSize: 14, margin: 0 }}>
             {error}
           </p>
         ) : null}
 
         <button type="submit" disabled={busy} style={{ ...button, opacity: busy ? 0.7 : 1 }}>
-          {busy ? "Signing in…" : "Sign in"}
+          {busy ? "Entrando…" : "Entrar"}
         </button>
 
-        <p style={{ fontSize: 13, color: "#5b7573", margin: "8px 0 0", textAlign: "center" }}>
-          New here? <a href="/signup" style={{ color: "#0f766e" }}>Set up your assistant</a>
+        <p style={{ fontSize: 13, color: "var(--muted)", margin: "8px 0 0", textAlign: "center" }}>
+          ¿Primera vez? <a href="/signup" style={{ color: "var(--accent)" }}>Configura tu asistente</a>
         </p>
       </form>
     </main>
@@ -82,8 +82,8 @@ export default function LoginPage() {
 
 const input: React.CSSProperties = {
   padding: "10px 12px",
-  border: "1px solid #dbe8e5",
-  borderRadius: 9,
+  border: "1px solid var(--line)",
+  borderRadius: 6,
   fontSize: 15,
   fontFamily: "inherit",
 };
@@ -91,10 +91,10 @@ const input: React.CSSProperties = {
 const button: React.CSSProperties = {
   marginTop: 6,
   padding: "11px 16px",
-  background: "#0f766e",
+  background: "var(--accent)",
   color: "#fff",
   border: 0,
-  borderRadius: 9,
+  borderRadius: 6,
   fontSize: 15,
   fontWeight: 600,
   cursor: "pointer",

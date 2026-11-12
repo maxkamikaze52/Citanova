@@ -101,7 +101,7 @@ export default function OperatorConsole() {
     return (
       <div style={{ maxWidth: 420, margin: "80px auto", padding: "0 24px" }}>
         <h1 style={{ fontSize: 26, marginBottom: 8 }}>Operator console</h1>
-        <p style={{ color: "#5b7573", marginBottom: 20 }}>
+        <p style={{ color: "var(--muted)", marginBottom: 20 }}>
           This page is for the supplier, not for practices. Sign in with your operator code.
         </p>
         <OperatorLogin
@@ -116,23 +116,23 @@ export default function OperatorConsole() {
   }
 
   return (
-    <main style={{ maxWidth: 1000, margin: "0 auto", padding: "40px 24px 80px" }}>
+    <main id="main" style={{ maxWidth: 1000, margin: "0 auto", padding: "40px 24px 80px" }}>
       <h1 style={{ fontSize: 28, margin: "0 0 4px" }}>Operator console</h1>
-      <p style={{ color: "#5b7573", marginTop: 0, marginBottom: 26 }}>
+      <p style={{ color: "var(--muted)", marginTop: 0, marginBottom: 26 }}>
         Mint a key for a practice, then run the installer on their machine with that key.
       </p>
 
       {minted ? (
         <div
           style={{
-            border: "1px solid #a6e3d6",
-            background: "#e6f6f2",
-            borderRadius: 14,
+            border: "1px solid var(--success-line)",
+            background: "var(--success-bg)",
+            borderRadius: 8,
             padding: 20,
             marginBottom: 26,
           }}
         >
-          <p style={{ margin: "0 0 8px", fontSize: 13, color: "#0b5a54", fontWeight: 700 }}>
+          <p style={{ margin: "0 0 8px", fontSize: 13, color: "var(--success-ink)", fontWeight: 700 }}>
             Key created — copy it now, it is never shown again
           </p>
           <code
@@ -142,15 +142,15 @@ export default function OperatorConsole() {
               fontSize: 19,
               letterSpacing: "0.04em",
               background: "#fff",
-              border: "1px solid #a6e3d6",
-              borderRadius: 9,
+              border: "1px solid var(--success-line)",
+              borderRadius: 6,
               padding: "12px 14px",
               userSelect: "all",
             }}
           >
             {minted}
           </code>
-          <p style={{ fontSize: 13, color: "#0b5a54", margin: "10px 0 0" }}>
+          <p style={{ fontSize: 13, color: "var(--success-ink)", margin: "10px 0 0" }}>
             Next: on their computer, in the installer folder, run{" "}
             <code>node install.mjs</code> and paste this key. You keep this key on your side only —
             the practice should never need it.
@@ -159,11 +159,11 @@ export default function OperatorConsole() {
       ) : null}
 
       <section
-        style={{ border: "1px solid #dbe8e5", borderRadius: 14, padding: 20, marginBottom: 30 }}
+        style={{ border: "1px solid var(--line)", borderRadius: 8, padding: 20, marginBottom: 30 }}
       >
         <h2 style={{ fontSize: 16, margin: "0 0 14px" }}>Create a key</h2>
         <form onSubmit={mint} style={{ display: "grid", gap: 12 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+          <div className="cols-stack" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
             <label style={label}>
               <span>Plan</span>
               <select value={plan} onChange={(e) => setPlan(e.target.value as typeof plan)} style={input}>
@@ -208,16 +208,16 @@ export default function OperatorConsole() {
       <h2 style={{ fontSize: 16, margin: "0 0 12px" }}>Keys issued</h2>
 
       {loading ? (
-        <p style={{ color: "#5b7573" }}>Loading…</p>
+        <p style={{ color: "var(--muted)" }}>Loading…</p>
       ) : error ? (
-        <p style={{ color: "#b42318" }}>{error}</p>
+        <p style={{ color: "var(--danger)" }}>{error}</p>
       ) : keys.length === 0 ? (
-        <p style={{ color: "#5b7573" }}>No keys yet. Create one above.</p>
+        <p style={{ color: "var(--muted)" }}>No keys yet. Create one above.</p>
       ) : (
-        <div style={{ border: "1px solid #dbe8e5", borderRadius: 14, overflow: "hidden" }}>
+        <div style={{ border: "1px solid var(--line)", borderRadius: 8, overflow: "hidden" }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
             <thead>
-              <tr style={{ background: "#f6fbfa", textAlign: "left", fontSize: 12, color: "#5b7573" }}>
+              <tr style={{ background: "var(--surface)", textAlign: "left", fontSize: 12, color: "var(--muted)" }}>
                 <th style={th}>Key</th>
                 <th style={th}>Plan</th>
                 <th style={th}>Status</th>
@@ -229,7 +229,7 @@ export default function OperatorConsole() {
             </thead>
             <tbody>
               {keys.map((key) => (
-                <tr key={key.id} style={{ borderTop: "1px solid #eef2f1" }}>
+                <tr key={key.id} style={{ borderTop: "1px solid var(--line-soft)" }}>
                   <td style={{ ...td, fontFamily: "ui-monospace,monospace", fontSize: 13 }}>
                     {key.hint}
                   </td>
@@ -238,25 +238,25 @@ export default function OperatorConsole() {
                     <span
                       style={{
                         padding: "2px 9px",
-                        borderRadius: 999,
+                        borderRadius: 4,
                         fontSize: 11.5,
                         fontWeight: 700,
                         background:
                           key.status === "active"
-                            ? "#e6f6f2"
+                            ? "var(--success-bg)"
                             : key.status === "revoked"
-                              ? "#fdeceb"
+                              ? "var(--danger-bg)"
                               : key.status === "suspended"
-                                ? "#fff5e6"
-                                : "#eef2f5",
+                                ? "var(--warn-bg)"
+                                : "var(--neutral-bg)",
                         color:
                           key.status === "active"
-                            ? "#0b5a54"
+                            ? "var(--success-ink)"
                             : key.status === "revoked"
-                              ? "#b42318"
+                              ? "var(--danger)"
                               : key.status === "suspended"
-                                ? "#b54708"
-                                : "#475467",
+                                ? "var(--warn)"
+                                : "var(--neutral-ink)",
                       }}
                     >
                       {key.status}
@@ -266,7 +266,7 @@ export default function OperatorConsole() {
                     {key.devices}/{key.maxDevices}
                   </td>
                   <td style={td}>{dmy(key.expiresAt)}</td>
-                  <td style={{ ...td, color: "#5b7573", maxWidth: 220 }}>{key.notes ?? "—"}</td>
+                  <td style={{ ...td, color: "var(--muted)", maxWidth: 220 }}>{key.notes ?? "—"}</td>
                   <td style={{ ...td, textAlign: "right", whiteSpace: "nowrap" }}>
                     {key.status !== "revoked" ? (
                       <>
@@ -290,13 +290,13 @@ export default function OperatorConsole() {
                               patch(key.id, { status: "revoked", revokeDevices: true });
                             }
                           }}
-                          style={{ ...smallButton, color: "#b42318", borderColor: "#fda29b" }}
+                          style={{ ...smallButton, color: "var(--danger)", borderColor: "var(--danger-line)" }}
                         >
                           Revoke
                         </button>
                       </>
                     ) : (
-                      <span style={{ fontSize: 12, color: "#98a2b3" }}>cancelled</span>
+                      <span style={{ fontSize: 12, color: "var(--faint)" }}>cancelled</span>
                     )}
                   </td>
                 </tr>
@@ -306,7 +306,7 @@ export default function OperatorConsole() {
         </div>
       )}
 
-      <p style={{ fontSize: 12.5, color: "#5b7573", marginTop: 16 }}>
+      <p style={{ fontSize: 12.5, color: "var(--muted)", marginTop: 16 }}>
         Only the last characters of each key are stored, so a key can be identified but never read
         back. If a practice loses theirs, revoke it and mint a new one.
       </p>
@@ -345,7 +345,7 @@ function OperatorLogin({ onDone }: { onDone: () => void }) {
         style={input}
         required
       />
-      {error ? <p style={{ color: "#b42318", fontSize: 13, margin: 0 }}>{error}</p> : null}
+      {error ? <p style={{ color: "var(--danger)", fontSize: 13, margin: 0 }}>{error}</p> : null}
       <button type="submit" disabled={busy} style={button}>
         {busy ? "Checking…" : "Enter"}
       </button>
@@ -358,13 +358,13 @@ const label: React.CSSProperties = {
   gap: 6,
   fontSize: 13,
   fontWeight: 600,
-  color: "#0f2b2a",
+  color: "var(--ink)",
 };
 
 const input: React.CSSProperties = {
   padding: "9px 11px",
-  border: "1px solid #dbe8e5",
-  borderRadius: 9,
+  border: "1px solid var(--line)",
+  borderRadius: 6,
   fontSize: 14,
   fontFamily: "inherit",
   fontWeight: 400,
@@ -374,10 +374,10 @@ const input: React.CSSProperties = {
 
 const button: React.CSSProperties = {
   padding: "10px 17px",
-  background: "#0f766e",
+  background: "var(--accent)",
   color: "#fff",
   border: 0,
-  borderRadius: 9,
+  borderRadius: 6,
   fontSize: 14,
   fontWeight: 600,
   cursor: "pointer",
@@ -387,12 +387,12 @@ const smallButton: React.CSSProperties = {
   padding: "5px 10px",
   marginLeft: 6,
   background: "#fff",
-  border: "1px solid #dbe8e5",
-  borderRadius: 7,
+  border: "1px solid var(--line)",
+  borderRadius: 4,
   fontSize: 12,
   fontWeight: 600,
   cursor: "pointer",
-  color: "#0f2b2a",
+  color: "var(--ink)",
 };
 
 const th: React.CSSProperties = {

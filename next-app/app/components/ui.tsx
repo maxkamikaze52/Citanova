@@ -32,7 +32,7 @@ export function CopyField({
 
   return (
     <div style={{ display: "grid", gap: 6 }}>
-      <span style={{ fontSize: 12.5, color: "#5b7573", fontWeight: 600 }}>{label}</span>
+      <span style={{ fontSize: 12.5, color: "var(--muted)", fontWeight: 600 }}>{label}</span>
       <div style={{ display: "flex", gap: 8, alignItems: "stretch" }}>
         <textarea
           readOnly
@@ -42,13 +42,13 @@ export function CopyField({
           style={{
             flex: 1,
             padding: "10px 12px",
-            border: "1px solid #dbe8e5",
-            borderRadius: 9,
+            border: "1px solid var(--line)",
+            borderRadius: 6,
             fontFamily: "ui-monospace,SFMono-Regular,Menlo,monospace",
             fontSize: 12.5,
             lineHeight: 1.5,
             background: "#fff",
-            color: "#0f2b2a",
+            color: "var(--ink)",
             resize: "none",
           }}
         />
@@ -57,10 +57,10 @@ export function CopyField({
           onClick={copy}
           style={{
             padding: "0 16px",
-            border: "1px solid #0f766e",
-            background: copied ? "#0f766e" : "#fff",
-            color: copied ? "#fff" : "#0f766e",
-            borderRadius: 9,
+            border: "1px solid var(--accent)",
+            background: copied ? "var(--accent)" : "#fff",
+            color: copied ? "#fff" : "var(--accent)",
+            borderRadius: 6,
             fontWeight: 600,
             fontSize: 13.5,
             cursor: "pointer",

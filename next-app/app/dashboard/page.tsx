@@ -19,11 +19,11 @@ type Appt = {
 type Msg = { id: string; role: string; content: string; created_at: string; conversation_id: string };
 
 const TONE: Record<string, { bg: string; ink: string }> = {
-  booked: { bg: "#e6f6f2", ink: "#0b5a54" },
-  confirmed: { bg: "#e6f6f2", ink: "#0b5a54" },
-  cancelled: { bg: "#fdeceb", ink: "#b42318" },
-  completed: { bg: "#eef2f5", ink: "#475467" },
-  no_show: { bg: "#fff5e6", ink: "#b54708" },
+  booked: { bg: "var(--success-bg)", ink: "var(--success-ink)" },
+  confirmed: { bg: "var(--success-bg)", ink: "var(--success-ink)" },
+  cancelled: { bg: "var(--danger-bg)", ink: "var(--danger)" },
+  completed: { bg: "var(--neutral-bg)", ink: "var(--neutral-ink)" },
+  no_show: { bg: "var(--warn-bg)", ink: "var(--warn)" },
 };
 
 /** Max is European: every date shown is DD/MM/YYYY, 24-hour. */
@@ -129,13 +129,13 @@ export default async function Dashboard() {
 
   const card: React.CSSProperties = {
     background: "#fff",
-    border: "1px solid #dbe8e5",
-    borderRadius: 14,
+    border: "1px solid var(--line)",
+    borderRadius: 8,
     padding: 20,
   };
 
   return (
-    <main style={{ maxWidth: 1000, margin: "0 auto", padding: "40px 24px 72px" }}>
+    <main id="main" style={{ maxWidth: 1000, margin: "0 auto", padding: "40px 24px 72px" }}>
       <AutoRefresh seconds={10} />
 
       <header
@@ -150,14 +150,14 @@ export default async function Dashboard() {
       >
         <div>
           <h1 style={{ fontSize: 30, margin: 0 }}>{business.name}</h1>
-          <p style={{ fontSize: 13.5, color: "#5b7573", margin: "4px 0 0" }}>
+          <p style={{ fontSize: 13.5, color: "var(--muted)", margin: "4px 0 0" }}>
             <span
               style={{
                 display: "inline-block",
                 width: 7,
                 height: 7,
                 borderRadius: "50%",
-                background: "#12b76a",
+                background: "var(--live)",
                 marginRight: 6,
               }}
             />
@@ -166,10 +166,10 @@ export default async function Dashboard() {
           </p>
         </div>
         <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-          <a href="/dashboard/settings" style={{ fontSize: 14, color: "#0f766e" }}>
+          <a href="/dashboard/settings" style={{ fontSize: 14, color: "var(--accent)" }}>
             Settings
           </a>
-          <a href="/api/auth/logout" style={{ fontSize: 14, color: "#0f766e" }}>
+          <a href="/api/auth/logout" style={{ fontSize: 14, color: "var(--accent)" }}>
             Sign out
           </a>
         </div>
@@ -202,7 +202,7 @@ export default async function Dashboard() {
           <strong>Messages this month:</strong> {used}
           {cap ? ` of ${cap}` : ""}
         </div>
-        <div style={{ color: billingOk ? "#0b5a54" : billingWarn ? "#b54708" : "#b42318" }}>
+        <div style={{ color: billingOk ? "var(--success-ink)" : billingWarn ? "var(--warn)" : "var(--danger)" }}>
           Billing: {business.subscription_status}
           {billingWarn ? " · last payment failed, the assistant is still running" : null}
           {!billingOk && !billingWarn ? (
@@ -219,7 +219,7 @@ export default async function Dashboard() {
 
       <h2 style={{ fontSize: 19, margin: "0 0 12px" }}>Appointments the assistant booked</h2>
       {appts.length === 0 ? (
-        <p style={{ ...card, color: "#5b7573", marginBottom: 34 }}>
+        <p style={{ ...card, color: "var(--muted)", marginBottom: 34 }}>
           Nothing yet. Open your website and book something in the chat — it appears here within
           ten seconds.
         </p>
@@ -227,7 +227,7 @@ export default async function Dashboard() {
         <div style={{ ...card, padding: 0, overflowX: "auto", marginBottom: 34 }}>
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14.5 }}>
             <thead>
-              <tr style={{ textAlign: "left", color: "#5b7573", fontSize: 12.5 }}>
+              <tr style={{ textAlign: "left", color: "var(--muted)", fontSize: 12.5 }}>
                 <th style={th}>When</th>
                 <th style={th}>Patient</th>
                 <th style={th}>Treatment</th>
@@ -240,12 +240,12 @@ export default async function Dashboard() {
                 const tone = TONE[appt.status] ?? TONE.completed;
                 const past = new Date(appt.starts_at).getTime() < now;
                 return (
-                  <tr key={appt.id} style={{ borderTop: "1px solid #eef2f1", opacity: past ? 0.55 : 1 }}>
+                  <tr key={appt.id} style={{ borderTop: "1px solid var(--line-soft)", opacity: past ? 0.55 : 1 }}>
                     <td style={{ ...td, whiteSpace: "nowrap" }}>{when(appt.starts_at, tz)}</td>
                     <td style={td}>
                       {appt.customers?.name ?? "—"}
                       {appt.customers?.phone ? (
-                        <span style={{ display: "block", color: "#5b7573", fontSize: 12.5 }}>
+                        <span style={{ display: "block", color: "var(--muted)", fontSize: 12.5 }}>
                           {appt.customers.phone}
                         </span>
                       ) : null}
@@ -260,7 +260,7 @@ export default async function Dashboard() {
                           background: tone.bg,
                           color: tone.ink,
                           padding: "3px 9px",
-                          borderRadius: 999,
+                          borderRadius: 4,
                           fontSize: 12.5,
                           fontWeight: 600,
                         }}
@@ -280,7 +280,7 @@ export default async function Dashboard() {
       <div style={{ display: "grid", gap: 14, marginBottom: 34 }}>
         <div style={card}>
           <h3 style={{ fontSize: 15, margin: "0 0 4px" }}>Google / Apple Calendar</h3>
-          <p style={{ fontSize: 13, color: "#5b7573", margin: "0 0 12px" }}>
+          <p style={{ fontSize: 13, color: "var(--muted)", margin: "0 0 12px" }}>
             Read-only feed. Google Calendar → Other calendars → + → From URL → paste this. Bookings
             appear automatically; nothing is ever edited from the calendar side.
           </p>
@@ -289,7 +289,7 @@ export default async function Dashboard() {
 
         <div style={card}>
           <h3 style={{ fontSize: 15, margin: "0 0 4px" }}>Website widget</h3>
-          <p style={{ fontSize: 13, color: "#5b7573", margin: "0 0 12px" }}>
+          <p style={{ fontSize: 13, color: "var(--muted)", margin: "0 0 12px" }}>
             Paste this immediately before <code>&lt;/body&gt;</code>. The chat only answers
             visitors from an approved address — that is the cross-site protection.
           </p>
@@ -299,13 +299,13 @@ export default async function Dashboard() {
 
       <h2 style={{ fontSize: 19, margin: "0 0 12px" }}>Latest from the chat</h2>
       {msgs.length === 0 ? (
-        <p style={{ ...card, color: "#5b7573" }}>No messages yet.</p>
+        <p style={{ ...card, color: "var(--muted)" }}>No messages yet.</p>
       ) : (
         <ul style={{ ...card, listStyle: "none", margin: 0, padding: 0 }}>
           {msgs.map((m) => (
-            <li key={m.id} style={{ padding: "12px 16px", borderTop: "1px solid #eef2f1" }}>
-              <div style={{ fontSize: 12, color: "#5b7573", marginBottom: 3 }}>
-                <strong style={{ color: m.role === "user" ? "#0f2b2a" : "#0f766e" }}>
+            <li key={m.id} style={{ padding: "12px 16px", borderTop: "1px solid var(--line-soft)" }}>
+              <div style={{ fontSize: 12, color: "var(--muted)", marginBottom: 3 }}>
+                <strong style={{ color: m.role === "user" ? "var(--ink)" : "var(--accent)" }}>
                   {m.role === "user" ? "Patient" : m.role === "assistant" ? "Assistant" : m.role}
                 </strong>{" "}
                 · {when(m.created_at, tz)}
@@ -321,9 +321,9 @@ export default async function Dashboard() {
 
 function Stat({ label, value }: { label: string; value: number }) {
   return (
-    <div style={{ background: "#fff", border: "1px solid #dbe8e5", borderRadius: 14, padding: "16px 18px" }}>
+    <div style={{ background: "#fff", border: "1px solid var(--line)", borderRadius: 8, padding: "16px 18px" }}>
       <div style={{ fontSize: 30, fontWeight: 700, lineHeight: 1.1 }}>{value}</div>
-      <div style={{ fontSize: 13, color: "#5b7573", marginTop: 4 }}>{label}</div>
+      <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>{label}</div>
     </div>
   );
 }
@@ -333,7 +333,7 @@ const th: React.CSSProperties = {
   fontWeight: 600,
   textTransform: "uppercase",
   letterSpacing: "0.04em",
-  borderBottom: "1px solid #eef2f1",
+  borderBottom: "1px solid var(--line-soft)",
 };
 
 const td: React.CSSProperties = { padding: "12px 16px", verticalAlign: "top" };

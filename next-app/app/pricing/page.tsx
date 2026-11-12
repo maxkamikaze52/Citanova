@@ -1,26 +1,28 @@
-"use client";
-const plans = [
-  { id: "starter", name: "Starter", price: "€49/mo", note: "Monthly plan. Message usage is shown in your dashboard." },
-  { id: "pro", name: "Pro", price: "€149/mo", note: "Monthly plan. Message usage is shown in your dashboard." },
-];
-export default function Pricing() {
-  async function subscribe(plan: string) {
-    const r = await fetch("/api/stripe/checkout", { method: "POST", body: JSON.stringify({ plan }) });
-    if (r.status === 401) return (location.href = "/login");
-    const data = await r.json().catch(() => null);
-    if (!r.ok || !data?.url) {
-      return alert(typeof data?.error === "string" ? data.error : "Could not start checkout. Please try again later.");
-    }
-    location.href = data.url;
-  }
+import type { Metadata } from "next";
+import SiteHeader from "../components/SiteHeader";
+import PricingPlans from "./PricingPlans";
+
+export const metadata: Metadata = {
+  title: "Precios",
+  description:
+    "Planes mensuales sencillos para la recepcionista con IA: Starter por 49 € al mes y Pro por 149 € al mes. El consumo de mensajes se ve en tu panel.",
+  alternates: { canonical: "/pricing" },
+};
+
+export default function PricingPage() {
   return (
-    <main style={{ maxWidth: 720, margin: "0 auto", padding: "64px 24px", display: "flex", gap: 24 }}>
-      {plans.map((p) => (
-        <div key={p.id} style={{ flex: 1, border: "1px solid #cfdad8", borderRadius: 10, padding: 24 }}>
-          <h2>{p.name}</h2><p style={{ fontSize: 28 }}>{p.price}</p><p>{p.note}</p>
-          <button onClick={() => subscribe(p.id)}>Subscribe</button>
-        </div>
-      ))}
-    </main>
+    <>
+      <SiteHeader />
+      <main id="main" className="container" style={{ padding: "56px 24px 0" }}>
+        <p className="eyebrow">Precios</p>
+        <h1 className="serif" style={{ fontSize: "clamp(30px,4.5vw,42px)", margin: "0 0 28px" }}>
+          Dos planes. Mensuales, sin coste de alta.
+        </h1>
+        <PricingPlans />
+        <p style={{ color: "var(--muted)", fontSize: 14, marginTop: 20 }}>
+          Precios en euros al mes, IVA incluido. El cobro lo gestiona Stripe.
+        </p>
+      </main>
+    </>
   );
 }

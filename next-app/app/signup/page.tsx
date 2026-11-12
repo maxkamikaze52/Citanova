@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { PhoneField } from "../components/practice";
 
-/** Spain first (home market), then the rest in a predictable order. */
+/** España primero (mercado de casa) y después el resto en un orden previsible. */
 const TIMEZONES = [
   "Europe/Madrid",
   "Europe/London",
@@ -74,13 +74,13 @@ export default function SignupPage() {
 
     if (!response.ok || !data.ok) {
       setBusy(false);
-      setError(data.error ?? "Something went wrong. Please try again.");
+      setError(data.error ?? "Ha fallado algo. Inténtalo otra vez.");
       return;
     }
 
     if (data.needsEmailConfirm) {
       setBusy(false);
-      setNotice(data.message ?? "Check your inbox to confirm the account.");
+      setNotice(data.message ?? "Mira tu correo para confirmar la cuenta.");
       return;
     }
 
@@ -89,27 +89,27 @@ export default function SignupPage() {
   }
 
   return (
-    <main style={{ maxWidth: 620, margin: "0 auto", padding: "56px 24px 88px" }}>
-      <p style={{ fontSize: 13, color: "#0f766e", fontWeight: 600, margin: 0 }}>STEP 1 OF 1</p>
-      <h1 style={{ fontSize: 32, margin: "6px 0 8px" }}>Set up your assistant</h1>
-      <p style={{ color: "#4b5f5c", marginTop: 0, marginBottom: 28 }}>
-        Three fields and a password. We create the assistant, a diary, a price list and your
-        dashboard — then give you one line to paste into your website.
+    <main id="main" style={{ maxWidth: 620, margin: "0 auto", padding: "56px 24px 88px" }}>
+      <p style={{ fontSize: 13, color: "var(--accent)", fontWeight: 600, margin: 0 }}>PASO 1 DE 1</p>
+      <h1 style={{ fontSize: 32, margin: "6px 0 8px" }}>Configura tu asistente</h1>
+      <p style={{ color: "var(--muted)", marginTop: 0, marginBottom: 28 }}>
+        Tres datos y una contraseña. Creamos el asistente, una agenda, una lista de precios y tu
+        panel; después te damos una línea para pegar en tu web.
       </p>
 
       <form onSubmit={submit} style={{ display: "grid", gap: 16 }}>
-        <Field label="Practice name" hint="Shown to patients in the chat.">
+        <Field label="Nombre de la clínica" hint="Es lo que ven los pacientes en el chat.">
           <input
             required
             value={form.practiceName}
             onChange={set("practiceName")}
-            placeholder="Bright Smile Dental"
+            placeholder="Clínica Dental Sol"
             style={input}
           />
         </Field>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-          <Field label="Timezone">
+        <div className="cols-stack" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+          <Field label="Zona horaria">
             <select value={form.timezone} onChange={set("timezone")} style={input}>
               {TIMEZONES.map((tz) => (
                 <option key={tz} value={tz}>
@@ -118,7 +118,7 @@ export default function SignupPage() {
               ))}
             </select>
           </Field>
-          <Field label="Phone" hint="Optional — any country.">
+          <Field label="Teléfono" hint="Opcional. De cualquier país.">
             <PhoneField
               value={form.phone}
               onChange={(next) => setForm((current) => ({ ...current, phone: next }))}
@@ -127,38 +127,38 @@ export default function SignupPage() {
           </Field>
         </div>
 
-        <Field label="Address" hint="Optional">
+        <Field label="Dirección" hint="Opcional">
           <input value={form.address} onChange={set("address")} style={input} />
         </Field>
 
         <Field
-          label="Your website"
-          hint="Where the assistant will live. The chat only accepts visitors from this address."
+          label="Tu página web"
+          hint="Donde vivirá el asistente. El chat solo acepta visitantes de esta dirección."
         >
           <input
             required
             value={form.website}
             onChange={set("website")}
-            placeholder="https://brightsmile.co.uk"
+            placeholder="https://clinicadentalsol.es"
             style={input}
           />
         </Field>
 
-        <hr style={{ border: 0, borderTop: "1px solid #dbe8e5", margin: "6px 0" }} />
+        <hr style={{ border: 0, borderTop: "1px solid var(--line)", margin: "6px 0" }} />
 
-        <Field label="Your email" hint="This is how you sign in to the dashboard.">
+        <Field label="Tu correo electrónico" hint="Con este entrarás en el panel.">
           <input
             required
             type="email"
             value={form.email}
             onChange={set("email")}
-            placeholder="you@practice.com"
+            placeholder="tu@clinica.es"
             style={input}
             autoComplete="email"
           />
         </Field>
 
-        <Field label="Password" hint="At least 8 characters.">
+        <Field label="Contraseña" hint="Al menos 8 caracteres.">
           <input
             required
             type="password"
@@ -171,22 +171,22 @@ export default function SignupPage() {
         </Field>
 
         {error ? (
-          <p role="alert" style={{ ...box, background: "#fdeceb", borderColor: "#fda29b", color: "#b42318" }}>
+          <p role="alert" style={{ ...box, background: "var(--danger-bg)", borderColor: "var(--danger-line)", color: "var(--danger)" }}>
             {error}
           </p>
         ) : null}
         {notice ? (
-          <p role="status" style={{ ...box, background: "#e6f6f2", borderColor: "#a6e3d6", color: "#0b5a54" }}>
+          <p role="status" style={{ ...box, background: "var(--success-bg)", borderColor: "var(--success-line)", color: "var(--success-ink)" }}>
             {notice}
           </p>
         ) : null}
 
         <button type="submit" disabled={busy} style={{ ...button, opacity: busy ? 0.7 : 1 }}>
-          {busy ? "Creating your assistant…" : "Create my assistant"}
+          {busy ? "Creando tu asistente…" : "Crear mi asistente"}
         </button>
 
-        <p style={{ fontSize: 13, color: "#5b7573", margin: 0, textAlign: "center" }}>
-          Already set up? <a href="/login" style={{ color: "#0f766e" }}>Sign in</a>
+        <p style={{ fontSize: 13, color: "var(--muted)", margin: 0, textAlign: "center" }}>
+          ¿Ya lo tienes? <a href="/login" style={{ color: "var(--accent)" }}>Entra aquí</a>
         </p>
       </form>
     </main>
@@ -203,31 +203,31 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label style={{ display: "grid", gap: 6, fontSize: 14, color: "#0f2b2a" }}>
+    <label style={{ display: "grid", gap: 6, fontSize: 14, color: "var(--ink)" }}>
       <span style={{ fontWeight: 600 }}>{label}</span>
       {children}
-      {hint ? <span style={{ fontSize: 12.5, color: "#5b7573", fontWeight: 400 }}>{hint}</span> : null}
+      {hint ? <span style={{ fontSize: 12.5, color: "var(--muted)", fontWeight: 400 }}>{hint}</span> : null}
     </label>
   );
 }
 
 const input: React.CSSProperties = {
   padding: "10px 12px",
-  border: "1px solid #dbe8e5",
-  borderRadius: 9,
+  border: "1px solid var(--line)",
+  borderRadius: 6,
   fontSize: 15,
   fontFamily: "inherit",
   background: "#fff",
-  color: "#0f2b2a",
+  color: "var(--ink)",
 };
 
 const button: React.CSSProperties = {
   marginTop: 4,
   padding: "13px 18px",
-  background: "#0f766e",
+  background: "var(--accent)",
   color: "#fff",
   border: 0,
-  borderRadius: 10,
+  borderRadius: 6,
   fontSize: 16,
   fontWeight: 600,
   cursor: "pointer",
@@ -237,6 +237,6 @@ const box: React.CSSProperties = {
   margin: 0,
   padding: "11px 14px",
   border: "1px solid",
-  borderRadius: 9,
+  borderRadius: 6,
   fontSize: 14,
 };

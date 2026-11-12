@@ -8,6 +8,7 @@ import { widgetTag } from "../../../lib/operator";
 import { createSupabaseServer, getMyBusiness } from "../../../lib/db";
 
 export const dynamic = "force-dynamic";
+export const metadata = { title: "Settings", robots: { index: false, follow: false } };
 
 /** Loopback is ours, not theirs: kept for testing, never shown as their site. */
 function isLocalOrigin(origin: string): boolean {
@@ -79,14 +80,14 @@ export default async function SettingsPage() {
     : null;
 
   return (
-    <main style={{ maxWidth: 920, margin: "0 auto", padding: "40px 24px 80px" }}>
+    <main id="main" style={{ maxWidth: 920, margin: "0 auto", padding: "40px 24px 80px" }}>
       <p style={{ margin: "0 0 4px" }}>
-        <a href="/dashboard" style={{ color: "#0f766e", fontSize: 14, textDecoration: "none" }}>
+        <a href="/dashboard" style={{ color: "var(--accent)", fontSize: 14, textDecoration: "none" }}>
           ← Dashboard
         </a>
       </p>
       <h1 style={{ fontSize: 30, margin: "0 0 6px" }}>Settings</h1>
-      <p style={{ color: "#5b7573", marginTop: 0, marginBottom: 30 }}>
+      <p style={{ color: "var(--muted)", marginTop: 0, marginBottom: 30 }}>
         Everything the assistant needs to work for {business.name}. Secrets are encrypted before
         they are stored and are never shown again.
       </p>
@@ -94,11 +95,11 @@ export default async function SettingsPage() {
       {backendError ? (
         <p
           style={{
-            background: "#fdeceb",
-            border: "1px solid #fda29b",
-            color: "#b42318",
+            background: "var(--danger-bg)",
+            border: "1px solid var(--danger-line)",
+            color: "var(--danger)",
             padding: "12px 14px",
-            borderRadius: 10,
+            borderRadius: 6,
             fontSize: 13.5,
             marginBottom: 24,
           }}
@@ -128,7 +129,7 @@ export default async function SettingsPage() {
         {connections.length ? (
           <Connections initial={connections} />
         ) : (
-          <p style={{ color: "#5b7573", fontSize: 14 }}>Connector settings are unavailable.</p>
+          <p style={{ color: "var(--muted)", fontSize: 14 }}>Connector settings are unavailable.</p>
         )}
       </Section>
 
@@ -143,7 +144,7 @@ export default async function SettingsPage() {
         {feedUrl ? (
           <CopyField label="Read-only calendar feed" value={feedUrl} />
         ) : (
-          <p style={{ color: "#b54708", fontSize: 14, margin: 0 }}>No calendar token yet.</p>
+          <p style={{ color: "var(--warn)", fontSize: 14, margin: 0 }}>No calendar token yet.</p>
         )}
       </Section>
     </main>
@@ -162,7 +163,7 @@ function Section({
   return (
     <section style={{ marginBottom: 34 }}>
       <h2 style={{ fontSize: 18, margin: "0 0 3px" }}>{title}</h2>
-      <p style={{ fontSize: 13, color: "#5b7573", margin: "0 0 14px" }}>{note}</p>
+      <p style={{ fontSize: 13, color: "var(--muted)", margin: "0 0 14px" }}>{note}</p>
       {children}
     </section>
   );

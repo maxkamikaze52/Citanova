@@ -7,9 +7,9 @@ import { getMyBusiness } from "../../lib/db";
 export const dynamic = "force-dynamic";
 
 /**
- * Shown once, straight after signup: everything they need to go live.
- * Reached while the invite cookie is still valid; afterwards the same
- * information lives in the dashboard, so this page just forwards there.
+ * Se muestra una sola vez, justo después del alta: todo lo necesario para salir en vivo.
+ * Se llega mientras la cookie de invitación sigue viva; después esa misma información
+ * vive en el panel, así que esta página solo redirige allí.
  */
 export default async function WelcomePage() {
   const { business, userId } = await getMyBusiness();
@@ -27,30 +27,34 @@ export default async function WelcomePage() {
     : null;
 
   return (
-    <main style={{ maxWidth: 720, margin: "0 auto", padding: "56px 24px 88px" }}>
-      <p style={{ fontSize: 13, color: "#0f766e", fontWeight: 600, margin: 0 }}>
-        ✓ {business.name} is set up
+    <main id="main" style={{ maxWidth: 720, margin: "0 auto", padding: "56px 24px 88px" }}>
+      <p style={{ fontSize: 13, color: "var(--accent)", fontWeight: 600, margin: 0 }}>
+        ✓ {business.name} ya está dado de alta
       </p>
-      <h1 style={{ fontSize: 32, margin: "6px 0 10px" }}>Your assistant is ready</h1>
-      <p style={{ color: "#4b5f5c", marginTop: 0, marginBottom: 30 }}>
-        We created a diary, a price list, opening hours and this dashboard. Two things left: put
-        the chat on your site, and subscribe to the calendar.
+      <h1 style={{ fontSize: 32, margin: "6px 0 10px" }}>Tu asistente está listo</h1>
+      <p style={{ color: "var(--muted)", marginTop: 0, marginBottom: 30 }}>
+        Hemos creado una agenda, una lista de precios, el horario de apertura y este panel. Quedan
+        dos cosas: poner el chat en tu web y suscribirte al calendario.
       </p>
 
-      <Step number={1} title="Paste this into your website" note="Just before </body>, on every page visitors might use the chat.">
-        <CopyField label="Widget tag" value={snippet} />
+      <Step
+        number={1}
+        title="Pega esto en tu página web"
+        note="Justo antes de </body>, en todas las páginas donde el visitante pueda usar el chat."
+      >
+        <CopyField label="Etiqueta del widget" value={snippet} />
       </Step>
 
       <Step
         number={2}
-        title="See bookings in Google Calendar"
-        note="Google Calendar → Other calendars → + → From URL → paste the link. It refreshes by itself."
+        title="Ver las citas en Google Calendar"
+        note="Google Calendar → Otros calendarios → + → Desde URL → pega el enlace. Se actualiza solo."
       >
         {feedUrl ? (
-          <CopyField label="Calendar feed (read-only)" value={feedUrl} />
+          <CopyField label="Fuente del calendario (solo lectura)" value={feedUrl} />
         ) : (
-          <p style={{ margin: 0, color: "#b54708" }}>
-            This practice has no calendar token yet — enable it from the dashboard.
+          <p style={{ margin: 0, color: "var(--warn)" }}>
+            Esta clínica todavía no tiene token de calendario. Actívalo desde el panel.
           </p>
         )}
       </Step>
@@ -59,28 +63,28 @@ export default async function WelcomePage() {
         style={{
           marginTop: 30,
           padding: 20,
-          border: "1px solid #dbe8e5",
-          borderRadius: 14,
-          background: "#f6fbfa",
+          border: "1px solid var(--line)",
+          borderRadius: 8,
+          background: "var(--surface)",
         }}
       >
-        <p style={{ margin: "0 0 14px", fontSize: 14, color: "#0f2b2a" }}>
-          Test it now: open your site and ask the chat for an appointment. The booking appears in
-          your dashboard within ten seconds.
+        <p style={{ margin: "0 0 14px", fontSize: 14, color: "var(--ink)" }}>
+          Pruébalo ahora: abre tu web y pide una cita en el chat. La reserva aparece en tu panel en
+          menos de diez segundos.
         </p>
         <a
           href="/dashboard"
           style={{
             display: "inline-block",
-            background: "#0f766e",
+            background: "var(--accent)",
             color: "#fff",
             padding: "12px 20px",
-            borderRadius: 10,
+            borderRadius: 6,
             textDecoration: "none",
             fontWeight: 600,
           }}
         >
-          Go to my dashboard →
+          Ir a mi panel →
         </a>
       </div>
     </main>
@@ -106,7 +110,7 @@ function Step({
             width: 24,
             height: 24,
             borderRadius: "50%",
-            background: "#0f766e",
+            background: "var(--accent)",
             color: "#fff",
             display: "grid",
             placeItems: "center",
@@ -118,7 +122,7 @@ function Step({
         </span>
         {title}
       </h2>
-      <p style={{ fontSize: 13, color: "#5b7573", margin: "0 0 10px 34px" }}>{note}</p>
+      <p style={{ fontSize: 13, color: "var(--muted)", margin: "0 0 10px 34px" }}>{note}</p>
       <div style={{ marginLeft: 34 }}>{children}</div>
     </section>
   );

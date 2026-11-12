@@ -121,8 +121,8 @@ function ConnectionCard({
     <section
       style={{
         background: "#fff",
-        border: `1px solid ${connection.connected ? "#a6e3d6" : "#dbe8e5"}`,
-        borderRadius: 14,
+        border: `1px solid ${connection.connected ? "var(--success-line)" : "var(--line)"}`,
+        borderRadius: 8,
         padding: 20,
       }}
     >
@@ -132,14 +132,14 @@ function ConnectionCard({
             {connection.label}
             <Badge connected={connection.connected} capability={connection.capability} />
           </h3>
-          <p style={{ fontSize: 13, color: "#5b7573", margin: 0, maxWidth: "62ch" }}>{connection.help}</p>
+          <p style={{ fontSize: 13, color: "var(--muted)", margin: 0, maxWidth: "62ch" }}>{connection.help}</p>
           {connection.connected && connection.accountLabel ? (
-            <p style={{ fontSize: 12.5, color: "#0f2b2a", margin: "8px 0 0" }}>
+            <p style={{ fontSize: 12.5, color: "var(--ink)", margin: "8px 0 0" }}>
               Connected as <strong>{connection.accountLabel}</strong>
             </p>
           ) : null}
           {connection.lastError ? (
-            <p style={{ fontSize: 12.5, color: "#b42318", margin: "8px 0 0" }}>
+            <p style={{ fontSize: 12.5, color: "var(--danger)", margin: "8px 0 0" }}>
               Last error: {connection.lastError}
             </p>
           ) : null}
@@ -158,7 +158,7 @@ function ConnectionCard({
       </header>
 
       {saved ? (
-        <p style={{ ...note, background: "#e6f6f2", borderColor: "#a6e3d6", color: "#0b5a54" }}>
+        <p style={{ ...note, background: "var(--success-bg)", borderColor: "var(--success-line)", color: "var(--success-ink)" }}>
           Saved and encrypted. {connection.capability === "saved_only" ? "It will be used as soon as the connector is enabled." : ""}
         </p>
       ) : null}
@@ -166,7 +166,7 @@ function ConnectionCard({
       {open ? (
         <form onSubmit={save} style={{ marginTop: 16, display: "grid", gap: 12 }}>
           {connection.fields.map((field) => (
-            <label key={field.key} style={{ display: "grid", gap: 6, fontSize: 13.5, color: "#0f2b2a" }}>
+            <label key={field.key} style={{ display: "grid", gap: 6, fontSize: 13.5, color: "var(--ink)" }}>
               <span style={{ fontWeight: 600 }}>{field.label}</span>
               <input
                 type={field.secret && connection.provider !== "ics_calendar" ? "password" : "text"}
@@ -183,13 +183,13 @@ function ConnectionCard({
             </label>
           ))}
 
-          {error ? <p style={{ color: "#b42318", fontSize: 13, margin: 0 }}>{error}</p> : null}
+          {error ? <p style={{ color: "var(--danger)", fontSize: 13, margin: 0 }}>{error}</p> : null}
 
           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
             <button type="submit" disabled={busy} style={{ ...button, opacity: busy ? 0.7 : 1 }}>
               {busy ? "Saving…" : "Save securely"}
             </button>
-            <span style={{ fontSize: 12.5, color: "#5b7573" }}>Encrypted before it is stored.</span>
+            <span style={{ fontSize: 12.5, color: "var(--muted)" }}>Encrypted before it is stored.</span>
           </div>
         </form>
       ) : null}
@@ -205,8 +205,8 @@ function Badge({
   capability: "active" | "saved_only";
 }) {
   const tone = connected
-    ? { bg: "#e6f6f2", ink: "#0b5a54", text: "Connected" }
-    : { bg: "#eef2f5", ink: "#475467", text: "Not connected" };
+    ? { bg: "var(--success-bg)", ink: "var(--success-ink)", text: "Connected" }
+    : { bg: "var(--neutral-bg)", ink: "var(--neutral-ink)", text: "Not connected" };
 
   return (
     <span style={{ display: "inline-flex", gap: 6 }}>
@@ -215,7 +215,7 @@ function Badge({
           background: tone.bg,
           color: tone.ink,
           padding: "2px 9px",
-          borderRadius: 999,
+          borderRadius: 4,
           fontSize: 11.5,
           fontWeight: 700,
         }}
@@ -225,10 +225,10 @@ function Badge({
       {capability === "saved_only" ? (
         <span
           style={{
-            background: "#fff5e6",
-            color: "#b54708",
+            background: "var(--warn-bg)",
+            color: "var(--warn)",
             padding: "2px 9px",
-            borderRadius: 999,
+            borderRadius: 4,
             fontSize: 11.5,
             fontWeight: 700,
           }}
@@ -242,18 +242,18 @@ function Badge({
 
 const input: React.CSSProperties = {
   padding: "10px 12px",
-  border: "1px solid #dbe8e5",
-  borderRadius: 9,
+  border: "1px solid var(--line)",
+  borderRadius: 6,
   fontSize: 14.5,
   fontFamily: "inherit",
 };
 
 const button: React.CSSProperties = {
   padding: "9px 15px",
-  background: "#0f766e",
+  background: "var(--accent)",
   color: "#fff",
   border: 0,
-  borderRadius: 9,
+  borderRadius: 6,
   fontSize: 13.5,
   fontWeight: 600,
   cursor: "pointer",
@@ -263,9 +263,9 @@ const button: React.CSSProperties = {
 const ghostButton: React.CSSProperties = {
   padding: "9px 15px",
   background: "#fff",
-  color: "#b42318",
-  border: "1px solid #fda29b",
-  borderRadius: 9,
+  color: "var(--danger)",
+  border: "1px solid var(--danger-line)",
+  borderRadius: 6,
   fontSize: 13.5,
   fontWeight: 600,
   cursor: "pointer",
@@ -276,6 +276,6 @@ const note: React.CSSProperties = {
   margin: "12px 0 0",
   padding: "10px 13px",
   border: "1px solid",
-  borderRadius: 9,
+  borderRadius: 6,
   fontSize: 13,
 };

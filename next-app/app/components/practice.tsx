@@ -25,12 +25,12 @@ type Props = {
 
 const field: React.CSSProperties = {
   padding: "10px 12px",
-  border: "1px solid #dbe8e5",
-  borderRadius: 9,
+  border: "1px solid var(--line)",
+  borderRadius: 6,
   fontSize: 14.5,
   fontFamily: "inherit",
   background: "#fff",
-  color: "#0f2b2a",
+  color: "var(--ink)",
   boxSizing: "border-box",
 };
 
@@ -88,7 +88,7 @@ export function PhoneField({ value, onChange, timeZone, style, id }: Props) {
     <div style={{ display: "grid", gap: 6 }}>
       <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1.6fr)", gap: 8 }}>
         <select
-          aria-label="Country calling code"
+          aria-label="Prefijo internacional"
           value={iso}
           onChange={(event) => {
             setIso(event.target.value);
@@ -115,13 +115,13 @@ export function PhoneField({ value, onChange, timeZone, style, id }: Props) {
         />
       </div>
 
-      <span style={{ fontSize: 12.5, color: shown ? "#0b5a54" : "#5b7573", fontWeight: 400 }}>
+      <span style={{ fontSize: 12.5, color: shown ? "var(--success-ink)" : "var(--muted)", fontWeight: 400 }}>
         {shown ? (
           <>
-            Saved as <strong style={{ fontWeight: 600 }}>{shown}</strong>
+            Guardado como <strong style={{ fontWeight: 600 }}>{shown}</strong>
           </>
         ) : (
-          "Any country works — pick yours, or paste a number with +country code."
+          "Vale cualquier país: elige el tuyo o pega el número con el prefijo +."
         )}
       </span>
     </div>
@@ -200,7 +200,7 @@ export function PracticeDetails({
 
   return (
     <form onSubmit={save} style={{ display: "grid", gap: 14 }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="cols-stack" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         <Field label="Practice name">
           <input value={form.name} onChange={field("name")} style={input} required />
         </Field>
@@ -213,7 +213,7 @@ export function PracticeDetails({
         </Field>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="cols-stack" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         <Field label="Email">
           <input value={form.email} onChange={field("email")} style={input} />
         </Field>
@@ -226,7 +226,7 @@ export function PracticeDetails({
         <input value={form.tagline} onChange={field("tagline")} style={input} />
       </Field>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="cols-stack" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         <Field label="Assistant name" hint="Leave empty for “the virtual receptionist”.">
           <input value={form.assistantName} onChange={field("assistantName")} style={input} placeholder="Ava" />
         </Field>
@@ -250,11 +250,11 @@ export function PracticeDetails({
           style={{
             margin: 0,
             padding: "10px 13px",
-            borderRadius: 9,
+            borderRadius: 6,
             fontSize: 13.5,
-            background: message.kind === "ok" ? "#e6f6f2" : "#fdeceb",
-            border: `1px solid ${message.kind === "ok" ? "#a6e3d6" : "#fda29b"}`,
-            color: message.kind === "ok" ? "#0b5a54" : "#b42318",
+            background: message.kind === "ok" ? "var(--success-bg)" : "var(--danger-bg)",
+            border: `1px solid ${message.kind === "ok" ? "var(--success-line)" : "var(--danger-line)"}`,
+            color: message.kind === "ok" ? "var(--success-ink)" : "var(--danger)",
           }}
         >
           {message.text}
@@ -280,18 +280,18 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label style={{ display: "grid", gap: 6, fontSize: 13.5, color: "#0f2b2a" }}>
+    <label style={{ display: "grid", gap: 6, fontSize: 13.5, color: "var(--ink)" }}>
       <span style={{ fontWeight: 600 }}>{label}</span>
       {children}
-      {hint ? <span style={{ fontSize: 12.5, color: "#5b7573", fontWeight: 400 }}>{hint}</span> : null}
+      {hint ? <span style={{ fontSize: 12.5, color: "var(--muted)", fontWeight: 400 }}>{hint}</span> : null}
     </label>
   );
 }
 
 const input: React.CSSProperties = {
   padding: "10px 12px",
-  border: "1px solid #dbe8e5",
-  borderRadius: 9,
+  border: "1px solid var(--line)",
+  borderRadius: 6,
   fontSize: 14.5,
   fontFamily: "inherit",
   width: "100%",
@@ -300,10 +300,10 @@ const input: React.CSSProperties = {
 
 const button: React.CSSProperties = {
   padding: "11px 18px",
-  background: "#0f766e",
+  background: "var(--accent)",
   color: "#fff",
   border: 0,
-  borderRadius: 9,
+  borderRadius: 6,
   fontSize: 14.5,
   fontWeight: 600,
   cursor: "pointer",
@@ -369,7 +369,7 @@ export function WebsiteOrigin({
 
   return (
     <form onSubmit={save} style={{ display: "grid", gap: 12 }}>
-      <label style={{ display: "grid", gap: 6, fontSize: 13.5, color: "#0f2b2a" }}>
+      <label style={{ display: "grid", gap: 6, fontSize: 13.5, color: "var(--ink)" }}>
         <span style={{ fontWeight: 600 }}>Your website</span>
         <input
           value={site}
@@ -377,7 +377,7 @@ export function WebsiteOrigin({
           placeholder="brightsmile.co.uk"
           style={input}
         />
-        <span style={{ fontSize: 12.5, color: "#5b7573" }}>
+        <span style={{ fontSize: 12.5, color: "var(--muted)" }}>
           Where the chat widget is installed. Visitors to any other address are turned away, so
           this is what stops someone else putting your assistant on their site.
         </span>
@@ -389,11 +389,11 @@ export function WebsiteOrigin({
           style={{
             margin: 0,
             padding: "10px 13px",
-            borderRadius: 9,
+            borderRadius: 6,
             fontSize: 13.5,
-            background: message.kind === "ok" ? "#e6f6f2" : "#fdeceb",
-            border: `1px solid ${message.kind === "ok" ? "#a6e3d6" : "#fda29b"}`,
-            color: message.kind === "ok" ? "#0b5a54" : "#b42318",
+            background: message.kind === "ok" ? "var(--success-bg)" : "var(--danger-bg)",
+            border: `1px solid ${message.kind === "ok" ? "var(--success-line)" : "var(--danger-line)"}`,
+            color: message.kind === "ok" ? "var(--success-ink)" : "var(--danger)",
           }}
         >
           {message.text}
@@ -405,11 +405,11 @@ export function WebsiteOrigin({
           {busy ? "Saving…" : "Save website"}
         </button>
         {connected.length ? (
-          <span style={{ fontSize: 13, color: "#0b5a54" }}>
+          <span style={{ fontSize: 13, color: "var(--success-ink)" }}>
             Live on {connected.join(", ")}
           </span>
         ) : (
-          <span style={{ fontSize: 13, color: "#b54708" }}>
+          <span style={{ fontSize: 13, color: "var(--warn)" }}>
             Not connected to a website yet — the chat will refuse visitors.
           </span>
         )}
@@ -425,8 +425,8 @@ function isLocal(origin: string) {
 
 const inputSite: React.CSSProperties = {
   padding: "10px 12px",
-  border: "1px solid #dbe8e5",
-  borderRadius: 9,
+  border: "1px solid var(--line)",
+  borderRadius: 6,
   fontSize: 14.5,
   fontFamily: "inherit",
   width: "100%",
@@ -435,10 +435,10 @@ const inputSite: React.CSSProperties = {
 
 const buttonSite: React.CSSProperties = {
   padding: "11px 18px",
-  background: "#0f766e",
+  background: "var(--accent)",
   color: "#fff",
   border: 0,
-  borderRadius: 9,
+  borderRadius: 6,
   fontSize: 14.5,
   fontWeight: 600,
   cursor: "pointer",
