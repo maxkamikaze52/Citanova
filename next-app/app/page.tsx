@@ -587,12 +587,23 @@ export default function Home() {
             </h2>
 
             <div className="ap-limits">
-              <p data-reveal data-n="01">No diagnostica.</p>
-              <p data-reveal data-n="02">No da presupuestos cerrados.</p>
-              <p data-reveal data-n="03">No pide tarjetas.</p>
-              <p data-reveal data-n="04">No escribe primero al paciente.</p>
-              <p data-reveal data-n="05">No actúa fuera de tu web.</p>
-              <p data-reveal data-n="06">No adivina: toma nota.</p>
+              <p data-reveal data-n="01">No diagnostica ni interpreta síntomas.</p>
+              <p data-reveal data-n="02">No recomienda medicamentos ni remedios caseros.</p>
+              <p data-reveal data-n="03">No da presupuestos cerrados.</p>
+              <p data-reveal data-n="04">No dice si algo es grave o leve.</p>
+              <p data-reveal data-n="05">No pide tarjetas.</p>
+              <p data-reveal data-n="06">No escribe primero al paciente.</p>
+            </div>
+
+            <div className="ap-emergency" data-reveal>
+              <span className="ap-emergency-tag">Urgencia de verdad</span>
+              <p>
+                Si el mensaje sugiere una emergencia — no respira bien, un sangrado que no para, un
+                golpe fuerte, un diente saltado, hinchazón con fiebre — el asistente <strong>deja de
+                atender la cita y manda llamar al 112</strong>. No pregunta más, no intenta valorar
+                la gravedad y no ofrece una cita normal en su lugar. Ante la duda, siempre trata el
+                caso como urgente.
+              </p>
             </div>
           </div>
         </section>

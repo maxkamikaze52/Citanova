@@ -1736,3 +1736,18 @@ html.reveal-js [data-reveal].is-in { opacity: 1; transform: none; pointer-events
   .ap-stat:last-child { border-bottom: 0; }
   .ap-ask-grid, .ap-faq-two { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Seguridad médica en la portada: una caja que se note, no una línea perdida. */
+.ap-emergency {
+  display: grid; gap: 8px; max-width: 860px; margin: 34px auto 0;
+  padding: 20px 22px; border-radius: 14px;
+  background: rgba(255, 138, 128, 0.07);
+  border: 1px solid rgba(255, 138, 128, 0.32);
+}
+.ap-emergency-tag {
+  justify-self: start; padding: 3px 10px; border-radius: 980px;
+  background: rgba(255, 138, 128, 0.16); color: #ff9d94;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.ap-emergency p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
+.ap-emergency strong { color: #ffd7d3; font-weight: 600; }
