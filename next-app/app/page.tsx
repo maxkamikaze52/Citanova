@@ -59,12 +59,15 @@ const dense = [
   },
 ];
 
-const compare = [
-  { what: "Contesta a las 22:00", vm: "No", as: "Por horas", us: "Sí" },
-  { what: "Reserva la cita", vm: "No", as: "A veces", us: "Sí" },
-  { what: "Se sabe tus precios", vm: "No", as: "Con briefing", us: "De serie" },
-  { what: "Coste mensual", vm: "0 € y pacientes perdidos", as: "Por llamada", us: "Desde 49 €" },
-  { what: "Puesta en marcha", vm: "Ninguna", as: "Semanas", us: "Una tarde" },
+type CompareRow = { what: string; vm: string; vmOk?: boolean; as: string; asOk?: boolean; us: string };
+
+const compare: CompareRow[] = [
+  { what: "Contesta a las 22:00", vm: "No", vmOk: false, as: "Solo por horas", asOk: false, us: "Siempre" },
+  { what: "Reserva la cita", vm: "No", vmOk: false, as: "A veces", asOk: false, us: "Con referencia" },
+  { what: "Se sabe tus precios", vm: "No", vmOk: false, as: "Tras un briefing", asOk: false, us: "De serie" },
+  { what: "Contesta igual siempre", vm: "No", vmOk: false, as: "Según quién esté", asOk: false, us: "Sí" },
+  { what: "Coste mensual", vm: "0 € y pacientes perdidos", as: "Por llamada y por hora", us: "Desde 49 €" },
+  { what: "Puesta en marcha", vm: "Ninguna", as: "Semanas de guion", us: "Una tarde" },
 ];
 
 const plans = [
@@ -111,6 +114,35 @@ function Tick() {
     </span>
   );
 }
+
+const CALENDAR: CalendarDay[] = [
+                  { day: "LUN", num: "16", events: [
+                    { t: "09:20", h: 1, cls: "blue", title: "Revisión", who: "A. Puig" },
+                    { t: "11:00", h: 2, cls: "green", title: "Higiene", who: "M. Costa" },
+                    { t: "15:20", h: 1, cls: "blue", title: "Revisión", who: "L. Vidal" },
+                  ]},
+                  { day: "MAR", num: "17", events: [
+                    { t: "09:40", h: 1, cls: "violet", title: "Ortodoncia", who: "J. Serra" },
+                    { t: "12:20", h: 1, cls: "blue", title: "Revisión", who: "N. Roca" },
+                    { t: "14:40", h: 1, cls: "green", title: "Higiene", who: "P. Mas" },
+                  ]},
+                  { day: "MIÉ", num: "18", today: true, events: [
+                    { t: "09:00", h: 1, cls: "blue", title: "Revisión", who: "C. Font" },
+                    { t: "10:40", h: 2, cls: "orange", title: "Urgencia", who: "Sra. Ferrer", badge: "nueva" },
+                    { t: "13:00", h: 1, cls: "green", title: "Higiene", who: "R. Pou" },
+                    { t: "15:00", h: 2, cls: "violet", title: "Ortodoncia", who: "T. Bosch" },
+                  ]},
+                  { day: "JUE", num: "19", events: [
+                    { t: "10:40", h: 1, cls: "blue", title: "Revisión", who: "Dr. Ellis" },
+                    { t: "12:00", h: 2, cls: "green", title: "Higiene", who: "E. Camps" },
+                    { t: "16:00", h: 1, cls: "blue", title: "Revisión", who: "G. Solé" },
+                  ]},
+                  { day: "VIE", num: "20", events: [
+                    { t: "09:20", h: 2, cls: "blue", title: "Revisión", who: "A. Marquès" },
+                    { t: "12:40", h: 1, cls: "orange", title: "Urgencia", who: "D. Vila" },
+                    { t: "15:20", h: 1, cls: "green", title: "Higiene", who: "S. Prat" },
+                  ]},
+];
 
 export default function Home() {
   return (
@@ -265,34 +297,7 @@ export default function Home() {
                   <span className="gcal-hour">16:00</span>
                 </div>
 
-                {([
-                  { day: "LUN", num: "16", events: [
-                    { t: "09:20", h: 1, cls: "blue", title: "Revisión", who: "A. Puig" },
-                    { t: "11:00", h: 2, cls: "green", title: "Higiene", who: "M. Costa" },
-                    { t: "15:20", h: 1, cls: "blue", title: "Revisión", who: "L. Vidal" },
-                  ]},
-                  { day: "MAR", num: "17", events: [
-                    { t: "09:40", h: 1, cls: "violet", title: "Ortodoncia", who: "J. Serra" },
-                    { t: "12:20", h: 1, cls: "blue", title: "Revisión", who: "N. Roca" },
-                    { t: "14:40", h: 1, cls: "green", title: "Higiene", who: "P. Mas" },
-                  ]},
-                  { day: "MIÉ", num: "18", today: true, events: [
-                    { t: "09:00", h: 1, cls: "blue", title: "Revisión", who: "C. Font" },
-                    { t: "10:40", h: 2, cls: "orange", title: "Urgencia", who: "Sra. Ferrer", badge: "nueva" },
-                    { t: "13:00", h: 1, cls: "green", title: "Higiene", who: "R. Pou" },
-                    { t: "15:00", h: 2, cls: "violet", title: "Ortodoncia", who: "T. Bosch" },
-                  ]},
-                  { day: "JUE", num: "19", events: [
-                    { t: "10:40", h: 1, cls: "blue", title: "Revisión", who: "Dr. Ellis" },
-                    { t: "12:00", h: 2, cls: "green", title: "Higiene", who: "E. Camps" },
-                    { t: "16:00", h: 1, cls: "blue", title: "Revisión", who: "G. Solé" },
-                  ]},
-                  { day: "VIE", num: "20", events: [
-                    { t: "09:20", h: 2, cls: "blue", title: "Revisión", who: "A. Marquès" },
-                    { t: "12:40", h: 1, cls: "orange", title: "Urgencia", who: "D. Vila" },
-                    { t: "15:20", h: 1, cls: "green", title: "Higiene", who: "S. Prat" },
-                  ]},
-                ] as CalendarDay[]).map((d) => (
+                {CALENDAR.map((d) => (
                   <div key={d.day} className={`gcal-col${d.today ? " is-today" : ""}`}>
                     <div className="gcal-head">
                       <span>{d.day}</span>
@@ -404,7 +409,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Compare */}
+        {/* Comparado — tablero de tres columnas con marcas, no una tabla sosa. */}
         <section className="ap-section" aria-labelledby="four">
           <div className="container">
             <p className="ap-label" data-reveal>Comparado</p>
@@ -412,71 +417,126 @@ export default function Home() {
               Con lo que tienes ahora.
             </h2>
 
-            <div className="ap-tablewrap" data-reveal>
-              <table className="ap-table">
-                <caption className="sr-only">
-                  Citadent frente al buzón de voz y a un servicio de atención telefónica
-                </caption>
-                <thead>
-                  <tr>
-                    <th scope="col"> </th>
-                    <th scope="col">Buzón de voz</th>
-                    <th scope="col">Servicio telefónico</th>
-                    <th scope="col" className="is-us">Citadent</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {compare.map((r) => (
-                    <tr key={r.what}>
-                      <th scope="row">{r.what}</th>
-                      <td>{r.vm}</td>
-                      <td>{r.as}</td>
-                      <td className="is-us">{r.us}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="ap-versus" data-reveal>
+              <div className="ap-vs-head">
+                <span className="ap-vs-blank" />
+                <div className="ap-vs-col-head">
+                  <strong>Buzón de voz</strong>
+                  <span>Lo que hay hoy</span>
+                </div>
+                <div className="ap-vs-col-head">
+                  <strong>Servicio telefónico</strong>
+                  <span>Una persona al teléfono</span>
+                </div>
+                <div className="ap-vs-col-head is-us">
+                  <strong>Citadent</strong>
+                  <span>La recepcionista de tu web</span>
+                </div>
+              </div>
+
+              {compare.map((r) => (
+                <div key={r.what} className="ap-vs-row">
+                  <span className="ap-vs-what">{r.what}</span>
+                  <span className="ap-vs-cell">
+                    {r.vmOk === false ? <i className="ap-mark-no" aria-label="No" /> : null}
+                    <em className={r.vmOk === false ? "is-no" : ""}>{r.vm}</em>
+                  </span>
+                  <span className="ap-vs-cell">
+                    {r.asOk === false ? <i className="ap-mark-no" aria-label="No" /> : null}
+                    <em className={r.asOk === false ? "is-no" : ""}>{r.as}</em>
+                  </span>
+                  <span className="ap-vs-cell is-us">
+                    <i className="ap-mark-yes" aria-label="Sí" />
+                    <em className="is-yes">{r.us}</em>
+                  </span>
+                </div>
+              ))}
+
+              <div className="ap-vs-foot">
+                <span />
+                <span />
+                <span />
+                <span className="ap-vs-cta">
+                  <Link href="/signup" className="ap-plan-cta">Configurar tu asistente</Link>
+                </span>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Privacy — dos columnas con borde, no otra pila centrada. */}
+        {/* Privacidad — un diagrama del límite, no una lista. */}
         <section className="ap-section ap-black" aria-labelledby="five">
-          <div className="container ap-priv">
-            <div className="ap-priv-copy">
-              <p className="ap-label ap-label-left" data-reveal>Privacidad</p>
-              <h2 id="five" data-reveal>Privacidad de serie.</h2>
-              <p data-reveal>
-                Las conversaciones de tus pacientes no son un activo de marketing. No entrenamos
-                modelos públicos con ellas y no las vendemos a nadie.
-              </p>
+          <div className="container">
+            <div className="ap-priv">
+              <div className="ap-priv-copy">
+                <p className="ap-label ap-label-left" data-reveal>Privacidad</p>
+                <h2 id="five" data-reveal>Privacidad de serie.</h2>
+                <p data-reveal>
+                  Lo que se dice en una consulta se queda en la consulta. El asistente usa la
+                  conversación para responder y reservar, y para nada más.
+                </p>
+                <p className="ap-priv-note" data-reveal>
+                  Cuando el paciente habla con tu asistente, el responsable de esos datos eres tú.
+                  Nosotros solo los tratamos por tu cuenta y con un contrato firmado.
+                </p>
+              </div>
+
+              {/* el límite, dibujado */}
+              <div className="ap-boundary" data-reveal aria-hidden="true">
+                <div className="ap-boundary-top">
+                  <span className="ap-boundary-label">Tu clínica</span>
+                  <span className="ap-boundary-lock">
+                    <span className="ap-lock-shackle" />
+                    <span className="ap-lock-body" />
+                  </span>
+                </div>
+
+                <div className="ap-flow">
+                  <div className="ap-node">
+                    <strong>Paciente</strong>
+                    <span>Escribe en tu web</span>
+                  </div>
+                  <span className="ap-flow-line"><i /></span>
+                  <div className="ap-node is-mid">
+                    <strong>Asistente</strong>
+                    <span>Responde y reserva</span>
+                  </div>
+                  <span className="ap-flow-line"><i /></span>
+                  <div className="ap-node">
+                    <strong>Tu agenda</strong>
+                    <span>Solo lectura</span>
+                  </div>
+                </div>
+
+                <div className="ap-boundary-rows">
+                  <div className="ap-boundary-row is-in">
+                    <span className="ap-b-dot" />
+                    <strong>Nombre, teléfono y cita</strong>
+                    <em>pas necesario</em>
+                  </div>
+                  <div className="ap-boundary-row is-out">
+                    <span className="ap-b-dot" />
+                    <strong>Entrenar modelos públicos</strong>
+                    <em>nunca</em>
+                  </div>
+                  <div className="ap-boundary-row is-out">
+                    <span className="ap-b-dot" />
+                    <strong>Vender o compartir conversaciones</strong>
+                    <em>nunca</em>
+                  </div>
+                  <div className="ap-boundary-row is-out">
+                    <span className="ap-b-dot" />
+                    <strong>Ver datos de otra clínica</strong>
+                    <em>imposible</em>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="ap-priv-table">
-              <div className="ap-priv-row" data-reveal>
-                <span>Dónde están los datos</span>
-                <strong>Servidores en la UE</strong>
-              </div>
-              <div className="ap-priv-row" data-reveal>
-                <span>Cómo se guardan</span>
-                <strong>Cifrado en tránsito y en reposo</strong>
-              </div>
-              <div className="ap-priv-row" data-reveal>
-                <span>Qué puedes tocar de tu agenda</span>
-                <strong>Nada: solo lectura</strong>
-              </div>
-              <div className="ap-priv-row" data-reveal>
-                <span>Si te vas</span>
-                <strong>Exportas o borras todo</strong>
-              </div>
-              <div className="ap-priv-row" data-reveal>
-                <span>Papeles</span>
-                <strong>Encargo de tratamiento firmado</strong>
-              </div>
-              <div className="ap-priv-row" data-reveal>
-                <span>Y las otras clínicas</span>
-                <strong>No ven nada tuyo</strong>
-              </div>
+            <div className="ap-priv-big">
+              <p data-reveal>No entrenamos con ellos.</p>
+              <p data-reveal>No los vendemos.</p>
+              <p data-reveal>No los compartimos.</p>
             </div>
           </div>
         </section>
