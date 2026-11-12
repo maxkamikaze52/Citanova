@@ -112,9 +112,10 @@ export default function Home() {
               <div className="ap-chat">
                 <div className="ap-chat-head">
                   <span className="ap-back" aria-hidden="true">‹</span>
-                  <span className="ap-avatar" aria-hidden="true">CD</span>
+                  {/* Visto desde la clínica: el contacto es la paciente. */}
+                  <span className="ap-avatar" aria-hidden="true">MF</span>
                   <div className="ap-chat-who">
-                    <strong>Clínica Dental Sol</strong>
+                    <strong>Marta Ferrer</strong>
                     <span className="ap-online">en línea</span>
                   </div>
                   <span className="ap-chat-actions" aria-hidden="true">
@@ -148,10 +149,12 @@ export default function Home() {
                     </p>
                   </div>
 
-                  <div className="ap-card">
-                    <span className="ap-card-tag">Cita reservada</span>
-                    <strong>Revisión · 45 min</strong>
-                    <span>Jue 19 nov · 10:40 · Dr. Ellis</span>
+                  <div className="ap-row out">
+                    <div className="ap-card">
+                      <span className="ap-card-tag">Cita reservada</span>
+                      <strong>Revisión · 45 min</strong>
+                      <span>Jue 19 nov · 10:40 · Dr. Ellis</span>
+                    </div>
                   </div>
                 </div>
 
