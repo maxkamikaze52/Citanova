@@ -120,7 +120,7 @@ function ConnectionCard({
   return (
     <section
       style={{
-        background: "#fff",
+        background: "var(--panel)",
         border: `1px solid ${connection.connected ? "var(--success-line)" : "var(--line)"}`,
         borderRadius: 8,
         padding: 20,
@@ -262,7 +262,7 @@ const button: React.CSSProperties = {
 
 const ghostButton: React.CSSProperties = {
   padding: "9px 15px",
-  background: "#fff",
+  background: "var(--panel)",
   color: "var(--danger)",
   border: "1px solid var(--danger-line)",
   borderRadius: 6,

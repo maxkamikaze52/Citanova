@@ -217,7 +217,7 @@ const input: React.CSSProperties = {
   borderRadius: 6,
   fontSize: 15,
   fontFamily: "inherit",
-  background: "#fff",
+  background: "var(--panel)",
   color: "var(--ink)",
 };
 

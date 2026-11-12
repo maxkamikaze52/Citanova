@@ -141,7 +141,7 @@ export default function OperatorConsole() {
               fontFamily: "ui-monospace,monospace",
               fontSize: 19,
               letterSpacing: "0.04em",
-              background: "#fff",
+              background: "var(--panel)",
               border: "1px solid var(--success-line)",
               borderRadius: 6,
               padding: "12px 14px",
@@ -386,7 +386,7 @@ const button: React.CSSProperties = {
 const smallButton: React.CSSProperties = {
   padding: "5px 10px",
   marginLeft: 6,
-  background: "#fff",
+  background: "var(--panel)",
   border: "1px solid var(--line)",
   borderRadius: 4,
   fontSize: 12,

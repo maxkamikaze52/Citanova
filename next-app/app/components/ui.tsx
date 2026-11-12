@@ -47,7 +47,7 @@ export function CopyField({
             fontFamily: "ui-monospace,SFMono-Regular,Menlo,monospace",
             fontSize: 12.5,
             lineHeight: 1.5,
-            background: "#fff",
+            background: "var(--panel)",
             color: "var(--ink)",
             resize: "none",
           }}

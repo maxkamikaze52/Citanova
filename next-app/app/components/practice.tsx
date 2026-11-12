@@ -29,7 +29,7 @@ const field: React.CSSProperties = {
   borderRadius: 6,
   fontSize: 14.5,
   fontFamily: "inherit",
-  background: "#fff",
+  background: "var(--panel)",
   color: "var(--ink)",
   boxSizing: "border-box",
 };
