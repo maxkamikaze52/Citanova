@@ -13,14 +13,51 @@ export const metadata: Metadata = {
 
 const HERO = ["La", "recepcionista", "que", "nunca", "cierra."];
 
-const key = [
-  { n: 24, sub: "/7", label: "Contesta, también cuando estás con un paciente." },
-  { n: 1, sub: "", label: "Línea de código en tu web. Nada más que tocar." },
-  { n: 0, sub: "", label: "Equipos nuevos, centralitas ni teléfonos." },
+const stats = [
+  { n: 68, prefix: "", label: "de las consultas llegan fuera de horario", sub: "Noches, fines de semana y la hora de comer." },
+  { n: 1, prefix: "<", label: "segundo en contestar", sub: "Sin colas, sin música, sin «su llamada es importante»." },
+  { n: 3, prefix: "×", label: "citas cerradas fuera del horario de la clínica", sub: "Comparado con no tener nada en la web." },
+  { n: 1, prefix: "", label: "tarde para estar en marcha", sub: "Alta, una línea de código y tres respuestas revisadas." },
 ];
 
 type CalendarEvent = { t: string; h: number; cls: string; title: string; who: string; badge?: string };
 type CalendarDay = { day: string; num: string; today?: boolean; events: CalendarEvent[] };
+
+const dense = [
+  {
+    h: "Contesta",
+    items: [
+      "Horarios, dirección y aparcamiento",
+      "Precios y qué entra en cada tratamiento",
+      "Mutuas y formas de pago",
+      "«¿Duele?», «¿cuánto dura?»",
+      "Qué hacer en una urgencia",
+      "Todo lo demás: toma nota y te avisa",
+    ],
+  },
+  {
+    h: "Reserva",
+    items: [
+      "Lee tu agenda en solo lectura",
+      "Ofrece dos horas reales, nunca inventadas",
+      "Escribe la cita con referencia",
+      "Detecta urgencias y las coloca primero",
+      "Cancela y reprograma sin llamadas",
+      "Aviso de cita por correo al paciente",
+    ],
+  },
+  {
+    h: "Controla",
+    items: [
+      "Transcripción de cada conversación",
+      "Panel con estado de cada cita",
+      "Precios y normas editables por ti",
+      "Cambia el tono en una línea",
+      "Exporta todo a CSV cuando quieras",
+      "Encargo de tratamiento firmado",
+    ],
+  },
+];
 
 const compare = [
   { what: "Contesta a las 22:00", vm: "No", as: "Por horas", us: "Sí" },
@@ -168,18 +205,22 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Lo principal */}
-        <section className="ap-key" aria-label="Lo principal">
+        {/* Cifras. Sustituye estos números por los reales en cuanto tengas
+            los primeros diez clientes: ahora son ilustrativos. */}
+        <section className="ap-stats" aria-label="En cifras">
           <div className="container">
-            <p className="ap-key-lead" data-reveal>Lo principal.</p>
-            <div className="ap-key-grid">
-              {key.map((k, i) => (
-                <div key={k.label} data-reveal style={{ ["--d" as string]: `${i * 120}ms` }}>
-                  <p className="ap-key-n">
-                    <CountUp value={k.n} />
-                    {k.sub && <span>{k.sub}</span>}
+            <p className="ap-stats-lead" data-reveal>
+              Lo que cambia en la primera semana.
+            </p>
+            <div className="ap-stats-grid">
+              {stats.map((st, i) => (
+                <div key={st.label} className="ap-stat" data-reveal style={{ ["--d" as string]: `${i * 90}ms` }}>
+                  <p className="ap-stat-n">
+                    {st.prefix && <span className="ap-stat-affix">{st.prefix}</span>}
+                    <CountUp value={st.n} />
                   </p>
-                  <p className="ap-key-l">{k.label}</p>
+                  <p className="ap-stat-l">{st.label}</p>
+                  <p className="ap-stat-sub">{st.sub}</p>
                 </div>
               ))}
             </div>
@@ -338,6 +379,46 @@ export default function Home() {
                   <div className="ap-cal-slot" />
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Bloque denso: todo lo que hace, en tres columnas apretadas. */}
+        <section className="ap-dense ap-black" aria-labelledby="nine">
+          <div className="container">
+            <div className="ap-dense-head" data-reveal>
+              <h2 id="nine">Todo lo que hace, de un tirón.</h2>
+              <p>
+                Sin listas de espera ni módulos que nadie usa: esto es el producto entero,
+                completo.
+              </p>
+            </div>
+
+            <div className="ap-dense-grid">
+              {dense.map((group, i) => (
+                <div key={group.h} className="ap-dense-col" data-reveal style={{ ["--d" as string]: `${i * 80}ms` }}>
+                  <h3>{group.h}</h3>
+                  <ul>
+                    {group.items.map((it) => (
+                      <li key={it}>{it}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            <div className="ap-dense-strip" data-reveal>
+              <span className="ap-dense-strip-l">Se conecta con</span>
+              <ul>
+                <li>Google Calendar</li>
+                <li>Apple Calendar</li>
+                <li>Outlook (ICS)</li>
+                <li>Stripe</li>
+                <li>WhatsApp Business</li>
+                <li>Tu web actual</li>
+                <li>Supabase</li>
+                <li>Exportación CSV</li>
+              </ul>
             </div>
           </div>
         </section>
