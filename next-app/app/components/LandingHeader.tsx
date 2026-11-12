@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { SITE } from "../../lib/site";
+import { Logo } from "./Logo";
 
 /**
  * Cabecera fina, al estilo de la barra de Apple: casi invisible sobre el hero
@@ -21,9 +21,8 @@ export default function LandingHeader() {
   return (
     <header className={`ap-nav${scrolled ? " is-scrolled" : ""}`}>
       <div className="container ap-nav-inner">
-        <Link href="/" className="ap-brand" aria-label={`${SITE.name}, inicio`}>
-          <span className="ap-mark" aria-hidden="true" />
-          Citadent
+        <Link href="/" className="ap-brand" aria-label="Citadent, inicio">
+          <Logo size={22} />
         </Link>
 
         <nav className="ap-links" aria-label="Principal">

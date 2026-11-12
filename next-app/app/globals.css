@@ -1751,3 +1751,57 @@ html.reveal-js [data-reveal].is-in { opacity: 1; transform: none; pointer-events
 }
 .ap-emergency p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
 .ap-emergency strong { color: #ffd7d3; font-weight: 600; }
+
+/* ==========================================================================
+   Logotipo.
+   El símbolo es una C y una D que, juntas, forman un diente: se lee "CD" y se
+   reconoce un molar. El nombre repite el truco en la D, así que el ojo cae en
+   la marca sin dejar de leer la palabra.
+   ========================================================================== */
+.logo { display: inline-flex; align-items: center; gap: 9px; color: inherit; }
+.logo svg { display: block; flex: none; }
+
+.wm, .wm > [aria-hidden="true"] {
+  display: inline-flex; align-items: baseline;
+}
+.wm {
+  font-family: var(--font-display); font-weight: 600;
+  letter-spacing: -0.03em; line-height: 1;
+  color: inherit;
+}
+.wm-lead { letter-spacing: -0.02em; }
+.wm-tail { letter-spacing: -0.035em; }
+.wm-d {
+  display: inline-flex; align-items: center;
+  width: 0.62em; height: 0.98em; margin: 0 0.01em;
+  transform: translateY(0.06em);
+}
+.wm-d svg { width: 100%; height: 100%; }
+
+/* la marca de la cabecera de la portada */
+.ap-brand { display: inline-flex; align-items: center; gap: 9px; }
+.ap-brand .wm { font-size: 18px; }
+.ap-mark { display: none; } /* el logo sustituye al cuadrado de color */
+
+.site-header .brand .logo .wm { font-size: 17px; }
+
+/* la capa de arranque, con la marca grande */
+.home-veil-inner { gap: 14px; }
+.home-veil-mark { display: none; }
+.home-veil-inner .logo .wm { font-size: 34px; }
+.home-veil-inner .logo svg { width: 40px; height: 40px; }
+
+/* animación de entrada: la C se dibuja y la D llega después */
+.logo-draw path {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: logo-draw 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.logo-draw path:nth-child(2) { animation-delay: 180ms; }
+.logo-draw path:nth-child(3) { animation-delay: 340ms; }
+.logo-draw path:nth-child(4) { animation-delay: 460ms; }
+@keyframes logo-draw { to { stroke-dashoffset: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-draw path { animation: none; stroke-dashoffset: 0; }
+}

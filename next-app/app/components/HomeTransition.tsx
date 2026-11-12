@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { Logo } from "./Logo";
 
 /**
  * Transición de vuelta a la portada.
@@ -88,8 +89,7 @@ export default function HomeTransition() {
   return (
     <div className={`home-veil${phase === "idle" ? "" : ` is-${phase}`}`} aria-hidden="true">
       <div className="home-veil-inner">
-        <span className="home-veil-mark" />
-        <span className="home-veil-word">Citadent</span>
+        <Logo size={40} className="logo-draw" />
       </div>
     </div>
   );

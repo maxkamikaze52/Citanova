@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SITE } from "../../lib/site";
+import { Logo } from "./Logo";
 
 /**
  * Cabecera de las páginas públicas (precios, contacto, legales, entrar).
@@ -12,7 +13,7 @@ export default function SiteHeader() {
     <header className="site-header">
       <div className="container inner">
         <Link href="/" className="brand" aria-label={`${SITE.name}, inicio`}>
-          {SITE.name}
+          <Logo size={20} />
         </Link>
         <nav className="site-nav" aria-label="Principal">
           <Link href="/" className="nav-home">
