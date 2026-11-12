@@ -5,129 +5,71 @@ import ScrollReveal from "./components/ScrollReveal";
 import CountUp from "./components/CountUp";
 
 export const metadata: Metadata = {
-  title: { absolute: "YourAI – la recepcionista que no pierde ni una consulta" },
+  title: { absolute: "Citadent — la recepcionista que nunca cierra" },
   description:
-    "YourAI responde a tus pacientes en tu propia web, reserva la cita de verdad y la deja en tu agenda. Pensado para clínicas dentales de un solo titular o de tamaño pequeño.",
+    "Citadent responde a tus pacientes en tu propia web, reserva la cita y te deja la agenda lista. Para clínicas dentales pequeñas.",
   alternates: { canonical: "/" },
 };
 
-const HEADLINE = ["Cada consulta,", "respondida. Cada", "hueco, cubierto."];
+const HERO = ["La", "recepcionista", "que", "nunca", "cierra."];
 
-const stats = [
-  { n: 24, sub: "/7", label: "Respondiendo, también las noches en que cierras" },
-  { n: 1, sub: "", label: "Línea de código añadida a tu web" },
-  { n: 0, sub: "", label: "Centralitas, teléfonos ni hardware nuevo" },
-];
-
-const features = [
-  {
-    icon: "bolt",
-    title: "Responde en un segundo",
-    body: "Sin colas y sin música de espera. El paciente recibe una respuesta de verdad mientras sigue en tu web.",
-  },
-  {
-    icon: "calendar",
-    title: "Reserva la cita, no un aviso",
-    body: "Consulta qué hueco está libre de verdad, ofrece dos horas reales y anota la cita con una referencia.",
-  },
-  {
-    icon: "pound",
-    title: "Se sabe tus precios",
-    body: "Revisión, higiene, blanqueamiento, urgencia: dice lo que cobras tú, no lo que adivina internet.",
-  },
-  {
-    icon: "user",
-    title: "Se acuerda del paciente",
-    body: "A quien ya ha venido se le recibe con su última visita, así la conversación empieza a medio camino.",
-  },
-  {
-    icon: "bell",
-    title: "Te lo pasa con criterio",
-    body: "Todo lo clínico, urgente o raro se convierte en un aviso que lees por la mañana. Nunca en una respuesta inventada.",
-  },
-  {
-    icon: "shield",
-    title: "Cerrado por defecto",
-    body: "Solo responde en la dirección que tú autorizas. Las credenciales van cifradas y la agenda se lee, no se toca.",
-  },
+const key = [
+  { n: 24, sub: "/7", label: "Contesta, también cuando estás con un paciente." },
+  { n: 1, sub: "", label: "Línea de código en tu web. Nada más que tocar." },
+  { n: 0, sub: "", label: "Equipos nuevos, centralitas ni teléfonos." },
 ];
 
 const compare = [
-  { what: "Responde a las 22:00", vm: "no", as: "por horas", us: "sí" },
-  { what: "Reserva una cita real", vm: "no", as: "a veces", us: "sí" },
-  { what: "Se sabe tu lista de precios", vm: "no", as: "tras un briefing", us: "de serie" },
-  { what: "Contesta igual siempre", vm: "no", as: "según quién esté", us: "sí" },
-  { what: "Coste mensual", vm: "0 € + pacientes perdidos", as: "por llamada y por hora", us: "desde 49 €" },
-  { what: "Puesta en marcha", vm: "ninguna", as: "semanas de guion", us: "una tarde" },
+  { what: "Contesta a las 22:00", vm: "No", as: "Por horas", us: "Sí" },
+  { what: "Reserva la cita", vm: "No", as: "A veces", us: "Sí" },
+  { what: "Se sabe tus precios", vm: "No", as: "Con briefing", us: "De serie" },
+  { what: "Coste mensual", vm: "0 € y pacientes perdidos", as: "Por llamada", us: "Desde 49 €" },
+  { what: "Puesta en marcha", vm: "Ninguna", as: "Semanas", us: "Una tarde" },
 ];
 
 const plans = [
   {
     name: "Starter",
     price: "49 €",
-    note: "Una clínica, una web y todo lo esencial.",
-    href: "/pricing",
-    cta: "Ver qué incluye",
+    note: "Una clínica, una web y todo lo necesario.",
+    featured: false,
   },
   {
     name: "Pro",
     price: "149 €",
-    note: "Para quien quiere las transcripciones, los informes y soporte prioritario.",
-    href: "/pricing",
-    cta: "Ver qué incluye",
+    note: "Con transcripciones, informes y soporte prioritario.",
     featured: true,
   },
 ];
 
 const faqs = [
   {
-    q: "¿Y si se equivoca?",
-    a: "Solo responde con la lista de precios, los horarios y las normas que tú le das. Para cualquier otra cosa toma nota y le dice al paciente que tú le llamarás. No se inventa nada, y cada respuesta queda en la transcripción junto a la cita.",
+    q: "¿Qué pasa si se equivoca?",
+    a: "Solo responde con los precios, los horarios y las normas que tú le das. Para todo lo demás toma nota y te pasa el aviso. Cada respuesta queda escrita junto a la cita.",
   },
   {
-    q: "¿Necesito teléfonos o programas nuevos?",
-    a: "No. Vive en la web que ya tienes, con una línea de código, y escribe en el calendario que ya usas mediante una fuente de solo lectura.",
+    q: "¿Necesito algo nuevo en la clínica?",
+    a: "No. Vive en la web que ya tienes y escribe en el calendario que ya usas. No hay que instalar nada.",
   },
   {
     q: "¿Cuánto se tarda en montarlo?",
-    a: "Una tarde: das de alta la clínica, pegas el fragmento de código y revisas tres respuestas. Puedes dejarlo en modo de prueba hasta que te convenza el tono.",
+    a: "Una tarde. Das de alta la clínica, pegas una línea y revisas tres respuestas. Puedes dejarlo en pruebas hasta que te guste cómo suena.",
   },
   {
-    q: "¿Es seguro con los datos de los pacientes?",
-    a: "Las conversaciones se guardan por clínica y nunca se comparten entre ellas. Los datos están en la UE, puedes exportarlos y borrarlos tú mismo, y firmamos un encargo de tratamiento con cada clínica.",
-  },
-  {
-    q: "¿Y si ya tengo un servicio de atención telefónica?",
-    a: "Mantenlo. YourAI cubre la web, que es por donde llegan hoy casi todas las consultas fuera de horario. Algunas clínicas lo cancelan al mes, otras se quedan con los dos: lo decides tú con tus propios números.",
+    q: "¿Y con los datos de los pacientes?",
+    a: "Se guardan por clínica y no se comparten nunca entre ellas. Datos en la UE, exportables y borrables por ti, con contrato de encargo firmado.",
   },
 ];
 
-function Icon({ name }: { name: string }) {
-  const common = {
-    width: 22,
-    height: 22,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.7,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    "aria-hidden": true,
-  };
-  switch (name) {
-    case "bolt":
-      return <svg {...common}><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" /></svg>;
-    case "calendar":
-      return <svg {...common}><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18M8 3v4M16 3v4" /></svg>;
-    case "pound":
-      return <svg {...common}><path d="M17 6a5 5 0 0 0-9 3v9m-3 0h10M6 13h7" /></svg>;
-    case "user":
-      return <svg {...common}><circle cx="12" cy="8" r="3.6" /><path d="M4.5 20a7.5 7.5 0 0 1 15 0" /></svg>;
-    case "bell":
-      return <svg {...common}><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z" /><path d="M10 19a2 2 0 0 0 4 0" /></svg>;
-    default:
-      return <svg {...common}><path d="M12 3 5 6v5.5c0 4.2 2.9 7.6 7 9.5 4.1-1.9 7-5.3 7-9.5V6l-7-3Z" /><path d="m9 12 2 2 4-4" /></svg>;
-  }
+function Tick() {
+  return (
+    <span className="ap-privacy-icon" aria-hidden="true">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3 5 6v5.5c0 4.3 2.9 7.7 7 9.5 4.1-1.8 7-5.2 7-9.5V6l-7-3Z" />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+    </span>
+  );
 }
 
 export default function Home() {
@@ -136,307 +78,204 @@ export default function Home() {
       <LandingHeader />
       <ScrollReveal />
 
-      <main id="main" className="lp">
-        {/* Announcement strip */}
-        <div className="lp-announce">
-          <div className="container lp-announce-in">
-            <span className="lp-announce-dot" aria-hidden="true" />
-            <p>
-              Responde en un segundo · Sin hardware nuevo · Desde 49 € al mes
-              <Link href="/pricing"> Ver planes</Link>
-            </p>
-          </div>
-        </div>
-
+      <main id="main" className="ap">
         {/* Hero */}
-        <section className="lp-hero">
-          <div className="lp-hero-bg" aria-hidden="true" />
-          <div className="container lp-hero-grid">
-            <div className="lp-hero-copy">
-              <p className="lp-badge" data-reveal style={{ ["--d" as string]: "0ms" }}>
-                <span className="lp-pulse" aria-hidden="true" />
-                Para clínicas dentales
-              </p>
+        <section className="ap-hero">
+          <div className="container">
+            <p className="ap-eyebrow">Nuevo · Modo nocturno incluido</p>
 
-              <h1 className="serif lp-h1">
-                {HEADLINE.map((line, li) => (
-                  <span key={li} className="lp-line">
-                    {line.split(" ").map((word, wi) => (
-                      <span
-                        key={wi}
-                        className="lp-word"
-                        style={{ ["--wd" as string]: `${(li * 3 + wi) * 55}ms` }}
-                      >
-                        {word}
-                      </span>
-                    ))}
-                  </span>
-                ))}
-              </h1>
+            <h1>
+              {HERO.map((word, i) => (
+                <span key={i} className="ap-word" style={{ ["--wd" as string]: `${180 + i * 90}ms` }}>
+                  {word}
+                </span>
+              ))}
+            </h1>
 
-              <p className="lp-lead" data-reveal style={{ ["--d" as string]: "420ms" }}>
-                YourAI es la recepcionista de tu web. Contesta a tus pacientes a las 2 de la
-                mañana, reserva la cita como hay que reservarla y te deja la agenda lista por la
-                mañana.
-              </p>
+            <p className="ap-sub">
+              Responde a tus pacientes, reserva la cita y te deja la agenda lista. En tu web, a
+              cualquier hora.
+            </p>
 
-              <div className="lp-actions" data-reveal style={{ ["--d" as string]: "520ms" }}>
-                <Link href="/signup" className="btn btn-primary lp-btn">Configurar tu asistente</Link>
-                <Link href="/pricing" className="btn btn-secondary lp-btn">Ver precios</Link>
-              </div>
-
-              <p className="lp-fine" data-reveal style={{ ["--d" as string]: "600ms" }}>
-                Una línea de código · listo en una tarde · sin permanencia
-              </p>
+            <div className="ap-hero-actions">
+              <Link href="/signup" className="ap-buy">Configurar tu asistente</Link>
+              <Link href="/pricing" className="ap-textlink">Ver precios ›</Link>
             </div>
+            <p className="ap-fine">Desde 49 € al mes. Sin coste de alta.</p>
 
-            <div className="lp-chat-wrap" data-reveal style={{ ["--d" as string]: "300ms" }}>
-              <aside className="lp-chat" aria-label="Ejemplo de conversación con el asistente">
-                <div className="lp-chat-head">
-                  <span className="lp-chat-avatar" aria-hidden="true">CD</span>
-                  <div className="lp-chat-who">
+            <div className="ap-product">
+              <div className="ap-chat">
+                <div className="ap-chat-head">
+                  <span className="ap-avatar" aria-hidden="true">CD</span>
+                  <div className="ap-chat-who">
                     <strong>Clínica Dental Sol</strong>
-                    <span className="lp-online"><i aria-hidden="true" />En línea</span>
+                    <span className="ap-online"><i aria-hidden="true" />En línea</span>
                   </div>
-                  <span className="lp-chat-x" aria-hidden="true">×</span>
                 </div>
 
-                <div className="lp-chat-body">
-                  <p className="lp-msg in">Hola, ¿tenéis algo para una revisión esta semana?</p>
-                  <p className="lp-msg out">
-                    Tenemos el jueves a las 10:40 con el doctor Ellis, o el viernes a las 15:20.
-                    ¿Qué te viene mejor?
+                <div className="ap-chat-body">
+                  <p className="ap-msg in">Hola, ¿tenéis algo para una revisión esta semana?</p>
+                  <p className="ap-msg out">
+                    El jueves a las 10:40 con el doctor Ellis, o el viernes a las 15:20. ¿Qué te
+                    viene mejor?
                   </p>
-                  <p className="lp-msg in">El jueves me va bien</p>
+                  <p className="ap-msg in">El jueves</p>
 
-                  <div className="lp-booked">
-                    <span className="lp-booked-tag">Reservada</span>
+                  <div className="ap-booked">
+                    <span className="ap-booked-tag">Reservada</span>
                     <strong>Revisión · 45 min</strong>
-                    <span>Jue 19 nov · 10:40 · Dr. Ellis</span>
+                    <span>Jueves 19 · 10:40 · Dr. Ellis</span>
                   </div>
                 </div>
 
-                <div className="lp-chat-foot" aria-hidden="true">
+                <div className="ap-chat-foot" aria-hidden="true">
                   <span>Escribe un mensaje…</span>
-                  <span className="lp-send">↑</span>
-                </div>
-              </aside>
-
-              <div className="lp-mini" aria-hidden="true">
-                <p className="lp-mini-head">Hoy · 4 citas</p>
-                <p className="lp-mini-row"><span>08:20</span> Urgencia · corona</p>
-                <p className="lp-mini-row"><span>10:40</span> Revisión · paciente nuevo</p>
-                <p className="lp-mini-row"><span>15:20</span> Higiene · 30 min</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Numbers (Skiper #37) */}
-        <section className="lp-band" aria-label="De un vistazo">
-          <div className="container lp-band-grid">
-            {stats.map((s, i) => (
-              <div key={s.label} className="lp-stat" data-reveal style={{ ["--d" as string]: `${i * 90}ms` }}>
-                <p className="lp-stat-n">
-                  <CountUp value={s.n} />
-                  {s.sub && <span className="lp-stat-sub">{s.sub}</span>}
-                </p>
-                <p className="lp-stat-l">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Showcase */}
-        <section className="lp-showcase" aria-labelledby="showcase-h">
-          <div className="container">
-            <div className="lp-showcase-head" data-reveal>
-              <p className="lp-eyebrow">Un asistente, tres trabajos</p>
-              <h2 id="showcase-h" className="serif">Contesta. Reserva. Se acuerda.</h2>
-            </div>
-
-            <div className="lp-showcase-grid">
-              <div className="lp-showcase-visual" aria-hidden="true">
-                <div className="lp-board">
-                  <div className="lp-board-head">
-                    <span>Hoy</span>
-                    <span className="lp-board-live">En directo</span>
-                  </div>
-                  <div className="lp-board-row is-new">
-                    <span className="lp-board-time">08:20</span>
-                    <span className="lp-board-what">Urgencia · Sra. Ferrer</span>
-                    <span className="lp-board-tag">nueva</span>
-                  </div>
-                  <div className="lp-board-row">
-                    <span className="lp-board-time">10:40</span>
-                    <span className="lp-board-what">Revisión · Dr. Ellis</span>
-                  </div>
-                  <div className="lp-board-row">
-                    <span className="lp-board-time">12:15</span>
-                    <span className="lp-board-what">Higiene · 30 min</span>
-                  </div>
-                  <div className="lp-board-row">
-                    <span className="lp-board-time">15:20</span>
-                    <span className="lp-board-what">Revisión · 45 min</span>
-                  </div>
-                  <div className="lp-board-row lp-board-dim">
-                    <span className="lp-board-time">17:00</span>
-                    <span className="lp-board-what">Cerrado</span>
-                  </div>
-                  <p className="lp-board-foot">3 de 4 citas reservadas por el asistente</p>
+                  <span className="ap-send">↑</span>
                 </div>
               </div>
-
-              <ol className="lp-showcase-steps">
-                <li data-reveal>
-                  <span className="lp-step-n serif">01</span>
-                  <h3>Contesta la pregunta que respondes cuarenta veces al día</h3>
-                  <p>
-                    Horarios, aparcamiento, mutuas, «¿duele?», cuánto cuesta una corona. Respondido
-                    con tus palabras, a cualquier hora, en un segundo.
-                  </p>
-                </li>
-                <li data-reveal>
-                  <span className="lp-step-n serif">02</span>
-                  <h3>Reserva en el hueco que está libre de verdad</h3>
-                  <p>
-                    Lee tu agenda, ofrece dos horas reales y anota la cita con una referencia que el
-                    paciente puede citarte después.
-                  </p>
-                </li>
-                <li data-reveal>
-                  <span className="lp-step-n serif">03</span>
-                  <h3>Se acuerda, para que no tengas que acordarte tú</h3>
-                  <p>
-                    Cada conversación y cada cita se archiva junto al paciente, en orden. Vuelve un
-                    mes atrás y verás exactamente qué se acordó.
-                  </p>
-                </li>
-              </ol>
             </div>
           </div>
         </section>
 
-        {/* Feature grid */}
-        <section className="lp-section" aria-labelledby="what">
+        {/* Lo principal */}
+        <section className="ap-key" aria-label="Lo principal">
           <div className="container">
-            <div className="lp-section-head" data-reveal>
-              <p className="lp-eyebrow">Qué hace</p>
-              <h2 id="what" className="serif">Hace la mitad aburrida de tu día.</h2>
-            </div>
-
-            <div className="lp-features">
-              {features.map((f, i) => (
-                <article key={f.title} className="lp-feature" data-reveal style={{ ["--d" as string]: `${(i % 3) * 80}ms` }}>
-                  <span className="lp-feature-icon"><Icon name={f.icon} /></span>
-                  <h3>{f.title}</h3>
-                  <p>{f.body}</p>
-                </article>
+            <p className="ap-key-lead" data-reveal>Lo principal.</p>
+            <div className="ap-key-grid">
+              {key.map((k, i) => (
+                <div key={k.label} data-reveal style={{ ["--d" as string]: `${i * 120}ms` }}>
+                  <p className="ap-key-n">
+                    <CountUp value={k.n} />
+                    {k.sub && <span>{k.sub}</span>}
+                  </p>
+                  <p className="ap-key-l">{k.label}</p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Split: transcripts */}
-        <section className="lp-section lp-section-soft" aria-labelledby="records">
-          <div className="container lp-split">
-            <div className="lp-split-copy">
-              <p className="lp-eyebrow" data-reveal>Todo por escrito</p>
-              <h2 id="records" className="serif" data-reveal>Cada respuesta, apuntada.</h2>
-              <p data-reveal>
-                Aquí no hay nada fuera de acta. Cada conversación se guarda junto a la cita que
-                generó, así que un mes después sigues pudiendo ver qué se le dijo al paciente y
-                cuándo.
-              </p>
-              <p data-reveal>
-                Si un paciente discute un precio, abres la transcripción. Si quieres cambiar cómo se
-                dice algo, editas una línea y cambia desde el mensaje siguiente.
-              </p>
-              <ul className="lp-checks">
-                <li data-reveal>Transcripción de cada conversación</li>
-                <li data-reveal>Historial de citas, cancelaciones y ausencias</li>
-                <li data-reveal>Exportación a CSV cuando quieras</li>
-              </ul>
-            </div>
+        {/* Statement + board */}
+        <section className="ap-section ap-black ap-hair" aria-labelledby="one">
+          <div className="container">
+            <p className="ap-label" data-reveal>Tu agenda</p>
+            <h2 id="one" className="ap-claim" data-reveal>
+              Contesta. Reserva. Recuerda.
+            </h2>
+            <p className="ap-body" data-reveal>
+              Un asistente, tres trabajos. Ninguno de ellos te quita la mañana.
+            </p>
 
-            <div className="lp-transcript" data-reveal aria-hidden="true">
-              <div className="lp-transcript-head">
-                <span>Sra. Ferrer</span>
-                <span className="lp-transcript-ref">SM-4821</span>
+            <div className="ap-board" data-reveal aria-hidden="true">
+              <div className="ap-board-head">
+                <span>Hoy</span>
+                <span className="ap-live">En directo</span>
               </div>
-              <p className="lp-tstamp">Ayer · 21:47</p>
-              <p className="lp-tmsg">Se me ha caído la corona esta noche, ¿es una urgencia?</p>
-              <p className="lp-tstamp">Ayer · 21:47</p>
-              <p className="lp-tmsg bot">
-                Guarda la corona y evita masticar de ese lado. Tenemos un hueco de urgencia a las
-                08:20, ¿te lo reservo?
+              <div className="ap-board-row is-new">
+                <span className="ap-board-time">08:20</span>
+                <span className="ap-board-what">Urgencia · Sra. Ferrer</span>
+                <span className="ap-board-tag">nueva</span>
+              </div>
+              <div className="ap-board-row">
+                <span className="ap-board-time">10:40</span>
+                <span className="ap-board-what">Revisión · Dr. Ellis</span>
+              </div>
+              <div className="ap-board-row">
+                <span className="ap-board-time">12:15</span>
+                <span className="ap-board-what">Higiene · 30 min</span>
+              </div>
+              <div className="ap-board-row">
+                <span className="ap-board-time">15:20</span>
+                <span className="ap-board-what">Revisión · 45 min</span>
+              </div>
+              <div className="ap-board-row ap-board-dim">
+                <span className="ap-board-time">17:00</span>
+                <span className="ap-board-what">Cerrado</span>
+              </div>
+              <p className="ap-board-foot">3 de 4 citas reservadas por el asistente.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Night story */}
+        <section className="ap-section" aria-labelledby="two">
+          <div className="container">
+            <p className="ap-label" data-reveal>21:47</p>
+            <h2 id="two" className="ap-claim" data-reveal>
+              Son las once de la noche. Y sigues abierto.
+            </h2>
+            <p className="ap-body" data-reveal>
+              La mitad de las consultas llegan con la clínica cerrada. Antes se quedaban sin
+              respuesta; ahora son una cita a las 08:20.
+            </p>
+
+            <div className="ap-transcript" data-reveal aria-hidden="true">
+              <div className="ap-tr-head">
+                <span>Sra. Ferrer</span>
+                <span className="ap-tr-ref">SM-4821</span>
+              </div>
+              <p className="ap-tstamp">Ayer · 21:47</p>
+              <p className="ap-tmsg">Se me ha caído la corona, ¿es urgente?</p>
+              <p className="ap-tstamp">Ayer · 21:47</p>
+              <p className="ap-tmsg bot">
+                Guárdala y no muerdas de ese lado. Tenemos un hueco de urgencia a las 08:20, ¿te lo
+                reservo?
               </p>
-              <p className="lp-tstamp">Ayer · 21:48</p>
-              <p className="lp-tmsg">Sí, por favor</p>
-              <div className="lp-tok">
+              <p className="ap-tstamp">Ayer · 21:48</p>
+              <p className="ap-tmsg">Sí, por favor</p>
+              <div className="ap-tok">
                 <span>Reservada</span> Urgencia · 08:20 · Dr. Ellis
               </div>
             </div>
           </div>
         </section>
 
-        {/* Split: calendar */}
-        <section className="lp-section" aria-labelledby="diary">
-          <div className="container lp-split lp-split-flip">
-            <div className="lp-split-copy">
-              <p className="lp-eyebrow" data-reveal>Tu agenda</p>
-              <h2 id="diary" className="serif" data-reveal>Escribe en el calendario que ya usas.</h2>
-              <p data-reveal>
-                Una fuente de solo lectura hacia el calendario que usas hoy. El asistente nunca mueve
-                tus citas, nunca pone dos pacientes en el mismo sillón y deja de ofrecer un hueco en
-                el momento en que lo ocupas.
-              </p>
-              <ul className="lp-chips" aria-label="Compatible con">
-                <li>Google Calendar</li>
-                <li>Apple Calendar</li>
-                <li>Outlook (ICS)</li>
-                <li>Cobros con Stripe</li>
-              </ul>
-              <p className="lp-note" data-reveal>
-                ¿No tienes calendario que conectar? El panel trae su propia agenda y puedes funcionar
-                solo con ella.
-              </p>
-            </div>
+        {/* Calendar */}
+        <section className="ap-section ap-black" aria-labelledby="three">
+          <div className="container">
+            <p className="ap-label" data-reveal>Tu calendario</p>
+            <h2 id="three" className="ap-claim" data-reveal>
+              Tu agenda, intacta.
+            </h2>
+            <p className="ap-body" data-reveal>
+              Se conecta en solo lectura al calendario que ya usas. Nunca mueve una cita tuya, y deja
+              de ofrecer un hueco en el momento en que lo ocupas.
+            </p>
 
-            <div className="lp-cal" data-reveal aria-hidden="true">
+            <div className="ap-cal" data-reveal aria-hidden="true">
               {["Lun", "Mar", "Mié", "Jue", "Vie"].map((d, i) => (
-                <div key={d} className="lp-cal-col">
-                  <p className="lp-cal-day">{d}</p>
-                  <div className="lp-cal-slot" />
-                  <div className={`lp-cal-slot${i === 1 ? " is-booked" : ""}`}>{i === 1 ? "10:40" : ""}</div>
-                  <div className="lp-cal-slot" />
-                  <div className={`lp-cal-slot${i === 3 ? " is-free" : ""}`}>{i === 3 ? "libre" : ""}</div>
-                  <div className="lp-cal-slot" />
+                <div key={d} className="ap-cal-col">
+                  <p className="ap-cal-day">{d}</p>
+                  <div className="ap-cal-slot" />
+                  <div className={`ap-cal-slot${i === 1 ? " is-booked" : ""}`}>{i === 1 ? "10:40" : ""}</div>
+                  <div className="ap-cal-slot" />
+                  <div className={`ap-cal-slot${i === 3 ? " is-free" : ""}`}>{i === 3 ? "libre" : ""}</div>
+                  <div className="ap-cal-slot" />
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Comparison */}
-        <section className="lp-section lp-section-soft" aria-labelledby="compare">
+        {/* Compare */}
+        <section className="ap-section" aria-labelledby="four">
           <div className="container">
-            <div className="lp-section-head" data-reveal>
-              <p className="lp-eyebrow">Comparado</p>
-              <h2 id="compare" className="serif">Con lo que tienes ahora.</h2>
-            </div>
+            <p className="ap-label" data-reveal>Comparado</p>
+            <h2 id="four" className="ap-claim" data-reveal>
+              Con lo que tienes ahora.
+            </h2>
 
-            <div className="table-wrap lp-compare-wrap" data-reveal>
-              <table className="lp-compare">
+            <div className="ap-tablewrap" data-reveal>
+              <table className="ap-table">
                 <caption className="sr-only">
-                  YourAI comparado con el buzón de voz y con un servicio de atención telefónica
+                  Citadent frente al buzón de voz y a un servicio de atención telefónica
                 </caption>
                 <thead>
                   <tr>
                     <th scope="col"> </th>
                     <th scope="col">Buzón de voz</th>
                     <th scope="col">Servicio telefónico</th>
-                    <th scope="col" className="is-us">YourAI</th>
+                    <th scope="col" className="is-us">Citadent</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -455,99 +294,94 @@ export default function Home() {
         </section>
 
         {/* Privacy */}
-        <section className="lp-privacy" aria-labelledby="privacy">
-          <div className="container lp-privacy-grid">
-            <div>
-              <p className="lp-eyebrow" data-reveal>Privacidad</p>
-              <h2 id="privacy" className="serif" data-reveal>Las conversaciones con pacientes no son un activo de marketing.</h2>
-              <p data-reveal>
-                No entrenamos modelos públicos con tus pacientes, no revendemos transcripciones y no
-                te enseñamos la clínica de al lado. Una clínica, un jardín cerrado.
-              </p>
-              <ul className="lp-privacy-list">
-                <li data-reveal>Datos alojados en la UE, cifrados en tránsito y en reposo</li>
-                <li data-reveal>Credenciales cifradas antes de guardarse</li>
-                <li data-reveal>Acceso de solo lectura al calendario: no podemos tocar tu agenda</li>
-                <li data-reveal>Exporta o borra todo, tú mismo, cuando quieras</li>
-                <li data-reveal>Encargo de tratamiento firmado con cada clínica</li>
-              </ul>
-            </div>
-            <div className="lp-privacy-art" data-reveal aria-hidden="true">
-              <div className="lp-lock">
-                <div className="lp-lock-body" />
-                <div className="lp-lock-shackle" />
-              </div>
-              <p>Tus datos. Tu clínica. Tu salida.</p>
+        <section className="ap-section ap-black" aria-labelledby="five">
+          <div className="container">
+            <div data-reveal><Tick /></div>
+            <p className="ap-label" data-reveal>Privacidad</p>
+            <h2 id="five" className="ap-claim" data-reveal>
+              Privacidad de serie.
+            </h2>
+            <p className="ap-body" data-reveal>
+              Las conversaciones de tus pacientes no son un activo de marketing. No entrenamos
+              modelos públicos con ellas y no las vendemos a nadie.
+            </p>
+
+            <ul className="ap-privacy-list">
+              <li data-reveal>Datos alojados en la UE</li>
+              <li data-reveal>Cifrado en tránsito y en reposo</li>
+              <li data-reveal>Calendario en solo lectura</li>
+              <li data-reveal>Exporta o borra todo cuando quieras</li>
+              <li data-reveal>Contrato de encargo con cada clínica</li>
+              <li data-reveal>Una clínica, un espacio cerrado</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Limits */}
+        <section className="ap-section-tight" aria-labelledby="six">
+          <div className="container">
+            <p className="ap-label" data-reveal>Los límites</p>
+            <h2 id="six" className="ap-claim ap-claim-wide" data-reveal>
+              Lo que no hace, dicho claro.
+            </h2>
+
+            <div className="ap-limits">
+              <p data-reveal>No diagnostica.</p>
+              <p data-reveal>No da presupuestos cerrados.</p>
+              <p data-reveal>No pide tarjetas.</p>
+              <p data-reveal>No escribe primero al paciente.</p>
+              <p data-reveal>No actúa fuera de tu web.</p>
+              <p data-reveal>No adivina: toma nota.</p>
             </div>
           </div>
         </section>
 
-        {/* Honesty */}
-        <section className="lp-section" aria-labelledby="wont">
+        {/* Pricing */}
+        <section className="ap-section ap-black" aria-labelledby="seven">
           <div className="container">
-            <div className="lp-section-head" data-reveal>
-              <p className="lp-eyebrow">Los límites</p>
-              <h2 id="wont" className="serif">Lo que no hace.</h2>
-            </div>
-            <div className="lp-wont">
-              <p data-reveal>No diagnostica ni le dice a un paciente qué tratamiento necesita.</p>
-              <p data-reveal>No da presupuestos cerrados ni totales de trabajos complejos.</p>
-              <p data-reveal>No pide datos de tarjeta, ni los acepta si se los dan.</p>
-              <p data-reveal>No escribe a los pacientes por su cuenta.</p>
-              <p data-reveal>No responde en una web que tú no hayas autorizado.</p>
-              <p data-reveal>No adivina. Cuando no lo sabe, toma nota.</p>
-            </div>
-          </div>
-        </section>
+            <p className="ap-label" data-reveal>Precios</p>
+            <h2 id="seven" className="ap-claim" data-reveal>
+              Dos planes. Los dos mensuales.
+            </h2>
 
-        {/* Pricing preview */}
-        <section className="lp-section lp-section-soft" aria-labelledby="plans">
-          <div className="container">
-            <div className="lp-section-head" data-reveal>
-              <p className="lp-eyebrow">Precios</p>
-              <h2 id="plans" className="serif">Dos planes. Sin coste de alta.</h2>
-            </div>
-
-            <div className="lp-plans">
+            <div className="ap-plans">
               {plans.map((p, i) => (
                 <article
                   key={p.name}
-                  className={`lp-plan${p.featured ? " is-featured" : ""}`}
+                  className={`ap-plan${p.featured ? " is-featured" : ""}`}
                   data-reveal
-                  style={{ ["--d" as string]: `${i * 90}ms` }}
+                  style={{ ["--d" as string]: `${i * 120}ms` }}
                 >
-                  {p.featured && <span className="lp-plan-tag">La opción de la mayoría</span>}
+                  {p.featured && <span className="ap-plan-tag">El más elegido</span>}
                   <h3>{p.name}</h3>
-                  <p className="lp-plan-price">{p.price}<span> / mes</span></p>
-                  <p className="lp-plan-note">{p.note}</p>
-                  <Link href={p.href} className={`btn lp-btn ${p.featured ? "btn-primary" : "btn-secondary"}`}>
-                    {p.cta}
+                  <p className="ap-plan-price">{p.price}<span> / mes</span></p>
+                  <p className="ap-plan-note">{p.note}</p>
+                  <Link href="/pricing" className={`ap-plan-cta${p.featured ? "" : " ghost"}`}>
+                    Ver qué incluye
                   </Link>
                 </article>
               ))}
             </div>
-            <p className="lp-plans-fine" data-reveal>
-              Precios en euros, por clínica. Sin permanencia: tus datos se van contigo.
+            <p className="ap-plans-fine" data-reveal>
+              Precios en euros, IVA incluido. Sin permanencia.
             </p>
           </div>
         </section>
 
         {/* FAQ */}
-        <section className="lp-section" aria-labelledby="faq">
-          <div className="container lp-faq">
-            <div className="lp-faq-head" data-reveal>
-              <p className="lp-eyebrow">Respuestas claras</p>
-              <h2 id="faq" className="serif">Las preguntas que harías igual.</h2>
-              <p className="lp-faq-note">
-                ¿Sigues con dudas? <Link href="/contact">Escríbenos</Link> y te contesta una persona.
-              </p>
-            </div>
-            <div className="lp-faq-list">
+        <section className="ap-section" aria-labelledby="eight">
+          <div className="container">
+            <p className="ap-label" data-reveal>Preguntas</p>
+            <h2 id="eight" className="ap-claim" data-reveal>
+              Las que harías igual.
+            </h2>
+
+            <div className="ap-faq">
               {faqs.map((f, i) => (
-                <details key={f.q} className="lp-faq-item" data-reveal style={{ ["--d" as string]: `${i * 60}ms` }}>
+                <details key={f.q} className="ap-faq-item" data-reveal style={{ ["--d" as string]: `${i * 70}ms` }}>
                   <summary>
                     <span>{f.q}</span>
-                    <span className="lp-faq-plus" aria-hidden="true" />
+                    <span className="ap-plus" aria-hidden="true" />
                   </summary>
                   <p>{f.a}</p>
                 </details>
@@ -556,21 +390,18 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="lp-cta-band" aria-labelledby="cta">
+        {/* Close */}
+        <section className="ap-close" aria-labelledby="close">
           <div className="container">
-            <div className="lp-cta-panel" data-reveal>
-              <h2 id="cta" className="serif">Ponlo en tu web hoy mismo.</h2>
-              <p>
-                Da de alta tu clínica, pega el fragmento de código y mira llegar la primera cita
-                antes de irte a casa.
-              </p>
-              <div className="lp-actions">
-                <Link href="/signup" className="btn btn-primary lp-btn">Configurar tu asistente</Link>
-                <Link href="/pricing" className="btn lp-btn lp-btn-ghost">Ver precios</Link>
-              </div>
-              <p className="lp-cta-fine">Sin permanencia. Sin coste de alta. Tus datos se van contigo.</p>
+            <h2 id="close" data-reveal>Ponla a trabajar esta tarde.</h2>
+            <p data-reveal>
+              Das de alta la clínica, pegas una línea y miras llegar la primera cita.
+            </p>
+            <div className="ap-close-actions" data-reveal>
+              <Link href="/signup" className="ap-buy">Configurar tu asistente</Link>
+              <Link href="/contact" className="ap-textlink">Habla con nosotros ›</Link>
             </div>
+            <p className="ap-close-fine">Sin permanencia. Sin coste de alta.</p>
           </div>
         </section>
       </main>

@@ -3,41 +3,34 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SITE } from "../../lib/site";
-import RollText from "./RollText";
 
-/** Cabecera de la portada: transparente sobre el hero, con desenfoque al hacer scroll (Skiper #57). */
+/**
+ * Cabecera fina, al estilo de la barra de Apple: casi invisible sobre el hero
+ * y con desenfoque en cuanto hay scroll.
+ */
 export default function LandingHeader() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header className={`lp-nav${scrolled ? " is-scrolled" : ""}`}>
-      <div className="container lp-nav-inner">
-        <Link href="/" className="lp-brand" aria-label={`${SITE.name}, inicio`}>
-          <span className="lp-mark" aria-hidden="true" />
-          {SITE.name}
+    <header className={`ap-nav${scrolled ? " is-scrolled" : ""}`}>
+      <div className="container ap-nav-inner">
+        <Link href="/" className="ap-brand" aria-label={`${SITE.name}, inicio`}>
+          <span className="ap-mark" aria-hidden="true" />
+          Citadent
         </Link>
 
-        <nav className="lp-links" aria-label="Principal">
-          <Link href="/pricing" className="lp-link">
-            <span className="sr-only">Precios</span>
-            <RollText text="Precios" />
-          </Link>
-          <Link href="/contact" className="lp-link hide-sm">
-            <span className="sr-only">Contacto</span>
-            <RollText text="Contacto" />
-          </Link>
-          <Link href="/login" className="lp-link">
-            <span className="sr-only">Entrar</span>
-            <RollText text="Entrar" />
-          </Link>
-          <Link href="/signup" className="lp-nav-cta">Configurar asistente</Link>
+        <nav className="ap-links" aria-label="Principal">
+          <Link href="/pricing" className="ap-link">Precios</Link>
+          <Link href="/contact" className="ap-link hide-sm">Contacto</Link>
+          <Link href="/login" className="ap-link">Entrar</Link>
+          <Link href="/signup" className="ap-nav-cta">Configurar</Link>
         </nav>
       </div>
     </header>
