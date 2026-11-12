@@ -1,26 +1,22 @@
 /**
- * Logotipo de Citadent.
+ * Logotipo de Citanova.
  *
- * La idea: las dos primeras letras, C y D, se dibujan de forma que la C es un
- * diente (un arco con dos raíces abajo) y la D es la mitad del mismo diente.
- * Juntas forman una sola pieza, así que se lee "CD" pero se reconoce un molar.
+ * Concepto: la marca es una **cita que se abre en abanico** — una hoja de
+ * calendario que se despliega en tres radios. Las tres hojas dibujan una N
+ * implícita y, a la vez, la idea del producto: un hueco que se convierte en
+ * varios huecos disponibles.
  *
- * - `Mark` es el símbolo suelto (favicon, cabecera, capa de arranque).
- * - `Wordmark` es el nombre con la D convertida en el diente: se lee "Citadent"
- *   y el ojo cae justo en la marca.
- * - `Logo` junta los dos.
+ * - `Mark`: el símbolo suelto (favicon, cabecera, arranque).
+ * - `Wordmark`: "citanova" con la N convertida en el símbolo, así que la palabra
+ *   se lee entera y el ojo cae en la marca.
+ * - `Logo`: los dos juntos.
  *
- * Todo va en SVG con `currentColor`, así que hereda el color del sitio.
+ * Todo en SVG con `currentColor` para que herede el color del sitio.
  */
 
-type MarkProps = {
-  size?: number;
-  className?: string;
-  /** El diente interior, en un color más claro que el trazo. */
-  accent?: string;
-};
+type MarkProps = { size?: number; className?: string; accent?: string };
 
-/** El símbolo: un diente formado por la C y la D. */
+/** El símbolo: tres hojas de agenda que se abren desde un mismo punto. */
 export function Mark({ size = 28, className, accent = "currentColor" }: MarkProps) {
   return (
     <svg
@@ -30,59 +26,56 @@ export function Mark({ size = 28, className, accent = "currentColor" }: MarkProp
       fill="none"
       className={className}
       role="img"
-      aria-label="Citadent"
+      aria-label="Citanova"
     >
-      {/* La C: arco del diente, abierto arriba a la derecha */}
+      {/* el punto de la cita */}
+      <circle cx="7.4" cy="16" r="3" fill="currentColor" />
+      {/* las tres hojas, en abanico: 0°, 42° y -42° */}
       <path
-        d="M23.5 6.4A10.2 10.2 0 1 0 23.5 23.6"
+        d="M12.6 16h13"
         stroke="currentColor"
-        strokeWidth="3.1"
+        strokeWidth="3.2"
         strokeLinecap="round"
       />
-      {/* La D: la otra mitad del diente, con el trazo recto a la izquierda */}
       <path
-        d="M16 5.2h2.1a10.3 10.3 0 0 1 0 20.6H16"
+        d="M12.4 14.2 23 7.1"
         stroke={accent}
-        strokeWidth="3.1"
+        strokeWidth="3.2"
         strokeLinecap="round"
       />
-      {/* Las dos raíces: lo que lo convierte en diente y no en un círculo */}
       <path
-        d="M12.4 22.2v3.9M19.6 22.2v3.9"
-        stroke="currentColor"
-        strokeWidth="3.1"
+        d="M12.4 17.8 23 24.9"
+        stroke={accent}
+        strokeWidth="3.2"
         strokeLinecap="round"
       />
-      {/* El hueco de la muela, apenas insinuado */}
-      <path d="M16 12.6v6.2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.55" />
+      {/* el pulso de la agenda llena: un punto al final de la hoja central */}
+      <circle cx="27.4" cy="16" r="2" fill="currentColor" opacity="0.45" />
     </svg>
   );
 }
 
-/** El nombre con la D hecha diente. Se lee y se reconoce a la vez. */
+/** "citanova" con la N hecha abanico. */
 export function Wordmark({ className }: { className?: string }) {
   return (
     <span className={`wm${className ? ` ${className}` : ""}`}>
-      {/* Las letras visibles van ocultas al lector de pantalla: la D está
-          dibujada, así que sin esto se oiría "Cita Citadent dent". */}
       <span aria-hidden="true">
-        <span className="wm-lead">Cita</span>
-        <span className="wm-d">
-          <svg viewBox="0 0 26 40" fill="none">
-            {/* D: asta recta + panza */}
-            <path
-              d="M4 4v32M4 4h4.5a16 16 0 0 1 0 32H4"
-              stroke="currentColor"
-              strokeWidth="3.4"
-              strokeLinecap="round"
-            />
-            {/* dos raíces, para que la D sea también el diente */}
-            <path d="M9 31.4v5.2M15.4 31.4v5.2" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" />
+        <span className="wm-lead">cita</span>
+        <span className="wm-n">
+          <svg viewBox="0 0 30 40" fill="none">
+            {/* N: dos astas + la diagonal convertida en las hojas */}
+            <path d="M5 34V6" stroke="currentColor" strokeWidth="3.6" strokeLinecap="round" />
+            <path d="M25 6v28" stroke="currentColor" strokeWidth="3.6" strokeLinecap="round" />
+            <path d="M5 6 25 34" stroke="currentColor" strokeWidth="3.6" strokeLinecap="round" opacity="0.42" />
+            {/* el abanico, en el cruce de la diagonal */}
+            <circle cx="15" cy="20" r="2.6" fill="currentColor" />
+            <path d="M17.6 19 25.5 13" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" opacity="0.7" />
+            <path d="M17.6 21 25.5 27" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" opacity="0.7" />
           </svg>
         </span>
-        <span className="wm-tail">dent</span>
+        <span className="wm-tail">nova</span>
       </span>
-      <span className="sr-only">Citadent</span>
+      <span className="sr-only">Citanova</span>
     </span>
   );
 }

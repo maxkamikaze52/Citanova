@@ -54,7 +54,7 @@ export default async function WelcomePage() {
           <CopyField label="Fuente del calendario (solo lectura)" value={feedUrl} />
         ) : (
           <p style={{ margin: 0, color: "var(--warn)" }}>
-            Esta clínica todavía no tiene token de calendario. Actívalo desde el panel.
+            Este negocio todavía no tiene token de calendario. Actívalo desde el panel.
           </p>
         )}
       </Step>

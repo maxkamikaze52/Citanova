@@ -4,7 +4,7 @@ import SiteHeader from "../components/SiteHeader";
 export const metadata: Metadata = {
   title: "Configurar el asistente",
   description:
-    "Crea tu clínica, recibe tu asistente y pega una línea en tu web. Se tarda unos minutos.",
+    "Crea tu negocio, recibe tu asistente y pega una línea en tu web. Se tarda unos minutos.",
   alternates: { canonical: "/signup" },
 };
 

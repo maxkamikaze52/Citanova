@@ -4,7 +4,7 @@ import { LEGAL } from "../../lib/site";
 
 export const metadata: Metadata = {
   title: "Términos y condiciones",
-  description: "Las condiciones que se aplican cuando una clínica dental usa el servicio de recepcionista con IA.",
+  description: "Las condiciones que se aplican cuando un negocio usa el servicio de recepcionista con IA.",
   alternates: { canonical: "/terms" },
 };
 
@@ -14,15 +14,15 @@ export default function Terms() {
       <h2>1. Quiénes somos</h2>
       <p>El servicio lo presta {LEGAL.companyName}, {LEGAL.taxId}, {LEGAL.address} («nosotros»). Se ofrece a empresas y profesionales, no a consumidores.</p>
       <h2>2. El servicio</h2>
-      <p>{SITE_NAME} ofrece un asistente de chat con IA que la clínica coloca en su web para responder dudas de pacientes y reservar citas, además de un panel y una fuente de calendario de solo lectura.</p>
+      <p>{SITE_NAME} ofrece un asistente de chat con IA que el negocio coloca en su web para responder dudas de clientes y reservar citas, además de un panel y una fuente de calendario de solo lectura.</p>
       <h2>3. Cuentas</h2>
-      <p>Debes dar datos veraces, mantener tus credenciales a salvo y responder de la actividad hecha con tu cuenta. Solo puede usarlo personal autorizado por la clínica.</p>
+      <p>Debes dar datos veraces, mantener tus credenciales a salvo y responder de la actividad hecha con tu cuenta. Solo puede usarlo personal autorizado por el negocio.</p>
       <h2>4. Planes y pago</h2>
       <p>Los planes se facturan mensualmente con Stripe, a los precios que figuran en la página de precios. Los precios incluyen IVA. Las suscripciones se renuevan hasta que se cancelen. [FILL IN: condiciones de cancelación y devoluciones]</p>
-      <h2>5. Datos de pacientes</h2>
-      <p>La clínica es la responsable del tratamiento de los datos de sus pacientes y nosotros actuamos como encargados. Un contrato de encargo de tratamiento conforme al art. 28 RGPD forma parte de estas condiciones. [FILL IN: enlace o anexo del contrato]</p>
+      <h2>5. Datos de clientes</h2>
+      <p>El negocio es el responsable del tratamiento de los datos de sus clientes y nosotros actuamos como encargados. Un contrato de encargo de tratamiento conforme al art. 28 RGPD forma parte de estas condiciones. [FILL IN: enlace o anexo del contrato]</p>
       <h2>6. Los límites del asistente</h2>
-      <p>El asistente es automático y puede equivocarse. No da consejo médico, ni diagnósticos, ni indicaciones de urgencia. La clínica sigue siendo responsable de sus citas, de sus decisiones clínicas y de revisar las reservas en el panel.</p>
+      <p>El asistente es automático y puede equivocarse. No da consejo médico, ni diagnósticos, ni indicaciones de urgencia. El negocio sigue siendo responsable de sus citas, de las decisiones sobre su servicio y de revisar las reservas en el panel.</p>
       <h2>7. Uso aceptable</h2>
       <p>No usarás el servicio de forma indebida, no intentarás romperlo ni sobrecargarlo, no accederás a datos de otras clínicas y no lo usarás para fines ilícitos.</p>
       <h2>8. Disponibilidad</h2>
@@ -41,4 +41,4 @@ export default function Terms() {
   );
 }
 
-const SITE_NAME = "YourAI";
+const SITE_NAME = "Citanova";

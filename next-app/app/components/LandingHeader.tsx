@@ -21,7 +21,7 @@ export default function LandingHeader() {
   return (
     <header className={`ap-nav${scrolled ? " is-scrolled" : ""}`}>
       <div className="container ap-nav-inner">
-        <Link href="/" className="ap-brand" aria-label="Citadent, inicio">
+        <Link href="/" className="ap-brand" aria-label="Citanova, inicio">
           <Logo size={22} />
         </Link>
 

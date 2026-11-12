@@ -1,11 +1,11 @@
 /**
  * Analítica de uso del asistente.
  *
- * Todo se calcula en el servidor a partir de los mensajes reales de la clínica
+ * Todo se calcula en el servidor a partir de los mensajes reales de el negocio
  * (30 días) y de sus citas, así que no hace falta ningún servicio externo.
  *
- * Si la clínica aún no tiene actividad, se enseña una muestra marcada como
- * "ejemplo" en lugar de un panel vacío: un dentista que entra el día uno tiene
+ * Si el negocio aún no tiene actividad, se enseña una muestra marcada como
+ * "ejemplo" en lugar de un panel vacío: un profesional que entra el día uno tiene
  * que entender qué va a ver aquí.
  */
 
@@ -22,7 +22,7 @@ type Appt = {
 const HOURS = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11",
                "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"];
 
-/** Hora local de la clínica, sin depender del reloj del servidor. */
+/** Hora local de el negocio, sin depender del reloj del servidor. */
 function localHour(iso: string, tz: string): number {
   const s = new Intl.DateTimeFormat("en-GB", { timeZone: tz, hour: "2-digit", hour12: false }).format(new Date(iso));
   const n = parseInt(s, 10);
@@ -83,7 +83,7 @@ export default function Usage({
   const inbound = events.filter((e) => e.role === "user");
   const messages = events.length;
 
-  // Horas punta: cuenta por hora local de la clínica
+  // Horas punta: cuenta por hora local de el negocio
   const byHour = new Array(24).fill(0) as number[];
   for (const e of inbound) byHour[localHour(e.created_at, tz)] += 1;
   const peak = byHour.reduce((best, v, i) => (v > byHour[best] ? i : best), 0);
@@ -194,7 +194,7 @@ export default function Usage({
         <div className="u-card">
           <div className="u-card-head">
             <h3>Cuándo te escriben</h3>
-            <span className="u-card-meta">hora local de la clínica</span>
+            <span className="u-card-meta">hora local de el negocio</span>
           </div>
           <div className="u-bars" role="img" aria-label={`Hora punta: ${HOURS[peak]}:00, con ${peakValue} mensajes`}>
             {byHour.map((v, h) => {
@@ -216,7 +216,7 @@ export default function Usage({
           <p className="u-note">
             Tu hora punta es a las <strong>{HOURS[peak]}:00</strong>
             {afterHours > 0 ? (
-              <> · <strong>{afterHours}</strong> consultas ({Math.round((afterHours / Math.max(1, inbound.length)) * 100)}%) llegaron con la clínica cerrada.</>
+              <> · <strong>{afterHours}</strong> consultas ({Math.round((afterHours / Math.max(1, inbound.length)) * 100)}%) llegaron con el negocio cerrada.</>
             ) : null}
           </p>
         </div>
@@ -247,7 +247,7 @@ export default function Usage({
             </div>
             <div>
               <p className="u-split-n">{messages > 0 ? Math.round((inbound.length / Math.max(1, messages)) * 100) : 0}%</p>
-              <p className="u-split-l">de los mensajes son del paciente</p>
+              <p className="u-split-l">de los mensajes son del cliente</p>
             </div>
           </div>
         </div>
@@ -262,5 +262,5 @@ export default function Usage({
 }
 
 function convIs(_demo: boolean, conversations: number) {
-  return conversations > 0 ? `${conversations} conversaciones` : "una sola conversación por paciente";
+  return conversations > 0 ? `${conversations} conversaciones` : "una sola conversación por cliente";
 }

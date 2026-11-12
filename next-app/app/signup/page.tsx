@@ -98,12 +98,12 @@ export default function SignupPage() {
       </p>
 
       <form onSubmit={submit} style={{ display: "grid", gap: 16 }}>
-        <Field label="Nombre de la clínica" hint="Es lo que ven los pacientes en el chat.">
+        <Field label="Nombre de el negocio" hint="Es lo que ven los clientes en el chat.">
           <input
             required
             value={form.practiceName}
             onChange={set("practiceName")}
-            placeholder="Clínica Dental Sol"
+            placeholder="Negocio Dental Sol"
             style={input}
           />
         </Field>

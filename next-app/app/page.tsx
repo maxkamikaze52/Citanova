@@ -5,9 +5,9 @@ import ScrollReveal from "./components/ScrollReveal";
 import CountUp from "./components/CountUp";
 
 export const metadata: Metadata = {
-  title: { absolute: "Citadent — la recepcionista que nunca cierra" },
+  title: { absolute: "Citanova — la recepcionista que nunca cierra" },
   description:
-    "Citadent responde a tus pacientes en tu propia web, reserva la cita y te deja la agenda lista. Para clínicas dentales pequeñas.",
+    "Citanova responde a tus clientes en tu propia web, reserva la cita y te deja la agenda lista. Para negocios pequeños.",
   alternates: { canonical: "/" },
 };
 
@@ -18,7 +18,7 @@ const stats = [
   { n: 1, prefix: "<", suffix: "s", label: "en contestar", sub: "Sin colas ni música de espera." },
   { n: 3, prefix: "×", suffix: "", label: "citas cerradas fuera de horario", sub: "Frente a no tener nada en la web." },
   { n: 1, prefix: "", suffix: "", label: "tarde para estar en marcha", sub: "Alta, una línea y tres respuestas." },
-  { n: 0, prefix: "", suffix: "", label: "pacientes perdidos sin avisar", sub: "Todo lo que entra queda escrito." },
+  { n: 0, prefix: "", suffix: "", label: "clientes perdidos sin avisar", sub: "Todo lo que entra queda escrito." },
   { n: 49, prefix: "", suffix: " €", label: "al mes, sin coste de alta", sub: "IVA incluido. Sin permanencia." },
 ];
 
@@ -45,7 +45,7 @@ const dense = [
       "Escribe la cita con referencia",
       "Detecta urgencias y las coloca primero",
       "Cancela y reprograma sin llamadas",
-      "Aviso de cita por correo al paciente",
+      "Aviso de cita por correo al cliente",
     ],
   },
   {
@@ -68,7 +68,7 @@ const compare: CompareRow[] = [
   { what: "Reserva la cita", vm: "No", vmOk: false, as: "A veces", asOk: false, us: "Con referencia" },
   { what: "Se sabe tus precios", vm: "No", vmOk: false, as: "Tras un briefing", asOk: false, us: "De serie" },
   { what: "Contesta igual siempre", vm: "No", vmOk: false, as: "Según quién esté", asOk: false, us: "Sí" },
-  { what: "Coste mensual", vm: "0 € y pacientes perdidos", as: "Por llamada y por hora", us: "Desde 49 €" },
+  { what: "Coste mensual", vm: "0 € y clientes perdidos", as: "Por llamada y por hora", us: "Desde 49 €" },
   { what: "Puesta en marcha", vm: "Ninguna", as: "Semanas de guion", us: "Una tarde" },
 ];
 
@@ -76,7 +76,7 @@ const plans = [
   {
     name: "Starter",
     price: "49 €",
-    note: "Una clínica, una web y todo lo necesario.",
+    note: "Un negocio, una web y todo lo necesario.",
     featured: false,
   },
   {
@@ -93,16 +93,16 @@ const faqs = [
     a: "Solo responde con los precios, los horarios y las normas que tú le das. Para todo lo demás toma nota y te pasa el aviso. Cada respuesta queda escrita junto a la cita.",
   },
   {
-    q: "¿Necesito algo nuevo en la clínica?",
+    q: "¿Necesito algo nuevo en el negocio?",
     a: "No. Vive en la web que ya tienes y escribe en el calendario que ya usas. No hay que instalar nada.",
   },
   {
     q: "¿Cuánto se tarda en montarlo?",
-    a: "Una tarde. Das de alta la clínica, pegas una línea y revisas tres respuestas. Puedes dejarlo en pruebas hasta que te guste cómo suena.",
+    a: "Una tarde. Das de alta el negocio, pegas una línea y revisas tres respuestas. Puedes dejarlo en pruebas hasta que te guste cómo suena.",
   },
   {
-    q: "¿Y con los datos de los pacientes?",
-    a: "Se guardan por clínica y no se comparten nunca entre ellas. Datos en la UE, exportables y borrables por ti, con contrato de encargo firmado.",
+    q: "¿Y con los datos de los clientes?",
+    a: "Se guardan por negocio y no se comparten nunca entre negocios. Datos en la UE, exportables y borrables por ti, con contrato de encargo firmado.",
   },
 ];
 
@@ -167,7 +167,7 @@ export default function Home() {
             </h1>
 
             <p className="ap-sub">
-              Responde a tus pacientes, reserva la cita y te deja la agenda lista. En tu web, a
+              Responde a tus clientes, reserva la cita y te deja la agenda lista. En tu web, a
               cualquier hora.
             </p>
 
@@ -183,7 +183,7 @@ export default function Home() {
               <div className="ap-chat">
                 <div className="ap-chat-head">
                   <span className="ap-back" aria-hidden="true">‹</span>
-                  {/* Visto desde la clínica: el contacto es la paciente. */}
+                  {/* Visto desde el negocio: el contacto es la cliente. */}
                   <span className="ap-avatar" aria-hidden="true">MF</span>
                   <div className="ap-chat-who">
                     <strong>Marta Ferrer</strong>
@@ -375,7 +375,7 @@ export default function Home() {
                 Son las once de la noche. Y sigues abierto.
               </h2>
               <p className="ap-split-body" data-reveal>
-                La mitad de las consultas llegan con la clínica cerrada. Antes se quedaban sin
+                La mitad de las consultas llegan con el negocio cerrado. Antes se quedaban sin
                 respuesta; ahora son una cita a las 08:20.
               </p>
               <ul className="ap-split-points">
@@ -466,7 +466,7 @@ export default function Home() {
                   <span>Una persona al teléfono</span>
                 </div>
                 <div className="ap-vs-col-head is-us">
-                  <strong>Citadent</strong>
+                  <strong>Citanova</strong>
                   <span>La recepcionista de tu web</span>
                 </div>
               </div>
@@ -513,7 +513,7 @@ export default function Home() {
                   conversación para responder y reservar, y para nada más.
                 </p>
                 <p className="ap-priv-note" data-reveal>
-                  Cuando el paciente habla con tu asistente, el responsable de esos datos eres tú.
+                  Cuando el cliente habla con tu asistente, el responsable de esos datos eres tú.
                   Nosotros solo los tratamos por tu cuenta y con un contrato firmado.
                 </p>
               </div>
@@ -521,7 +521,7 @@ export default function Home() {
               {/* el límite, dibujado */}
               <div className="ap-boundary" data-reveal aria-hidden="true">
                 <div className="ap-boundary-top">
-                  <span className="ap-boundary-label">Tu clínica</span>
+                  <span className="ap-boundary-label">Tu negocio</span>
                   <span className="ap-boundary-lock">
                     <span className="ap-lock-shackle" />
                     <span className="ap-lock-body" />
@@ -530,7 +530,7 @@ export default function Home() {
 
                 <div className="ap-flow">
                   <div className="ap-node">
-                    <strong>Paciente</strong>
+                    <strong>Cliente</strong>
                     <span>Escribe en tu web</span>
                   </div>
                   <span className="ap-flow-line"><i /></span>
@@ -563,7 +563,7 @@ export default function Home() {
                   </div>
                   <div className="ap-boundary-row is-out">
                     <span className="ap-b-dot" />
-                    <strong>Ver datos de otra clínica</strong>
+                    <strong>Ver datos de otro negocio</strong>
                     <em>imposible</em>
                   </div>
                 </div>
@@ -592,7 +592,7 @@ export default function Home() {
               <p data-reveal data-n="03">No da presupuestos cerrados.</p>
               <p data-reveal data-n="04">No dice si algo es grave o leve.</p>
               <p data-reveal data-n="05">No pide tarjetas.</p>
-              <p data-reveal data-n="06">No escribe primero al paciente.</p>
+              <p data-reveal data-n="06">No escribe primero al cliente.</p>
             </div>
 
             <div className="ap-emergency" data-reveal>
@@ -667,7 +667,7 @@ export default function Home() {
           <div className="container">
             <h2 id="close" data-reveal>Ponla a trabajar esta tarde.</h2>
             <p data-reveal>
-              Das de alta la clínica, pegas una línea y miras llegar la primera cita.
+              Das de alta el negocio, pegas una línea y miras llegar la primera cita.
             </p>
             <div className="ap-close-actions" data-reveal>
               <Link href="/signup" className="ap-buy">Configurar tu asistente</Link>

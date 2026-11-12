@@ -3,7 +3,7 @@ import SiteHeader from "../components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "Entrar",
-  description: "Entra en tu clínica para ver las citas y el uso que ha hecho tu asistente.",
+  description: "Entra en tu negocio para ver las citas y el uso que ha hecho tu asistente.",
   alternates: { canonical: "/login" },
 };
 

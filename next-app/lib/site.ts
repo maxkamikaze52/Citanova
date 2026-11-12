@@ -4,10 +4,10 @@
  * legales leen de aquí. Busca lo que queda con:  grep -rn "FILL IN" app lib
  */
 export const SITE = {
-  name: "YourAI", // cámbialo cuando la marca sea definitiva (regenera también los iconos)
-  tagline: "Asistentes de IA para clínicas dentales",
+  name: "Citanova",
+  tagline: "Recepcionistas con IA para cualquier negocio",
   description:
-    "Una recepcionista con IA para clínicas dentales. Responde las dudas de los pacientes, reserva citas y se sincroniza con tu calendario, en tu propia web.",
+    "Una recepcionista con IA para cualquier negocio. Responde las dudas de los clientes, reserva citas y se sincroniza con tu calendario, en tu propia web.",
   url: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3002",
   locale: "es_ES",
   analyticsId: process.env.NEXT_PUBLIC_GA_ID || "", // id de GA4, p. ej. G-XXXXXXXXXX. Vacío = sin analítica.

@@ -36,8 +36,8 @@ export default function LoginPage() {
     <main id="main" className="auth">
       <div className="auth-card">
         <Link href="/" className="auth-back">← Volver a la web</Link>
-        <p className="auth-brand">Citadent</p>
-        <h1>Entra en tu clínica</h1>
+        <p className="auth-brand">Citanova</p>
+        <h1>Entra en tu negocio</h1>
         <p className="auth-sub">
           Mira cuánto ha trabajado el asistente por ti: mensajes, citas y horas que te has ahorrado.
         </p>

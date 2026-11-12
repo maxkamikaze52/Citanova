@@ -34,7 +34,7 @@ async function sendWelcome(to: string | null | undefined) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
-      from: `YourAI <hello@${process.env.NEXT_PUBLIC_ROOT_DOMAIN}>`,
+      from: `Citanova <hola@${process.env.NEXT_PUBLIC_ROOT_DOMAIN}>`,
       to,
       subject: "Your AI assistant is ready",
       html: `<p>Welcome! Open your dashboard: https://app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/dashboard</p>`,

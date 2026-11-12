@@ -124,7 +124,7 @@ export default async function Dashboard() {
 
       <header className="dash-head">
         <div>
-          <p className="dash-eyebrow">Panel de la clínica</p>
+          <p className="dash-eyebrow">Panel del negocio</p>
           <h1>{business.name}</h1>
           <p className="dash-sub">
             <span className="dash-live" aria-hidden="true" />
@@ -146,7 +146,7 @@ export default async function Dashboard() {
         </p>
       ) : null}
 
-      {/* Analítica de uso: lo que de verdad quiere ver el dentista. */}
+      {/* Analítica de uso: lo que de verdad quiere ver el profesional. */}
       <Usage activity={activity} appointments={appts} conversations={convCount ?? 0} usedThisMonth={used} cap={cap} tz={tz} />
 
       <section className="dash-grid2">
@@ -163,7 +163,7 @@ export default async function Dashboard() {
                 <li key={a.id}>
                   <span className="dash-when">{when(a.starts_at, tz)}</span>
                   <span className="dash-what">
-                    <strong>{a.customers?.name ?? "Paciente"}</strong>
+                    <strong>{a.customers?.name ?? "Cliente"}</strong>
                     <em>{a.services?.name ?? "Cita"}{a.reference ? ` · ${a.reference}` : ""}</em>
                   </span>
                   <span className={`dash-tag ${TONE[a.status] ?? "is-idle"}`}>{a.status}</span>
@@ -186,7 +186,7 @@ export default async function Dashboard() {
                 <li key={m.id}>
                   <span className="dash-when">{when(m.created_at, tz)}</span>
                   <span className="dash-what">
-                    <strong>{m.role === "assistant" ? "Asistente" : "Paciente"}</strong>
+                    <strong>{m.role === "assistant" ? "Asistente" : "Cliente"}</strong>
                     <em>{(m.content ?? "").slice(0, 90)}</em>
                   </span>
                 </li>
@@ -228,7 +228,7 @@ export default async function Dashboard() {
               <li key={a.id}>
                 <span className="dash-when">{when(a.starts_at, tz)}</span>
                 <span className="dash-what">
-                  <strong>{a.customers?.name ?? "Paciente"}</strong>
+                  <strong>{a.customers?.name ?? "Cliente"}</strong>
                   <em>{a.services?.name ?? "Cita"}</em>
                 </span>
                 <span className="dash-tag is-bad">cancelada</span>

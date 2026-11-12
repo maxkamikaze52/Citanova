@@ -1770,13 +1770,13 @@ html.reveal-js [data-reveal].is-in { opacity: 1; transform: none; pointer-events
   color: inherit;
 }
 .wm-lead { letter-spacing: -0.02em; }
-.wm-tail { letter-spacing: -0.035em; }
-.wm-d {
+.wm-tail { letter-spacing: -0.02em; text-transform: uppercase; }
+.wm-n {
   display: inline-flex; align-items: center;
-  width: 0.62em; height: 0.98em; margin: 0 0.01em;
-  transform: translateY(0.06em);
+  width: 0.68em; height: 0.96em; margin: 0 0.005em;
+  transform: translateY(0.055em);
 }
-.wm-d svg { width: 100%; height: 100%; }
+.wm-n svg { width: 100%; height: 100%; }
 
 /* la marca de la cabecera de la portada */
 .ap-brand { display: inline-flex; align-items: center; gap: 9px; }

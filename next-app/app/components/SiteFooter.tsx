@@ -19,7 +19,7 @@ export default function SiteFooter() {
             <ul>
               <li><Link href="/pricing">Precios</Link></li>
               <li><Link href="/signup">Configurar un asistente</Link></li>
-              <li><Link href="/login">Entrar en mi clínica</Link></li>
+              <li><Link href="/login">Entrar en mi negocio</Link></li>
               <li><Link href="/contact">Contacto</Link></li>
             </ul>
           </nav>
